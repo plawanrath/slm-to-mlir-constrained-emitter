@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.env
+*.egg-info/
+dist/
+build/
+
+# ML artifacts
+data/raw/
+data/processed/
+checkpoints/
+wandb/
+mlruns/
+*.safetensors
+*.bin
+*.gguf
+*.pt
+*.pth
+results/
+outputs/
+
+# Logs
+*.log
+logs/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Paper artifacts
+docs/paper/*.aux
+docs/paper/*.bbl
+docs/paper/*.blg
+docs/paper/*.log
+docs/paper/*.out
+docs/paper/*.synctex.gz
+docs/paper/*.toc
+
+# Large-model weights (keep pointers only)
+models/
