@@ -1,0 +1,8 @@
+{
+  "id": "028_float-to-int",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that converts an f64 to a signed i64.",
+  "mlir": "module {\n  func.func @f2i(%a: f64) -> i64 {\n    %0 = arith.fptosi %a : f64 to i64\n    return %0 : i64\n  }\n}\n",
+  "notes": "seed example; arith.fptosi"
+}

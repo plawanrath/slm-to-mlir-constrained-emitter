@@ -1,0 +1,8 @@
+{
+  "id": "082_is-negative",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns whether an i32 value is strictly less than zero (signed).",
+  "mlir": "module {\n  func.func @isn(%x: i32) -> i1 {\n    %0 = arith.constant 0 : i32\n    %1 = arith.cmpi slt, %x, %0 : i32\n    return %1 : i1\n  }\n}\n",
+  "notes": "cmpi slt zero"
+}

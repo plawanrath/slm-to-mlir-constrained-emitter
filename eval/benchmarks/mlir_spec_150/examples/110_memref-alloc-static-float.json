@@ -1,0 +1,8 @@
+{
+  "id": "110_memref-alloc-static-float",
+  "dialect": "memref+func",
+  "difficulty": "easy",
+  "nl": "Write a function that allocates a memref<16xf32>, stores 0.0 at index 0, and deallocates.",
+  "mlir": "module {\n  func.func @a16() {\n    %m = memref.alloc() : memref<16xf32>\n    %c0 = arith.constant 0 : index\n    %z = arith.constant 0.0 : f32\n    memref.store %z, %m[%c0] : memref<16xf32>\n    memref.dealloc %m : memref<16xf32>\n    return\n  }\n}\n",
+  "notes": "alloc-init-dealloc"
+}

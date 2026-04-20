@@ -1,0 +1,8 @@
+{
+  "id": "045_alloc-load-dealloc",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that allocates a memref<8xf32>, loads the element at index 0, deallocates the memref, and returns the loaded value.",
+  "mlir": "module {\n  func.func @alloc_read() -> f32 {\n    %c0 = arith.constant 0 : index\n    %buf = memref.alloc() : memref<8xf32>\n    %v = memref.load %buf[%c0] : memref<8xf32>\n    memref.dealloc %buf : memref<8xf32>\n    return %v : f32\n  }\n}\n",
+  "notes": "seed example; alloc+load+dealloc chain; returns uninitialized value (parses/verifies but UB at runtime)"
+}

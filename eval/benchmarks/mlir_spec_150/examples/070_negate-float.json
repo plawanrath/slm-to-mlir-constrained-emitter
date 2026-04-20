@@ -1,0 +1,8 @@
+{
+  "id": "070_negate-float",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns `-x` for an f64 input using arith.negf.",
+  "mlir": "module {\n  func.func @neg64(%x: f64) -> f64 {\n    %0 = arith.negf %x : f64\n    return %0 : f64\n  }\n}\n",
+  "notes": "f64 negf (distinct from 015 f32)"
+}

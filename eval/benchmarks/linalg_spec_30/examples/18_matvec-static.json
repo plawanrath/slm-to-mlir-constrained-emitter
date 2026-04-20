@@ -1,0 +1,8 @@
+{
+  "id": "18_matvec-static",
+  "dialect": "linalg+memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that multiplies a 4x8xf32 matrix by an 8xf32 vector, writing to a 4xf32 result memref.",
+  "mlir": "module {\n  func.func @mvs(%A: memref<4x8xf32>, %x: memref<8xf32>, %y: memref<4xf32>) {\n    linalg.matvec ins(%A, %x : memref<4x8xf32>, memref<8xf32>) outs(%y : memref<4xf32>)\n    return\n  }\n}\n",
+  "notes": "static matvec 4x8 by 8"
+}

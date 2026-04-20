@@ -1,0 +1,8 @@
+{
+  "id": "074_unsigned-compare",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns whether an i32 `a` is unsigned-less-than an i32 `b` using arith.cmpi ult.",
+  "mlir": "module {\n  func.func @ult(%a: i32, %b: i32) -> i1 {\n    %0 = arith.cmpi ult, %a, %b : i32\n    return %0 : i1\n  }\n}\n",
+  "notes": "unsigned cmp predicate"
+}

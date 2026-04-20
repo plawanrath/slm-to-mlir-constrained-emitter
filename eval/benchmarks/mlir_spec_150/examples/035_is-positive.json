@@ -1,0 +1,8 @@
+{
+  "id": "035_is-positive",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns true if a signed i32 is strictly positive.",
+  "mlir": "module {\n  func.func @is_pos(%a: i32) -> i1 {\n    %c0 = arith.constant 0 : i32\n    %0 = arith.cmpi sgt, %a, %c0 : i32\n    return %0 : i1\n  }\n}\n",
+  "notes": "seed example; cmpi sgt vs zero"
+}

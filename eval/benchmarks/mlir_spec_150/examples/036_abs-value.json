@@ -1,0 +1,8 @@
+{
+  "id": "036_abs-value",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns the absolute value of a signed i32 (negate if negative, else return unchanged).",
+  "mlir": "module {\n  func.func @abs(%a: i32) -> i32 {\n    %c0 = arith.constant 0 : i32\n    %neg = arith.subi %c0, %a : i32\n    %cond = arith.cmpi slt, %a, %c0 : i32\n    %0 = arith.select %cond, %neg, %a : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; select + cmp + subi composition"
+}

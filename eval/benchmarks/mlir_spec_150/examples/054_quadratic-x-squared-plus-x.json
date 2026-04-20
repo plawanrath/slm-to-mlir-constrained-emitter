@@ -1,0 +1,8 @@
+{
+  "id": "054_quadratic-x-squared-plus-x",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes an i32 `x` and returns `x*x + x`.",
+  "mlir": "module {\n  func.func @quad(%x: i32) -> i32 {\n    %0 = arith.muli %x, %x : i32\n    %1 = arith.addi %0, %x : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "self-multiplication chain"
+}

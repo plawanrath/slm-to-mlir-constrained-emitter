@@ -1,0 +1,8 @@
+{
+  "id": "055_dot-product-2d-floats",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that takes four f32 values (a, b, c, d) and returns `a*c + b*d`.",
+  "mlir": "module {\n  func.func @dot2(%a: f32, %b: f32, %c: f32, %d: f32) -> f32 {\n    %0 = arith.mulf %a, %c : f32\n    %1 = arith.mulf %b, %d : f32\n    %2 = arith.addf %0, %1 : f32\n    return %2 : f32\n  }\n}\n",
+  "notes": "parallel muls + reduction"
+}

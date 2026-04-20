@@ -1,0 +1,8 @@
+{
+  "id": "138_float-hypot-sq",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that returns `a*a + b*b` on f32 inputs (squared hypotenuse).",
+  "mlir": "module {\n  func.func @hs(%a: f32, %b: f32) -> f32 {\n    %0 = arith.mulf %a, %a : f32\n    %1 = arith.mulf %b, %b : f32\n    %2 = arith.addf %0, %1 : f32\n    return %2 : f32\n  }\n}\n",
+  "notes": "hypot squared"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "004_add-floats",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function `addf` that takes two f32 values and returns their sum.",
+  "mlir": "module {\n  func.func @addf(%a: f32, %b: f32) -> f32 {\n    %0 = arith.addf %a, %b : f32\n    return %0 : f32\n  }\n}\n",
+  "notes": "seed example; arith.addf"
+}

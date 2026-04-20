@@ -1,0 +1,8 @@
+{
+  "id": "17_matvec",
+  "dialect": "linalg+memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that performs a matrix-vector multiplication: input is a 2-D f32 memref and a 1-D f32 memref; output is a 1-D f32 memref.",
+  "mlir": "module {\n  func.func @mv(%A: memref<?x?xf32>, %x: memref<?xf32>, %y: memref<?xf32>) {\n    linalg.matvec ins(%A, %x : memref<?x?xf32>, memref<?xf32>) outs(%y : memref<?xf32>)\n    return\n  }\n}\n",
+  "notes": "canonical matvec"
+}

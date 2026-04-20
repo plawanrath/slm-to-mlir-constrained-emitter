@@ -1,0 +1,8 @@
+{
+  "id": "14_transpose-static",
+  "dialect": "linalg+memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that transposes a 3x5xf32 memref to a 5x3xf32 memref using permutation [1, 0].",
+  "mlir": "module {\n  func.func @ts(%s: memref<3x5xf32>, %d: memref<5x3xf32>) {\n    linalg.transpose ins(%s : memref<3x5xf32>) outs(%d : memref<5x3xf32>) permutation = [1, 0]\n    return\n  }\n}\n",
+  "notes": "static-shape transpose"
+}

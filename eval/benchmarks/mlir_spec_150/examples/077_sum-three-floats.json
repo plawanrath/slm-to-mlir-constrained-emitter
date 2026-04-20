@@ -1,0 +1,8 @@
+{
+  "id": "077_sum-three-floats",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that adds three f32 values and returns the sum.",
+  "mlir": "module {\n  func.func @sum3(%a: f32, %b: f32, %c: f32) -> f32 {\n    %0 = arith.addf %a, %b : f32\n    %1 = arith.addf %0, %c : f32\n    return %1 : f32\n  }\n}\n",
+  "notes": "reduction chain"
+}

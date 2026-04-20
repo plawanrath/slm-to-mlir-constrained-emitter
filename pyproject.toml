@@ -1,0 +1,21 @@
+[project]
+name = "slm-mlir"
+version = "0.1.0"
+description = "SLM-to-MLIR constrained emitter (NeurIPS 2026 M1)."
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["grammar*", "decoder*", "eval*", "data*", "train*"]
+
+[tool.pytest.ini_options]
+testpaths = ["grammar/tests", "decoder/tests", "eval/tests", "data/tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers"
+markers = [
+    "slow: tests that take >5s",
+    "docker: tests requiring the LLVM docker container",
+    "mlx: tests requiring MLX + Apple Silicon",
+    "ollama: tests requiring a running Ollama daemon",
+]

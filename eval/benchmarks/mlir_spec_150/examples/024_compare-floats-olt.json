@@ -1,0 +1,8 @@
+{
+  "id": "024_compare-floats-olt",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns true (i1) if f32 value a is ordered and less than f32 value b.",
+  "mlir": "module {\n  func.func @flt(%a: f32, %b: f32) -> i1 {\n    %0 = arith.cmpf olt, %a, %b : f32\n    return %0 : i1\n  }\n}\n",
+  "notes": "seed example; arith.cmpf olt"
+}

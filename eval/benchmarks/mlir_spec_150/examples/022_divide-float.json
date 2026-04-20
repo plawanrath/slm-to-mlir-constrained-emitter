@@ -1,0 +1,8 @@
+{
+  "id": "022_divide-float",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that divides two f64 values.",
+  "mlir": "module {\n  func.func @divf(%a: f64, %b: f64) -> f64 {\n    %0 = arith.divf %a, %b : f64\n    return %0 : f64\n  }\n}\n",
+  "notes": "seed example; arith.divf f64"
+}

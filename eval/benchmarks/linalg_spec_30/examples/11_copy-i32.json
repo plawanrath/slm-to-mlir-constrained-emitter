@@ -1,0 +1,8 @@
+{
+  "id": "11_copy-i32",
+  "dialect": "linalg+memref+func",
+  "difficulty": "easy",
+  "nl": "Write a function that copies a 1-D i32 memref into another 1-D i32 memref of the same shape.",
+  "mlir": "module {\n  func.func @ci(%s: memref<?xi32>, %d: memref<?xi32>) {\n    linalg.copy ins(%s : memref<?xi32>) outs(%d : memref<?xi32>)\n    return\n  }\n}\n",
+  "notes": "i32 copy"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "116_swap-two-floats",
+  "dialect": "memref+arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that swaps two f32 values in memref `m` at indices `i` and `j`.",
+  "mlir": "module {\n  func.func @sw(%m: memref<?xf32>, %i: index, %j: index) {\n    %a = memref.load %m[%i] : memref<?xf32>\n    %b = memref.load %m[%j] : memref<?xf32>\n    memref.store %b, %m[%i] : memref<?xf32>\n    memref.store %a, %m[%j] : memref<?xf32>\n    return\n  }\n}\n",
+  "notes": "swap via load-load-store-store"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "052_abs-diff-ints",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that takes two i32 values `a` and `b` and returns `|a - b|` using cmpi + select.",
+  "mlir": "module {\n  func.func @absdiff(%a: i32, %b: i32) -> i32 {\n    %0 = arith.subi %a, %b : i32\n    %1 = arith.subi %b, %a : i32\n    %2 = arith.cmpi sge, %a, %b : i32\n    %3 = arith.select %2, %0, %1 : i32\n    return %3 : i32\n  }\n}\n",
+  "notes": "cmp+select branch on sign"
+}

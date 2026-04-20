@@ -1,0 +1,8 @@
+{
+  "id": "062_median-of-three",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that returns the median of three i32 values using pairwise min/max: `median = max(min(a,b), min(max(a,b), c))`.",
+  "mlir": "module {\n  func.func @med3(%a: i32, %b: i32, %c: i32) -> i32 {\n    %0 = arith.minsi %a, %b : i32\n    %1 = arith.maxsi %a, %b : i32\n    %2 = arith.minsi %1, %c : i32\n    %3 = arith.maxsi %0, %2 : i32\n    return %3 : i32\n  }\n}\n",
+  "notes": "4-op min/max composition"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "13_transpose-3d",
+  "dialect": "linalg+memref+func",
+  "difficulty": "hard",
+  "nl": "Write a function that transposes a 3-D f32 memref using permutation [0, 2, 1] (swap the last two dimensions).",
+  "mlir": "module {\n  func.func @t3(%s: memref<?x?x?xf32>, %d: memref<?x?x?xf32>) {\n    linalg.transpose ins(%s : memref<?x?x?xf32>) outs(%d : memref<?x?x?xf32>) permutation = [0, 2, 1]\n    return\n  }\n}\n",
+  "notes": "3D transpose"
+}

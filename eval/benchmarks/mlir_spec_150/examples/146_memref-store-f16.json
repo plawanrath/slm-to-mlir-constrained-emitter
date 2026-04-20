@@ -1,0 +1,8 @@
+{
+  "id": "146_memref-store-f16",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that truncates an f32 to f16 and stores it at index `i` of memref<?xf16>.",
+  "mlir": "module {\n  func.func @sf(%m: memref<?xf16>, %i: index, %x: f32) {\n    %0 = arith.truncf %x : f32 to f16\n    memref.store %0, %m[%i] : memref<?xf16>\n    return\n  }\n}\n",
+  "notes": "truncf + store (f16 element type)"
+}

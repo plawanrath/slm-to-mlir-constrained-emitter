@@ -1,0 +1,8 @@
+{
+  "id": "041_cube",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that computes x * x * x for an f32 x.",
+  "mlir": "module {\n  func.func @cube(%x: f32) -> f32 {\n    %0 = arith.mulf %x, %x : f32\n    %1 = arith.mulf %0, %x : f32\n    return %1 : f32\n  }\n}\n",
+  "notes": "seed example; two mulf chain"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "088_memref-sum-two-positions",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns the sum of memref elements at positions `i` and `j` (memref<?xi32>).",
+  "mlir": "module {\n  func.func @s2(%m: memref<?xi32>, %i: index, %j: index) -> i32 {\n    %0 = memref.load %m[%i] : memref<?xi32>\n    %1 = memref.load %m[%j] : memref<?xi32>\n    %2 = arith.addi %0, %1 : i32\n    return %2 : i32\n  }\n}\n",
+  "notes": "two loads + add"
+}

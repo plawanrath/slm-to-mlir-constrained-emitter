@@ -1,0 +1,8 @@
+{
+  "id": "22_mul-elemwise-2d",
+  "dialect": "linalg+memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that multiplies two 2-D f32 memrefs element-wise (Hadamard product) into an output memref.",
+  "mlir": "module {\n  func.func @me(%a: memref<?x?xf32>, %b: memref<?x?xf32>, %c: memref<?x?xf32>) {\n    linalg.mul ins(%a, %b : memref<?x?xf32>, memref<?x?xf32>) outs(%c : memref<?x?xf32>)\n    return\n  }\n}\n",
+  "notes": "Hadamard product"
+}

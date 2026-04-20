@@ -1,0 +1,8 @@
+{
+  "id": "122_memref-load-and-cast",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that loads i32 at index `i` from memref `m` and returns it as i64 via extsi.",
+  "mlir": "module {\n  func.func @lc(%m: memref<?xi32>, %i: index) -> i64 {\n    %0 = memref.load %m[%i] : memref<?xi32>\n    %1 = arith.extsi %0 : i32 to i64\n    return %1 : i64\n  }\n}\n",
+  "notes": "load-then-widen"
+}

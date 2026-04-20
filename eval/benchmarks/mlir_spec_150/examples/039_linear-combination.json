@@ -1,0 +1,8 @@
+{
+  "id": "039_linear-combination",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that computes `a*x + b*y + c` on f32 inputs (five f32 parameters: a, x, b, y, c).",
+  "mlir": "module {\n  func.func @linear(%a: f32, %x: f32, %b: f32, %y: f32, %c: f32) -> f32 {\n    %0 = arith.mulf %a, %x : f32\n    %1 = arith.mulf %b, %y : f32\n    %2 = arith.addf %0, %1 : f32\n    %3 = arith.addf %2, %c : f32\n    return %3 : f32\n  }\n}\n",
+  "notes": "seed example; chain of 4 arith ops"
+}

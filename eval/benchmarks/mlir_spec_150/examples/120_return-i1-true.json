@@ -1,0 +1,8 @@
+{
+  "id": "120_return-i1-true",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns the i1 constant true.",
+  "mlir": "module {\n  func.func @t() -> i1 {\n    %0 = arith.constant 1 : i1\n    return %0 : i1\n  }\n}\n",
+  "notes": "i1 constant"
+}

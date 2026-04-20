@@ -1,0 +1,8 @@
+{
+  "id": "017_bitwise-or",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that computes the bitwise OR of two i64 values.",
+  "mlir": "module {\n  func.func @bor(%a: i64, %b: i64) -> i64 {\n    %0 = arith.ori %a, %b : i64\n    return %0 : i64\n  }\n}\n",
+  "notes": "seed example; arith.ori i64"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "020_shift-right-signed",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that arithmetically shifts an i32 right by another i32.",
+  "mlir": "module {\n  func.func @shr(%a: i32, %b: i32) -> i32 {\n    %0 = arith.shrsi %a, %b : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; arith.shrsi"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "07_fill-value-param",
+  "dialect": "linalg+memref+func",
+  "difficulty": "easy",
+  "nl": "Write a function that fills a 2-D f32 memref with a given f32 value passed as a parameter.",
+  "mlir": "module {\n  func.func @fp(%v: f32, %m: memref<?x?xf32>) {\n    linalg.fill ins(%v : f32) outs(%m : memref<?x?xf32>)\n    return\n  }\n}\n",
+  "notes": "fill with parameter value"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "117_chained-float-ops",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that computes `(a*b + c*d) - e` on f32 inputs.",
+  "mlir": "module {\n  func.func @ce(%a: f32, %b: f32, %c: f32, %d: f32, %e: f32) -> f32 {\n    %0 = arith.mulf %a, %b : f32\n    %1 = arith.mulf %c, %d : f32\n    %2 = arith.addf %0, %1 : f32\n    %3 = arith.subf %2, %e : f32\n    return %3 : f32\n  }\n}\n",
+  "notes": "4-op float chain"
+}

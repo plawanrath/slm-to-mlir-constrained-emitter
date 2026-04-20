@@ -1,0 +1,8 @@
+{
+  "id": "015_neg-float",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that negates an f32 value (returns `-x`).",
+  "mlir": "module {\n  func.func @neg(%x: f32) -> f32 {\n    %0 = arith.negf %x : f32\n    return %0 : f32\n  }\n}\n",
+  "notes": "seed example; arith.negf"
+}

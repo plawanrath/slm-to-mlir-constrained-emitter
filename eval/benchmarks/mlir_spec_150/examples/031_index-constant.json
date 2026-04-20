@@ -1,0 +1,8 @@
+{
+  "id": "031_index-constant",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns the constant 0 as `index` type.",
+  "mlir": "module {\n  func.func @zero() -> index {\n    %0 = arith.constant 0 : index\n    return %0 : index\n  }\n}\n",
+  "notes": "seed example; arith.constant index"
+}

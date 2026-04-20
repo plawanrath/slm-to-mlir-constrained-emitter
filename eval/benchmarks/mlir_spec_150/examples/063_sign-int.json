@@ -1,0 +1,8 @@
+{
+  "id": "063_sign-int",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that returns the sign of an i32 value: 1 if positive, -1 if negative, 0 if zero. Use cmpi and two selects.",
+  "mlir": "module {\n  func.func @sign(%x: i32) -> i32 {\n    %0 = arith.constant 0 : i32\n    %1 = arith.constant 1 : i32\n    %2 = arith.constant -1 : i32\n    %3 = arith.cmpi sgt, %x, %0 : i32\n    %4 = arith.cmpi slt, %x, %0 : i32\n    %5 = arith.select %4, %2, %0 : i32\n    %6 = arith.select %3, %1, %5 : i32\n    return %6 : i32\n  }\n}\n",
+  "notes": "nested cmp+select chains"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "119_memref-copy-with-scale",
+  "dialect": "memref+arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that reads f32 at position `i` from memref `src`, doubles it, and stores at position `i` in memref `dst`.",
+  "mlir": "module {\n  func.func @sx(%src: memref<?xf32>, %dst: memref<?xf32>, %i: index) {\n    %0 = memref.load %src[%i] : memref<?xf32>\n    %1 = arith.constant 2.0 : f32\n    %2 = arith.mulf %0, %1 : f32\n    memref.store %2, %dst[%i] : memref<?xf32>\n    return\n  }\n}\n",
+  "notes": "load-scale-store"
+}

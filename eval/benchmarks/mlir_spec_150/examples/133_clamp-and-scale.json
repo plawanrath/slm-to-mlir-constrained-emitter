@@ -1,0 +1,8 @@
+{
+  "id": "133_clamp-and-scale",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that clamps an i32 `x` into [lo, hi] and multiplies the result by `k`.",
+  "mlir": "module {\n  func.func @cs(%x: i32, %lo: i32, %hi: i32, %k: i32) -> i32 {\n    %0 = arith.maxsi %x, %lo : i32\n    %1 = arith.minsi %0, %hi : i32\n    %2 = arith.muli %1, %k : i32\n    return %2 : i32\n  }\n}\n",
+  "notes": "clamp + scale"
+}

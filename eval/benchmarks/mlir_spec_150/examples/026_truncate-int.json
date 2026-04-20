@@ -1,0 +1,8 @@
+{
+  "id": "026_truncate-int",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that truncates an i64 value to an i8.",
+  "mlir": "module {\n  func.func @trunc(%a: i64) -> i8 {\n    %0 = arith.trunci %a : i64 to i8\n    return %0 : i8\n  }\n}\n",
+  "notes": "seed example; arith.trunci"
+}

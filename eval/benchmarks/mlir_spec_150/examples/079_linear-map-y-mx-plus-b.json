@@ -1,0 +1,8 @@
+{
+  "id": "079_linear-map-y-mx-plus-b",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that computes `y = m*x + b` on i32 inputs.",
+  "mlir": "module {\n  func.func @lm(%m: i32, %x: i32, %b: i32) -> i32 {\n    %0 = arith.muli %m, %x : i32\n    %1 = arith.addi %0, %b : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "classic y=mx+b"
+}

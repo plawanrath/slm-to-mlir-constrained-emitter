@@ -1,0 +1,8 @@
+{
+  "id": "058_memref-copy-element",
+  "dialect": "memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that copies the element at position `i` from memref `src` to position `j` in memref `dst` (both memref<?xf32>).",
+  "mlir": "module {\n  func.func @cp(%src: memref<?xf32>, %dst: memref<?xf32>, %i: index, %j: index) {\n    %0 = memref.load %src[%i] : memref<?xf32>\n    memref.store %0, %dst[%j] : memref<?xf32>\n    return\n  }\n}\n",
+  "notes": "load-then-store pattern"
+}

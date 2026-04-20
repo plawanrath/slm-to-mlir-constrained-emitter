@@ -1,0 +1,8 @@
+{
+  "id": "20_add-elemwise",
+  "dialect": "linalg+memref+func",
+  "difficulty": "easy",
+  "nl": "Write a function that adds two 1-D f32 memrefs element-wise into a third output memref.",
+  "mlir": "module {\n  func.func @ae(%a: memref<?xf32>, %b: memref<?xf32>, %c: memref<?xf32>) {\n    linalg.add ins(%a, %b : memref<?xf32>, memref<?xf32>) outs(%c : memref<?xf32>)\n    return\n  }\n}\n",
+  "notes": "elemwise add"
+}

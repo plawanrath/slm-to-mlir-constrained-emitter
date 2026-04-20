@@ -1,0 +1,8 @@
+{
+  "id": "118_is-even",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns whether an i32 value is even (x mod 2 == 0).",
+  "mlir": "module {\n  func.func @ie(%x: i32) -> i1 {\n    %0 = arith.constant 2 : i32\n    %1 = arith.remsi %x, %0 : i32\n    %2 = arith.constant 0 : i32\n    %3 = arith.cmpi eq, %1, %2 : i32\n    return %3 : i1\n  }\n}\n",
+  "notes": "modulo + cmp"
+}

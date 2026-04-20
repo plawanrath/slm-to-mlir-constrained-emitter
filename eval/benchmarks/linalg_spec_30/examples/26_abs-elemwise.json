@@ -1,0 +1,8 @@
+{
+  "id": "26_abs-elemwise",
+  "dialect": "linalg+memref+func",
+  "difficulty": "easy",
+  "nl": "Write a function that applies the elementwise absolute value to a 1-D f32 memref, writing the result into another memref.",
+  "mlir": "module {\n  func.func @ae(%x: memref<?xf32>, %y: memref<?xf32>) {\n    linalg.abs ins(%x : memref<?xf32>) outs(%y : memref<?xf32>)\n    return\n  }\n}\n",
+  "notes": "elemwise abs"
+}

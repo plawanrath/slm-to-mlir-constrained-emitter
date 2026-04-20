@@ -1,0 +1,8 @@
+{
+  "id": "106_abs-value-float",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns the absolute value of an f32 using arith.cmpf + select.",
+  "mlir": "module {\n  func.func @absf(%x: f32) -> f32 {\n    %0 = arith.negf %x : f32\n    %c = arith.constant 0.0 : f32\n    %1 = arith.cmpf oge, %x, %c : f32\n    %2 = arith.select %1, %x, %0 : f32\n    return %2 : f32\n  }\n}\n",
+  "notes": "float-abs pattern"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "111_const-index-arith",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns the index value 7.",
+  "mlir": "module {\n  func.func @i7() -> index {\n    %0 = arith.constant 7 : index\n    return %0 : index\n  }\n}\n",
+  "notes": "index constant"
+}

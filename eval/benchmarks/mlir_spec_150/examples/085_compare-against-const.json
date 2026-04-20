@@ -1,0 +1,8 @@
+{
+  "id": "085_compare-against-const",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns whether an i32 value is signed-greater-than 100.",
+  "mlir": "module {\n  func.func @gt100(%x: i32) -> i1 {\n    %0 = arith.constant 100 : i32\n    %1 = arith.cmpi sgt, %x, %0 : i32\n    return %1 : i1\n  }\n}\n",
+  "notes": "const + cmp"
+}

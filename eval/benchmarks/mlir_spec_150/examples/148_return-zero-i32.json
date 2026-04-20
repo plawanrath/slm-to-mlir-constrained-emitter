@@ -1,0 +1,8 @@
+{
+  "id": "148_return-zero-i32",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that takes no arguments and returns the i32 value 0.",
+  "mlir": "module {\n  func.func @z() -> i32 {\n    %0 = arith.constant 0 : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "no-arg void-param return"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "075_memref-dim-query",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes a 2-D memref `m` of shape `?x?` of f32 and returns the size of its 0th dimension as an index value.",
+  "mlir": "module {\n  func.func @dim0(%m: memref<?x?xf32>) -> index {\n    %0 = arith.constant 0 : index\n    %1 = memref.dim %m, %0 : memref<?x?xf32>\n    return %1 : index\n  }\n}\n",
+  "notes": "memref.dim with constant index"
+}

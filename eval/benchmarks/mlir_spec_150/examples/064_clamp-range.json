@@ -1,0 +1,8 @@
+{
+  "id": "064_clamp-range",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that clamps an i32 value `x` into the range [lo, hi]. Use maxsi then minsi.",
+  "mlir": "module {\n  func.func @clamp(%x: i32, %lo: i32, %hi: i32) -> i32 {\n    %0 = arith.maxsi %x, %lo : i32\n    %1 = arith.minsi %0, %hi : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "canonical clamp pattern"
+}

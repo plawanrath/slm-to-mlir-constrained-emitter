@@ -1,0 +1,8 @@
+{
+  "id": "095_memref-load-at-last",
+  "dialect": "memref+arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that returns the f32 element at the last position of a dynamic memref<?xf32>, computed as `dim(0) - 1`.",
+  "mlir": "module {\n  func.func @last(%m: memref<?xf32>) -> f32 {\n    %c0 = arith.constant 0 : index\n    %c1 = arith.constant 1 : index\n    %0 = memref.dim %m, %c0 : memref<?xf32>\n    %1 = arith.subi %0, %c1 : index\n    %2 = memref.load %m[%1] : memref<?xf32>\n    return %2 : f32\n  }\n}\n",
+  "notes": "dim-dependent indexing"
+}

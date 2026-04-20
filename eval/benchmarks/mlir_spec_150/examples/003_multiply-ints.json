@@ -1,0 +1,8 @@
+{
+  "id": "003_multiply-ints",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function `mul` that multiplies two i64 values and returns their product.",
+  "mlir": "module {\n  func.func @mul(%a: i64, %b: i64) -> i64 {\n    %0 = arith.muli %a, %b : i64\n    return %0 : i64\n  }\n}\n",
+  "notes": "seed example; arith.muli i64"
+}

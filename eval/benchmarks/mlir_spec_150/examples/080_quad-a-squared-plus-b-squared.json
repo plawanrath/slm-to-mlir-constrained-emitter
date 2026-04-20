@@ -1,0 +1,8 @@
+{
+  "id": "080_quad-a-squared-plus-b-squared",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns `a*a + b*b` on i32 inputs.",
+  "mlir": "module {\n  func.func @sumsq(%a: i32, %b: i32) -> i32 {\n    %0 = arith.muli %a, %a : i32\n    %1 = arith.muli %b, %b : i32\n    %2 = arith.addi %0, %1 : i32\n    return %2 : i32\n  }\n}\n",
+  "notes": "parallel muls + add"
+}

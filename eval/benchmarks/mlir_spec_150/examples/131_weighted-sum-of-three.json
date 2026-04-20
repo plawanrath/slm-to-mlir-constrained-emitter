@@ -1,0 +1,8 @@
+{
+  "id": "131_weighted-sum-of-three",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that computes `w1*a + w2*b + w3*c` on i32 inputs (all six values are parameters).",
+  "mlir": "module {\n  func.func @ws(%a: i32, %b: i32, %c: i32, %w1: i32, %w2: i32, %w3: i32) -> i32 {\n    %0 = arith.muli %w1, %a : i32\n    %1 = arith.muli %w2, %b : i32\n    %2 = arith.muli %w3, %c : i32\n    %3 = arith.addi %0, %1 : i32\n    %4 = arith.addi %3, %2 : i32\n    return %4 : i32\n  }\n}\n",
+  "notes": "5-op weighted reduction"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "114_float-div-by-two",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns an f32 value divided by 2.0.",
+  "mlir": "module {\n  func.func @h(%x: f32) -> f32 {\n    %0 = arith.constant 2.0 : f32\n    %1 = arith.divf %x, %0 : f32\n    return %1 : f32\n  }\n}\n",
+  "notes": "divf by constant"
+}

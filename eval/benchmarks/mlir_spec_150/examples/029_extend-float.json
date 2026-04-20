@@ -1,0 +1,8 @@
+{
+  "id": "029_extend-float",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that extends an f32 to an f64.",
+  "mlir": "module {\n  func.func @fext(%a: f32) -> f64 {\n    %0 = arith.extf %a : f32 to f64\n    return %0 : f64\n  }\n}\n",
+  "notes": "seed example; arith.extf"
+}

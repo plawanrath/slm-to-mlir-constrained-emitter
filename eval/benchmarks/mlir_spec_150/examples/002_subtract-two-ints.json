@@ -1,0 +1,8 @@
+{
+  "id": "002_subtract-two-ints",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function `sub` that takes two i32 values `a` and `b` and returns `a - b`.",
+  "mlir": "module {\n  func.func @sub(%a: i32, %b: i32) -> i32 {\n    %0 = arith.subi %a, %b : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; arith.subi"
+}

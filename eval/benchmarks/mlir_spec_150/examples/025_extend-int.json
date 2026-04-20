@@ -1,0 +1,8 @@
+{
+  "id": "025_extend-int",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that sign-extends an i16 value to an i32.",
+  "mlir": "module {\n  func.func @sext(%a: i16) -> i32 {\n    %0 = arith.extsi %a : i16 to i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; arith.extsi"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "081_is-zero",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns whether an i32 value is equal to zero.",
+  "mlir": "module {\n  func.func @iz(%x: i32) -> i1 {\n    %0 = arith.constant 0 : i32\n    %1 = arith.cmpi eq, %x, %0 : i32\n    return %1 : i1\n  }\n}\n",
+  "notes": "cmpi eq zero"
+}

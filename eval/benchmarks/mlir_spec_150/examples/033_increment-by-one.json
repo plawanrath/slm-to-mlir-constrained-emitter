@@ -1,0 +1,8 @@
+{
+  "id": "033_increment-by-one",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes an i32 and returns it incremented by 1.",
+  "mlir": "module {\n  func.func @inc(%a: i32) -> i32 {\n    %c1 = arith.constant 1 : i32\n    %0 = arith.addi %a, %c1 : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; constant + addi"
+}

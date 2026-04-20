@@ -2,7 +2,11 @@
 
 **Status**: locked 2026-04-17. Changes require an ADR in `docs/decisions/`.
 
-> **2026-04-18 update**: timeline compressed to 17 days and eval sample sizes raised per **ADR-0004**. The authoritative execution schedule is now [`docs/execution_plan.md`](execution_plan.md). Scientific content (thesis §1, contributions §2, scope §3, methodology §4) is unchanged. §5.1 (metrics) is refined by the execution plan; §6 (timeline) is superseded by it.
+> **2026-04-18 update**: timeline compressed to 17 days and eval sample sizes raised per **ADR-0004**. The authoritative execution schedule is now [`docs/execution_plan.md`](execution_plan.md). §6 (timeline) is superseded by it.
+>
+> **2026-04-19 updates**:
+> - **ADR-0005** — primary SLM swapped from Phi-3.5-mini (3.8B) to **SmolLM2-1.7B**. Day-4 measurement: SmolLM2 + C1 = 58% verify-valid / 1.5 s gen vs Phi + C1 = 9.5% verify-valid / 5.3 s gen (n=200). Phi kept as secondary.
+> - **ADR-0006** — **C3 (SSA/dominance) scoped back into M1** after error-category analysis showed C3 is the verify-valid bottleneck ("other" bucket = 80/200 cross-SSA type errors that neither C1 nor C2 can fix). The §5.2 matrix gains a C1+C2+C3 row; §9 future-work loses its C3 entry.
 
 ---
 
@@ -12,9 +16,9 @@ For formal intermediate representations, ODS-derived structural priors applied a
 
 ## 2. Contributions
 
-1. **Phenomenon (empirical)**: 1-3B SLM + ODS-aware constrained decoding matches 30B+ open models (CodeLlama-34B, Granite-Code-34B, both quantized Q4) at verifier-pass rate on NL→MLIR across 3 dialects, with **zero gradient updates**.
-2. **Algorithm**: ODS-derived constraint construction — type-lattice prefix automata + operand-arity state machines, composable with any transformer decoder. Categorically beyond CFG-based GCD.
-3. **Mechanism analysis**: quantify MLIR token entropy under progressive constraint tightening (base → CFG → +types → +arity); show entropy collapse matches task-accuracy recovery. The "why it works" artifact.
+1. **Phenomenon (empirical)**: a **1.7B SLM** (SmolLM2-1.7B) + ODS-aware constrained decoding (C1+C2+C3) matches 30B+ open models (CodeLlama-34B, Granite-Code-34B, both quantized Q4) at verifier-pass rate on NL→MLIR across 3 dialects, with **zero gradient updates**.
+2. **Algorithm**: ODS-derived constraint construction — type-domain grammar splits + operand-arity structural enforcement + **SSA-scope symbol-table tracker (C3)**, composable with any transformer decoder. Categorically beyond CFG-based GCD.
+3. **Mechanism analysis**: quantify MLIR token entropy and error-category distribution under progressive constraint tightening (base → C1 → +C2 → +C3); show entropy collapse and error-bucket collapse match task-accuracy recovery. The "why it works" artifact.
 
 ## 3. Scope (locked)
 
@@ -24,7 +28,7 @@ For formal intermediate representations, ODS-derived structural priors applied a
 | Data pipeline | **Frontier-model-free** (no paraphrase-via-LLM). Three existing sources only. |
 | Dialects | `arith`, `func`, `linalg` (3). `tosa` stretch goal if week 2 slack allows. |
 | Cross-target generalization | **Future work**. Not in this paper. |
-| SSA/dominance constraint (C3) | **Future work**. Not in this paper. |
+| SSA/dominance constraint (C3) | **In M1** (per ADR-0006). Symbol-table tracker; in-line logits processor or post-hoc rejection-sampling fallback. |
 | Proper RL (GRPO) | **Future work**. Not in this paper. |
 | Hardware | Apple M4 Max 128GB unified memory, single machine. |
 | Venue | NeurIPS 2026 main track. Abstract ~May 13, full paper ~May 20. |
@@ -44,16 +48,16 @@ Evaluation gold set: `MLIR-Spec-50`, hand-authored, 2-person review. Day 18.
 
 ### 4.2 Constraint engine
 
-- **C1 — Syntactic (LARK → XGrammar/Outlines mask)**: full MLIR grammar for target dialects. Day 6-7.
-- **C2 — Semantic (ODS-derived type+arity)**: type lattice per dialect from `.td` files; prefix automata over type completions at op boundaries; operand-arity enforcement as state machine. Day 8-9.
-- **C3 — SSA/dominance**: *out of scope*. Future work.
+- **C1 — Syntactic (LARK → Outlines/llguidance mask)**: explicit-WS generation grammar for target dialects covering the subset we emit. Day 6-7.
+- **C2 — Semantic (ODS-derived type+arity)**: type lattice per dialect from `.td` files; type-domain grammar splits (ARITH_BIN_INT vs ARITH_BIN_FLOAT, etc.); operand-arity enforced by production structure. Day 8-9.
+- **C3 — SSA/dominance (ADR-0006, scoped in)**: symbol-table tracker seeded with function parameters; SSA operand tokens constrained to names currently in scope. In-line logits processor layered on Outlines CFG, or post-hoc rejection-sampling fallback. Day 5-6 of the 17-day execution plan.
 
 ### 4.3 Models
 
 | Role | Model | Quantization | Source |
 |---|---|---|---|
-| Primary SLM | **Phi-3.5-mini** (3.8B) | fp16 via MLX-LM | Microsoft |
-| Secondary SLM | **SmolLM2-1.7B** | fp16 via MLX-LM | HuggingFace |
+| Primary SLM | **SmolLM2-1.7B-Instruct** | fp16 via MLX-LM | HuggingFace (ADR-0005) |
+| Secondary SLM | **Phi-3.5-mini-instruct** (3.8B) | fp16 via MLX-LM | Microsoft |
 | Tokenizer shootout (day 2) | Phi-3.5-mini, SmolLM2-1.7B, Gemma-2-2b | — | — |
 | Large baseline 1 | **CodeLlama-34B-Instruct** | Q4_K_M via llama.cpp | Meta |
 | Large baseline 2 | **Granite-Code-34B-Instruct** | Q4_K_M via llama.cpp | IBM |
@@ -89,27 +93,34 @@ Model selection is final after day-2 tokenizer shootout measures mean-tokens-per
 
 ### 5.2 Main results matrix
 
-| System | arith+func | linalg | MLIR-Spec-50 |
-|---|---|---|---|
-| Phi-3.5-mini, free | TBD | TBD | TBD |
-| Phi-3.5-mini + C1 (CFG-GCD) | TBD | TBD | TBD |
-| Phi-3.5-mini + C1+C2 (**ours**) | TBD | TBD | TBD |
-| SmolLM2-1.7B, free | TBD | TBD | TBD |
-| SmolLM2-1.7B + C1 | TBD | TBD | TBD |
-| SmolLM2-1.7B + C1+C2 (**ours**) | TBD | TBD | TBD |
-| CodeLlama-34B (Q4), free | TBD | TBD | TBD |
-| CodeLlama-34B (Q4) + C1 | TBD | TBD | TBD |
-| Granite-Code-34B (Q4), free | TBD | TBD | TBD |
-| Granite-Code-34B (Q4) + C1 | TBD | TBD | TBD |
+| System | arith+func (n=200, smoke) | arith+func (n=1000, final) | linalg | MLIR-Spec-150 |
+|---|---|---|---|---|
+| SmolLM2-1.7B, free | 34.5 [28.0, 41.0] | TBD Day 10 | TBD | TBD |
+| SmolLM2-1.7B + C1 | 54.5 [47.5, 61.5] | TBD Day 10 | TBD | TBD |
+| SmolLM2-1.7B + C1+C2 | 54.5 [47.5, 61.5] | TBD Day 10 | TBD | TBD |
+| **SmolLM2-1.7B + C1+C2+C3** (**ours**) | **67.5 [61.0, 74.0]** | TBD Day 10 | TBD | TBD |
+| Phi-3.5-mini, free | 2.0 [0, 4] | TBD | TBD | TBD |
+| Phi-3.5-mini + C1 | 9.5 [6, 14] | TBD | TBD | TBD |
+| Phi-3.5-mini + C1+C2 | 9.5 [6, 14] | TBD | TBD | TBD |
+| Phi-3.5-mini + C1+C2+C3 | TBD | TBD | TBD | TBD |
+| CodeLlama-34B (Q4), free | 0.8 [0, 2] Day-3 | TBD | TBD | TBD |
+| CodeLlama-34B (Q4) + C1 | 82.0 [76, 88] | TBD | TBD | TBD |
+| Granite-Code-34B (Q4), free | 17.0 [12, 22] | TBD | TBD | TBD |
+| Granite-Code-34B (Q4) + C1 | 27.0 [21, 34] | TBD | TBD | TBD |
 
-All cells: mean ± bootstrap 95% CI over 3 seeds.
+All cells: mean + 95% bootstrap CI. "Smoke" column is Day-4/Day-5 n=200 few-shot
+arith+func, single seed; final column will be n=1000 L3 held-out × 3 seeds per
+the execution plan (Day 10). "C1" on 30B baselines denotes post-hoc
+rejection-sampling against the LARK coverage grammar (not token-level masked
+decoding, which llama.cpp doesn't support); SLM "C1" is true masked decoding
+via Outlines + llguidance. Fairness caveat documented at §8 risks.
 
 ### 5.3 Required ablations
 
-1. **Progressive constraint tightening**: base, +C1, +C1+C2. Entropy + pass@1 at each level.
+1. **Progressive constraint tightening**: base, +C1, +C1+C2, +C1+C2+C3. Entropy + pass@1 at each level.
 2. **Hidden-Cost-of-Structure replication**: show plain CFG-GCD hurts Phi-3.5-mini base (per RANLP 2025); show C1+C2 reverses it.
-3. **LoRA appendix**: Phi-3.5-mini + LoRA vs. Phi-3.5-mini training-free. Demonstrates claim robustness (training adds <Xpp).
-4. **Error-category analysis**: categorize failures (type, arity, dialect-misuse, syntax); show C2 specifically resolves type/arity errors.
+3. **LoRA appendix**: primary SLM + LoRA vs. training-free. Demonstrates claim robustness (training adds <Xpp).
+4. **Error-category analysis**: categorize failures (type, arity, dialect-misuse, syntax, SSA/scope); show each constraint layer specifically resolves its error bucket. Day-4/Day-5 data: C2 trims type errors 4→2; C3 collapses the "other" (SSA/scope) bucket from 80/200 to ~22/200 residual.
 
 ## 6. Timeline
 
@@ -193,12 +204,13 @@ All cells: mean ± bootstrap 95% CI over 3 seeds.
 
 These items are deliberately excluded from M1. They become the basis for subsequent milestones or extended-version papers.
 
-- **C3**: SSA/dominance-aware constrained decoding with stateful symbol table.
 - **Proper RL**: GRPO with structured verifier diagnostics as dense reward.
 - **Cross-target generalization**: LLVM IR direct, WebAssembly text.
 - **Additional dialects**: `tosa`, `scf`, `affine`, `gpu`.
 - **Executable equivalence**: I/O-based correctness on dialects that support it.
 - **Iterative repair loop**: bounded multi-round compiler-feedback refinement.
+
+*(C3 — SSA/dominance — was originally listed here but moved back into M1 scope per ADR-0006; see §4.2.)*
 
 ## 10. Repository layout
 

@@ -1,0 +1,8 @@
+{
+  "id": "049_memref-2d",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that loads element (i, j) from a memref<4x8xf32> and returns it.",
+  "mlir": "module {\n  func.func @load2d(%m: memref<4x8xf32>, %i: index, %j: index) -> f32 {\n    %0 = memref.load %m[%i, %j] : memref<4x8xf32>\n    return %0 : f32\n  }\n}\n",
+  "notes": "seed example; 2D memref load"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "29_add-then-exp",
+  "dialect": "linalg+memref+func",
+  "difficulty": "hard",
+  "nl": "Write a function that adds two 1-D f32 memrefs element-wise into a temporary buffer, then applies exp to the buffer into the final output.",
+  "mlir": "module {\n  func.func @ax(%a: memref<?xf32>, %b: memref<?xf32>, %t: memref<?xf32>, %y: memref<?xf32>) {\n    linalg.add ins(%a, %b : memref<?xf32>, memref<?xf32>) outs(%t : memref<?xf32>)\n    linalg.exp ins(%t : memref<?xf32>) outs(%y : memref<?xf32>)\n    return\n  }\n}\n",
+  "notes": "add-then-exp chain"
+}

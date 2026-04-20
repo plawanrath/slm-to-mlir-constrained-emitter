@@ -1,0 +1,8 @@
+{
+  "id": "096_sign-extend-then-add",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that sign-extends an i16 to i32 and adds it to another i32 value.",
+  "mlir": "module {\n  func.func @sxa(%a: i16, %b: i32) -> i32 {\n    %0 = arith.extsi %a : i16 to i32\n    %1 = arith.addi %0, %b : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "widen + add"
+}

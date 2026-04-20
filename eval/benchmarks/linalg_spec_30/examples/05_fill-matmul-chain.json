@@ -1,0 +1,8 @@
+{
+  "id": "05_fill-matmul-chain",
+  "dialect": "linalg+memref+arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that zeroes an f32 output memref using linalg.fill, then computes matmul of two input memrefs into it.",
+  "mlir": "module {\n  func.func @fm(%A: memref<?x?xf32>, %B: memref<?x?xf32>, %C: memref<?x?xf32>) {\n    %z = arith.constant 0.0 : f32\n    linalg.fill ins(%z : f32) outs(%C : memref<?x?xf32>)\n    linalg.matmul ins(%A, %B : memref<?x?xf32>, memref<?x?xf32>) outs(%C : memref<?x?xf32>)\n    return\n  }\n}\n",
+  "notes": "zero-then-matmul idiom"
+}

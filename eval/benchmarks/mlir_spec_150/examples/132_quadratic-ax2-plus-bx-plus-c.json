@@ -1,0 +1,8 @@
+{
+  "id": "132_quadratic-ax2-plus-bx-plus-c",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that evaluates `a*x*x + b*x + c` on i32 inputs (a, b, c, x).",
+  "mlir": "module {\n  func.func @q(%a: i32, %b: i32, %c: i32, %x: i32) -> i32 {\n    %0 = arith.muli %x, %x : i32\n    %1 = arith.muli %a, %0 : i32\n    %2 = arith.muli %b, %x : i32\n    %3 = arith.addi %1, %2 : i32\n    %4 = arith.addi %3, %c : i32\n    return %4 : i32\n  }\n}\n",
+  "notes": "5-op polynomial eval"
+}

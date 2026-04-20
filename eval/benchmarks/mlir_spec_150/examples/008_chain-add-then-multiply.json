@@ -1,0 +1,8 @@
+{
+  "id": "008_chain-add-then-multiply",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that computes `(a + b) * c` on i32 inputs and returns the i32 result.",
+  "mlir": "module {\n  func.func @fma_like(%a: i32, %b: i32, %c: i32) -> i32 {\n    %0 = arith.addi %a, %b : i32\n    %1 = arith.muli %0, %c : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "seed example; op chaining"
+}

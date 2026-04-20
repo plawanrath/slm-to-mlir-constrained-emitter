@@ -1,0 +1,8 @@
+{
+  "id": "087_memref-increment-slot",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that loads i32 at position `i` from memref `m`, adds 1, and stores it back.",
+  "mlir": "module {\n  func.func @inc(%m: memref<?xi32>, %i: index) {\n    %0 = memref.load %m[%i] : memref<?xi32>\n    %1 = arith.constant 1 : i32\n    %2 = arith.addi %0, %1 : i32\n    memref.store %2, %m[%i] : memref<?xi32>\n    return\n  }\n}\n",
+  "notes": "load-modify-store"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "30_transpose-then-matmul",
+  "dialect": "linalg+memref+func",
+  "difficulty": "hard",
+  "nl": "Write a function that transposes A (2-D f32) into a temp memref and then performs matmul of transposed A and B.",
+  "mlir": "module {\n  func.func @tm(%A: memref<?x?xf32>, %At: memref<?x?xf32>, %B: memref<?x?xf32>, %C: memref<?x?xf32>) {\n    linalg.transpose ins(%A : memref<?x?xf32>) outs(%At : memref<?x?xf32>) permutation = [1, 0]\n    linalg.matmul ins(%At, %B : memref<?x?xf32>, memref<?x?xf32>) outs(%C : memref<?x?xf32>)\n    return\n  }\n}\n",
+  "notes": "transpose-then-matmul"
+}

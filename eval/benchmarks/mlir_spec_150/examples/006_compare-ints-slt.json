@@ -1,0 +1,8 @@
+{
+  "id": "006_compare-ints-slt",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns true (i1) if signed integer `a` is less than `b`, both i32.",
+  "mlir": "module {\n  func.func @lt(%a: i32, %b: i32) -> i1 {\n    %0 = arith.cmpi slt, %a, %b : i32\n    return %0 : i1\n  }\n}\n",
+  "notes": "seed example; arith.cmpi slt"
+}

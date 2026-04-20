@@ -1,0 +1,8 @@
+{
+  "id": "091_memref-write-two-values",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that writes i32 values `v1` at index `i` and `v2` at index `j` in memref `m`.",
+  "mlir": "module {\n  func.func @w2(%m: memref<?xi32>, %i: index, %j: index, %v1: i32, %v2: i32) {\n    memref.store %v1, %m[%i] : memref<?xi32>\n    memref.store %v2, %m[%j] : memref<?xi32>\n    return\n  }\n}\n",
+  "notes": "two memref stores"
+}

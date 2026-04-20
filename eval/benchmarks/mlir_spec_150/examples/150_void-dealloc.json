@@ -1,0 +1,8 @@
+{
+  "id": "150_void-dealloc",
+  "dialect": "memref+func",
+  "difficulty": "easy",
+  "nl": "Write a function that deallocates a given memref<?xi32>.",
+  "mlir": "module {\n  func.func @d(%m: memref<?xi32>) {\n    memref.dealloc %m : memref<?xi32>\n    return\n  }\n}\n",
+  "notes": "minimum void function"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "005_integer-constant",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns the constant integer 42 as an i32.",
+  "mlir": "module {\n  func.func @const42() -> i32 {\n    %0 = arith.constant 42 : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; arith.constant"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "101_truncate-i64-to-i16",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that truncates an i64 to i16 and returns it.",
+  "mlir": "module {\n  func.func @t16(%x: i64) -> i16 {\n    %0 = arith.trunci %x : i64 to i16\n    return %0 : i16\n  }\n}\n",
+  "notes": "narrow trunc"
+}

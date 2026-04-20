@@ -1,0 +1,8 @@
+{
+  "id": "103_select-clamp-zero-one",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that clamps an i32 into [0, 1] by returning 0 if x<0, 1 if x>1, else x.",
+  "mlir": "module {\n  func.func @c01(%x: i32) -> i32 {\n    %c0 = arith.constant 0 : i32\n    %c1 = arith.constant 1 : i32\n    %0 = arith.maxsi %x, %c0 : i32\n    %1 = arith.minsi %0, %c1 : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "saturate [0,1]"
+}

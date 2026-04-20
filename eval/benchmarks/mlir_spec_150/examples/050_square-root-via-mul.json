@@ -1,0 +1,8 @@
+{
+  "id": "050_square-root-via-mul",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns `x * x + x` for an f64 x.",
+  "mlir": "module {\n  func.func @fn(%x: f64) -> f64 {\n    %0 = arith.mulf %x, %x : f64\n    %1 = arith.addf %0, %x : f64\n    return %1 : f64\n  }\n}\n",
+  "notes": "seed example; two-op chain f64"
+}

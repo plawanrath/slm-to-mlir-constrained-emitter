@@ -1,0 +1,8 @@
+{
+  "id": "149_identity-float",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that takes an f64 value and returns it unchanged.",
+  "mlir": "module {\n  func.func @id(%x: f64) -> f64 {\n    return %x : f64\n  }\n}\n",
+  "notes": "identity: no ops, just return"
+}

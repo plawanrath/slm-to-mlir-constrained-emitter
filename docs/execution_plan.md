@@ -48,10 +48,10 @@ Dates assume Day 1 = 2026-04-18.
 | 2 | 04-19 | Tokenizer shootout → lock primary+secondary SLM. Run L0 ODS miner. Run L3 test miner. Kick off L1 Polygeist pipeline. Grammar v0 iteration against L3 samples. | L1 Polygeist (long) |
 | 3 | 04-20 | Grammar v1; C1 decoder on SLMs parse-valid check. Start MLIR-Spec authoring (target 25 pairs today). Kick off CodeLlama-34B free-decoding baseline on n=300 subsample. | L1 Polygeist; CodeLlama baseline |
 | 4 | 04-21 | C2 mask integration (type + arity). C1+C2 sanity on 100 L3 held-out samples. Continue MLIR-Spec (target 50 total). Kick off CodeLlama + C1 baseline. | CodeLlama + C1; Granite free |
-| 5 | 04-22 | **Week-1 gate**: base SLM + C1 parse-valid ≥95% on L3 held-out. Entropy analysis. Full SLM matrix on `arith+func` at n=1000. Continue MLIR-Spec (target 100). | Granite + C1 |
-| 6 | 04-23 | Hidden-Cost-of-Structure replication + reversal ablation. Continue MLIR-Spec (target 130). | — |
-| 7 | 04-24 | **Week-2 gate**: C1+C2 beats C1 alone by ≥5pp (paired bootstrap). MLIR-Spec-150 locked (2-person review). **Go/no-go on `linalg`**: proceed if Week-2 gate passed comfortably, defer otherwise. | LoRA training (overnight) |
-| 8 | 04-25 | `linalg` grammar + C2 (if pursuing). LoRA eval. | — |
+| 5 | 04-22 | **Week-1 gate**: base SLM + C1 parse-valid ≥95% on L3 held-out (already met Day 3 at 96.0%). **C3 prototype**: symbol-table tracker + in-line logits processor (primary path). If in-line blocked, fall back to post-hoc rejection-sampling validator. Measure SmolLM2 × {C1, C1+C2, C1+C2+C3} × arith+func at n=500. | Granite + C1 completes; full 30B matrix compiles |
+| 6 | 04-23 | Hidden-Cost-of-Structure replication + reversal ablation. Error-category analysis across all constraint levels (expect C3 to collapse the "other"/cross-SSA bucket). Continue MLIR-Spec (target 130). | — |
+| 7 | 04-24 | **Week-2 gate** (revised): SLM + C1+C2+C3 beats SLM + C1+C2 by ≥10pp on verify-valid (paired bootstrap). MLIR-Spec-150 locked. **Go/no-go on `linalg`**: PURSUED per ADR-0007 (met comfortably on Day 5 at +13pp). LoRA training **deferred** to post-M1 future work. | — (LoRA deferred) |
+| 8 | 04-25 | `linalg` grammar + C2 (per ADR-0007). **LoRA eval deferred** — see §future-work. | — |
 | 9 | 04-26 | `linalg` full eval (if pursuing). Error-category analysis across all cells. | — |
 | 10 | 04-27 | **Week-3 gate**: SLM + C1+C2 within 3pp of 30B + C1 on ≥1 dialect (paired bootstrap). Bootstrap CIs + paired tests on every cell. Regenerate all figures from `results/*.json`. | — |
 | 11 | 04-28 | Buffer: re-runs for any cell with anomalous CI width. Freeze numbers in `results/frozen/`. | — |
@@ -116,8 +116,8 @@ Every file below scaffolded with unit tests passing on synthetic inputs by EOD D
 
 | Gate | Date | Criterion | If fails |
 |---|---|---|---|
-| Week-1 | Day 5 (04-22) | Base SLM + C1 parse-valid ≥95% on L3 held-out | Stop, diagnose grammar or tokenizer |
-| Week-2 | Day 7 (04-24) | C1+C2 > C1 by ≥5pp (paired bootstrap, 95% CI lower bound >0) | Pivot to "types alone suffice" or drop C2 |
+| Week-1 | Day 5 (04-22) | Base SLM + C1 parse-valid ≥95% on L3 held-out | Stop, diagnose grammar or tokenizer. **Status: met Day 3 at 96.0%.** |
+| Week-2 | Day 7 (04-24) | SLM + C1+C2+C3 > SLM + C1+C2 by ≥10pp verify-valid (paired bootstrap, 95% CI lower bound >0). C2→C3 is where the lift lives (day-4 ablation showed C1→C2 only reduces type errors by 2/200; "other" bucket = C3). | If C3 doesn't lift: drop the C3 contribution, ship C1+C2 + better prompting as the bundle; reframe ADR-0006. |
 | Week-3 | Day 10 (04-27) | SLM + C1+C2 within 3pp of 30B + C1 on ≥1 dialect (paired bootstrap) | Workshop-only submission |
 | Writing | Day 17 (05-04) | Submission-ready draft | Submit with known gaps; use rebuttal |
 

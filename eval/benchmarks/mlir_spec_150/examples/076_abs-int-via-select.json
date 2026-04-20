@@ -1,0 +1,8 @@
+{
+  "id": "076_abs-int-via-select",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns `|x|` for an i32 input using cmpi + select with subi from zero.",
+  "mlir": "module {\n  func.func @abs(%x: i32) -> i32 {\n    %0 = arith.constant 0 : i32\n    %1 = arith.subi %0, %x : i32\n    %2 = arith.cmpi sge, %x, %0 : i32\n    %3 = arith.select %2, %x, %1 : i32\n    return %3 : i32\n  }\n}\n",
+  "notes": "absolute value via cmp+select"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "04_matmul-f64",
+  "dialect": "linalg+memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that performs matmul on two f64 2-D memrefs into an f64 output memref.",
+  "mlir": "module {\n  func.func @mmf64(%A: memref<?x?xf64>, %B: memref<?x?xf64>, %C: memref<?x?xf64>) {\n    linalg.matmul ins(%A, %B : memref<?x?xf64>, memref<?x?xf64>) outs(%C : memref<?x?xf64>)\n    return\n  }\n}\n",
+  "notes": "f64 matmul"
+}

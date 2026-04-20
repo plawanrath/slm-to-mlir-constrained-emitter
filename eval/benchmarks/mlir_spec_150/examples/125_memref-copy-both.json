@@ -1,0 +1,8 @@
+{
+  "id": "125_memref-copy-both",
+  "dialect": "memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that copies both `m[0]` and `m[1]` into `dst[0]` and `dst[1]` for memref<?xi32>.",
+  "mlir": "module {\n  func.func @c2(%src: memref<?xi32>, %dst: memref<?xi32>) {\n    %c0 = arith.constant 0 : index\n    %c1 = arith.constant 1 : index\n    %a = memref.load %src[%c0] : memref<?xi32>\n    %b = memref.load %src[%c1] : memref<?xi32>\n    memref.store %a, %dst[%c0] : memref<?xi32>\n    memref.store %b, %dst[%c1] : memref<?xi32>\n    return\n  }\n}\n",
+  "notes": "two-element copy"
+}

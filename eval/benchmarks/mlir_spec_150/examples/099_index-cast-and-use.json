@@ -1,0 +1,8 @@
+{
+  "id": "099_index-cast-and-use",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes an i32 value `n`, casts it to index, and uses it to load from a memref<?xf32>.",
+  "mlir": "module {\n  func.func @ic(%m: memref<?xf32>, %n: i32) -> f32 {\n    %0 = arith.index_cast %n : i32 to index\n    %1 = memref.load %m[%0] : memref<?xf32>\n    return %1 : f32\n  }\n}\n",
+  "notes": "index_cast + memref.load"
+}

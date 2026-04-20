@@ -1,0 +1,8 @@
+{
+  "id": "145_memref-f64-load-double",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that loads f64 at index `i` from memref<?xf64>, doubles it, and returns the f64 result.",
+  "mlir": "module {\n  func.func @ld(%m: memref<?xf64>, %i: index) -> f64 {\n    %0 = memref.load %m[%i] : memref<?xf64>\n    %c2 = arith.constant 2.0 : f64\n    %1 = arith.mulf %0, %c2 : f64\n    return %1 : f64\n  }\n}\n",
+  "notes": "f64 memref"
+}

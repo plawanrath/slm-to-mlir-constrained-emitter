@@ -1,0 +1,8 @@
+{
+  "id": "107_sum-memref-two",
+  "dialect": "memref+arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that computes the sum of the first two elements of a memref<?xi32> and stores it at position 2.",
+  "mlir": "module {\n  func.func @s012(%m: memref<?xi32>) {\n    %c0 = arith.constant 0 : index\n    %c1 = arith.constant 1 : index\n    %c2 = arith.constant 2 : index\n    %a = memref.load %m[%c0] : memref<?xi32>\n    %b = memref.load %m[%c1] : memref<?xi32>\n    %s = arith.addi %a, %b : i32\n    memref.store %s, %m[%c2] : memref<?xi32>\n    return\n  }\n}\n",
+  "notes": "load-load-add-store"
+}

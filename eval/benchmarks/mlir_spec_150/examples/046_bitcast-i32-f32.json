@@ -1,0 +1,8 @@
+{
+  "id": "046_bitcast-i32-f32",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that reinterprets the bits of an i32 as an f32 (bitcast).",
+  "mlir": "module {\n  func.func @bc(%a: i32) -> f32 {\n    %0 = arith.bitcast %a : i32 to f32\n    return %0 : f32\n  }\n}\n",
+  "notes": "seed example; arith.bitcast"
+}

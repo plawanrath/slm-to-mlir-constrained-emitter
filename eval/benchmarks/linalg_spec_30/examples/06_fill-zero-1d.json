@@ -1,0 +1,8 @@
+{
+  "id": "06_fill-zero-1d",
+  "dialect": "linalg+memref+arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that fills a 1-D f32 memref with zeros.",
+  "mlir": "module {\n  func.func @f0(%m: memref<?xf32>) {\n    %z = arith.constant 0.0 : f32\n    linalg.fill ins(%z : f32) outs(%m : memref<?xf32>)\n    return\n  }\n}\n",
+  "notes": "zero-fill 1D"
+}

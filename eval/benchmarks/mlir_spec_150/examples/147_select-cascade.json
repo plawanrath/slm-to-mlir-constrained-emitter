@@ -1,0 +1,8 @@
+{
+  "id": "147_select-cascade",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns `f1 ? a : (f2 ? b : c)` for i32 values.",
+  "mlir": "module {\n  func.func @sc(%f1: i1, %f2: i1, %a: i32, %b: i32, %c: i32) -> i32 {\n    %0 = arith.select %f2, %b, %c : i32\n    %1 = arith.select %f1, %a, %0 : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "nested selects"
+}

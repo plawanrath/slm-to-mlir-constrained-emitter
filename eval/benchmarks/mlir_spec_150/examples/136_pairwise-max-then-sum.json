@@ -1,0 +1,8 @@
+{
+  "id": "136_pairwise-max-then-sum",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that returns `max(a, b) + max(c, d)` on i32 inputs using signed maximums.",
+  "mlir": "module {\n  func.func @pms(%a: i32, %b: i32, %c: i32, %d: i32) -> i32 {\n    %0 = arith.maxsi %a, %b : i32\n    %1 = arith.maxsi %c, %d : i32\n    %2 = arith.addi %0, %1 : i32\n    return %2 : i32\n  }\n}\n",
+  "notes": "pairwise max + add"
+}

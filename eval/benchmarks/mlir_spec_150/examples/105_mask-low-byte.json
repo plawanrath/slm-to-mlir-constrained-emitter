@@ -1,0 +1,8 @@
+{
+  "id": "105_mask-low-byte",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that masks an i32 down to its low 8 bits by AND with 0xff.",
+  "mlir": "module {\n  func.func @mb(%x: i32) -> i32 {\n    %0 = arith.constant 255 : i32\n    %1 = arith.andi %x, %0 : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "andi with mask"
+}

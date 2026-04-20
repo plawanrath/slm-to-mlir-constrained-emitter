@@ -1,0 +1,8 @@
+{
+  "id": "140_memref-cond-store",
+  "dialect": "memref+arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that takes a memref<?xi32> `m`, index `i`, value `v`, and flag `f`. If `f` is true store `v` at `i`; otherwise store `v * 2`.",
+  "mlir": "module {\n  func.func @cs2(%m: memref<?xi32>, %i: index, %v: i32, %f: i1) {\n    %c2 = arith.constant 2 : i32\n    %d = arith.muli %v, %c2 : i32\n    %s = arith.select %f, %v, %d : i32\n    memref.store %s, %m[%i] : memref<?xi32>\n    return\n  }\n}\n",
+  "notes": "conditional store via select"
+}

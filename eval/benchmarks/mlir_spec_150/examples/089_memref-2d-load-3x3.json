@@ -1,0 +1,8 @@
+{
+  "id": "089_memref-2d-load-3x3",
+  "dialect": "memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes a static 3x3xf32 memref and returns the center element (position (1, 1)).",
+  "mlir": "module {\n  func.func @c(%m: memref<3x3xf32>) -> f32 {\n    %c1 = arith.constant 1 : index\n    %0 = memref.load %m[%c1, %c1] : memref<3x3xf32>\n    return %0 : f32\n  }\n}\n",
+  "notes": "static 2D memref load"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "121_larger-of-two-f64",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns the larger of two f64 values using arith.maximumf.",
+  "mlir": "module {\n  func.func @m(%a: f64, %b: f64) -> f64 {\n    %0 = arith.maximumf %a, %b : f64\n    return %0 : f64\n  }\n}\n",
+  "notes": "maximumf f64"
+}

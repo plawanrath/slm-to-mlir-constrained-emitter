@@ -1,0 +1,8 @@
+{
+  "id": "112_double-negate",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that negates an f32 twice (returning the original value).",
+  "mlir": "module {\n  func.func @nn(%x: f32) -> f32 {\n    %0 = arith.negf %x : f32\n    %1 = arith.negf %0 : f32\n    return %1 : f32\n  }\n}\n",
+  "notes": "double-negation"
+}

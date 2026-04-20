@@ -1,0 +1,8 @@
+{
+  "id": "128_shift-right-by-two",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that arithmetically shifts an i32 right by 2.",
+  "mlir": "module {\n  func.func @sr(%x: i32) -> i32 {\n    %0 = arith.constant 2 : i32\n    %1 = arith.shrsi %x, %0 : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "shrsi by 2"
+}

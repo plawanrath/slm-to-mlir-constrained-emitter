@@ -1,0 +1,8 @@
+{
+  "id": "065_conditional-negate",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes an i1 flag `f` and an i32 `x`. If `f` is true return `-x`, otherwise return `x`.",
+  "mlir": "module {\n  func.func @cneg(%f: i1, %x: i32) -> i32 {\n    %0 = arith.constant 0 : i32\n    %1 = arith.subi %0, %x : i32\n    %2 = arith.select %f, %1, %x : i32\n    return %2 : i32\n  }\n}\n",
+  "notes": "negation via subi from zero"
+}

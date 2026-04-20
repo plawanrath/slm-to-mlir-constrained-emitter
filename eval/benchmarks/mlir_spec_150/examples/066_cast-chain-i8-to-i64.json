@@ -1,0 +1,8 @@
+{
+  "id": "066_cast-chain-i8-to-i64",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes an i8 `b`, sign-extends it to i32 then to i64, and returns the i64 result.",
+  "mlir": "module {\n  func.func @w(%b: i8) -> i64 {\n    %0 = arith.extsi %b : i8 to i32\n    %1 = arith.extsi %0 : i32 to i64\n    return %1 : i64\n  }\n}\n",
+  "notes": "two-step sign-extension"
+}

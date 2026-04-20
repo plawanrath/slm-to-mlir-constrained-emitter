@@ -1,0 +1,8 @@
+{
+  "id": "134_lerp-floats",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that linearly interpolates: `a + t*(b - a)` on f32 inputs.",
+  "mlir": "module {\n  func.func @lr(%a: f32, %b: f32, %t: f32) -> f32 {\n    %0 = arith.subf %b, %a : f32\n    %1 = arith.mulf %t, %0 : f32\n    %2 = arith.addf %a, %1 : f32\n    return %2 : f32\n  }\n}\n",
+  "notes": "canonical lerp"
+}

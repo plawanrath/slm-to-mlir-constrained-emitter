@@ -1,0 +1,8 @@
+{
+  "id": "048_remainder",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that computes signed remainder of two i32 values (a mod b).",
+  "mlir": "module {\n  func.func @rem(%a: i32, %b: i32) -> i32 {\n    %0 = arith.remsi %a, %b : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; arith.remsi"
+}

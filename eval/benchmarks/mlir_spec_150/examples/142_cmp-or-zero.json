@@ -1,0 +1,8 @@
+{
+  "id": "142_cmp-or-zero",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes i32 `x` and returns `x` if positive else 0.",
+  "mlir": "module {\n  func.func @pz(%x: i32) -> i32 {\n    %c0 = arith.constant 0 : i32\n    %1 = arith.maxsi %x, %c0 : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "ReLU-like"
+}

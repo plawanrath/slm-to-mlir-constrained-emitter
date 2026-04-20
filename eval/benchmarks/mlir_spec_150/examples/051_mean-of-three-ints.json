@@ -1,0 +1,8 @@
+{
+  "id": "051_mean-of-three-ints",
+  "dialect": "arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that takes three i32 values and returns their integer mean by summing them and dividing by 3.",
+  "mlir": "module {\n  func.func @mean3(%a: i32, %b: i32, %c: i32) -> i32 {\n    %0 = arith.addi %a, %b : i32\n    %1 = arith.addi %0, %c : i32\n    %2 = arith.constant 3 : i32\n    %3 = arith.divsi %1, %2 : i32\n    return %3 : i32\n  }\n}\n",
+  "notes": "4-op chain; constant-op reuse"
+}

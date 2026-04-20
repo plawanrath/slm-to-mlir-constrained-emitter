@@ -1,0 +1,8 @@
+{
+  "id": "011_store-to-memref",
+  "dialect": "memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that stores the f32 value `v` at index `i` in a memref with shape `32xf32`.",
+  "mlir": "module {\n  func.func @store(%m: memref<32xf32>, %i: index, %v: f32) {\n    memref.store %v, %m[%i] : memref<32xf32>\n    return\n  }\n}\n",
+  "notes": "seed example; memref.store static shape"
+}

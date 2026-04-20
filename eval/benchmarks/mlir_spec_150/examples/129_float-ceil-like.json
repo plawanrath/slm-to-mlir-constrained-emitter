@@ -1,0 +1,8 @@
+{
+  "id": "129_float-ceil-like",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that approximates ceiling for an f32 by adding 0.5 and casting to i32 via fptosi.",
+  "mlir": "module {\n  func.func @cl(%x: f32) -> i32 {\n    %0 = arith.constant 0.5 : f32\n    %1 = arith.addf %x, %0 : f32\n    %2 = arith.fptosi %1 : f32 to i32\n    return %2 : i32\n  }\n}\n",
+  "notes": "round-via-add-cast"
+}

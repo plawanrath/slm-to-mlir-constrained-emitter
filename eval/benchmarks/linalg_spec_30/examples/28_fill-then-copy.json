@@ -1,0 +1,8 @@
+{
+  "id": "28_fill-then-copy",
+  "dialect": "linalg+memref+arith+func",
+  "difficulty": "hard",
+  "nl": "Write a function that fills a 1-D f32 memref with 1.0 and then copies its contents into a second memref.",
+  "mlir": "module {\n  func.func @fc(%m: memref<?xf32>, %d: memref<?xf32>) {\n    %one = arith.constant 1.0 : f32\n    linalg.fill ins(%one : f32) outs(%m : memref<?xf32>)\n    linalg.copy ins(%m : memref<?xf32>) outs(%d : memref<?xf32>)\n    return\n  }\n}\n",
+  "notes": "fill-then-copy chain"
+}

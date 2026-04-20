@@ -1,0 +1,8 @@
+{
+  "id": "093_memref-sum-at-two-indices",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns the f32 sum of elements at (0,0) and (1,1) of a 2x2xf32 memref.",
+  "mlir": "module {\n  func.func @s22(%m: memref<2x2xf32>) -> f32 {\n    %c0 = arith.constant 0 : index\n    %c1 = arith.constant 1 : index\n    %0 = memref.load %m[%c0, %c0] : memref<2x2xf32>\n    %1 = memref.load %m[%c1, %c1] : memref<2x2xf32>\n    %2 = arith.addf %0, %1 : f32\n    return %2 : f32\n  }\n}\n",
+  "notes": "diagonal sum"
+}

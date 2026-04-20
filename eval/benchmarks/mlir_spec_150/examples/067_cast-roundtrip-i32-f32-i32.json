@@ -1,0 +1,8 @@
+{
+  "id": "067_cast-roundtrip-i32-f32-i32",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes an i32, converts to f32 via sitofp, then back to i32 via fptosi, and returns the result.",
+  "mlir": "module {\n  func.func @rt(%x: i32) -> i32 {\n    %0 = arith.sitofp %x : i32 to f32\n    %1 = arith.fptosi %0 : f32 to i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "int→float→int roundtrip"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "042_boolean-and",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that performs logical AND on two i1 values.",
+  "mlir": "module {\n  func.func @land(%a: i1, %b: i1) -> i1 {\n    %0 = arith.andi %a, %b : i1\n    return %0 : i1\n  }\n}\n",
+  "notes": "seed example; andi on i1"
+}

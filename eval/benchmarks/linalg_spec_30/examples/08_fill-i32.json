@@ -1,0 +1,8 @@
+{
+  "id": "08_fill-i32",
+  "dialect": "linalg+memref+arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that fills a 1-D i32 memref with the integer constant 7.",
+  "mlir": "module {\n  func.func @f7(%m: memref<?xi32>) {\n    %c7 = arith.constant 7 : i32\n    linalg.fill ins(%c7 : i32) outs(%m : memref<?xi32>)\n    return\n  }\n}\n",
+  "notes": "integer-typed fill"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "124_memref-store-zero",
+  "dialect": "memref+arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that stores i32 value 0 at index `i` of memref<?xi32>.",
+  "mlir": "module {\n  func.func @z(%m: memref<?xi32>, %i: index) {\n    %0 = arith.constant 0 : i32\n    memref.store %0, %m[%i] : memref<?xi32>\n    return\n  }\n}\n",
+  "notes": "const-store"
+}

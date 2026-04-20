@@ -1,0 +1,8 @@
+{
+  "id": "086_memref-copy-loop-unrolled",
+  "dialect": "memref+func",
+  "difficulty": "hard",
+  "nl": "Write a function that copies the elements at positions 0, 1, 2 from memref `src` to positions 0, 1, 2 of memref `dst` (both memref<?xi32>).",
+  "mlir": "module {\n  func.func @cp3(%src: memref<?xi32>, %dst: memref<?xi32>) {\n    %c0 = arith.constant 0 : index\n    %c1 = arith.constant 1 : index\n    %c2 = arith.constant 2 : index\n    %a = memref.load %src[%c0] : memref<?xi32>\n    memref.store %a, %dst[%c0] : memref<?xi32>\n    return\n  }\n}\n",
+  "notes": "unrolled copy"
+}

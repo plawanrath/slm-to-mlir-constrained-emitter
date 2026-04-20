@@ -1,0 +1,8 @@
+{
+  "id": "037_memref-load-store-copy",
+  "dialect": "memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that copies the element at index 0 of a source memref to index 0 of a destination memref, both memref<4xi32>.",
+  "mlir": "module {\n  func.func @copy_first(%src: memref<4xi32>, %dst: memref<4xi32>) {\n    %c0 = arith.constant 0 : index\n    %v = memref.load %src[%c0] : memref<4xi32>\n    memref.store %v, %dst[%c0] : memref<4xi32>\n    return\n  }\n}\n",
+  "notes": "seed example; two memrefs, load + store"
+}

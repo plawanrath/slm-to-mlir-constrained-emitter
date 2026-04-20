@@ -1,0 +1,8 @@
+{
+  "id": "059_memref-2d-store",
+  "dialect": "memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes a 2-D memref of shape `?x?` of i32, indices (i, j), and an i32 value `v`, and stores `v` at position (i, j).",
+  "mlir": "module {\n  func.func @st2d(%m: memref<?x?xi32>, %i: index, %j: index, %v: i32) {\n    memref.store %v, %m[%i, %j] : memref<?x?xi32>\n    return\n  }\n}\n",
+  "notes": "2-D memref store"
+}

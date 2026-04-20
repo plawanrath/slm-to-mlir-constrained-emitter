@@ -1,0 +1,8 @@
+{
+  "id": "060_memref-static-shape",
+  "dialect": "memref+func",
+  "difficulty": "easy",
+  "nl": "Write a function that allocates a static memref of shape 4x4xf32 and immediately deallocates it.",
+  "mlir": "module {\n  func.func @sz() {\n    %0 = memref.alloc() : memref<4x4xf32>\n    memref.dealloc %0 : memref<4x4xf32>\n    return\n  }\n}\n",
+  "notes": "static memref shapes"
+}

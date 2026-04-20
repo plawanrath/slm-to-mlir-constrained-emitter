@@ -1,0 +1,8 @@
+{
+  "id": "094_memref-dim-1",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns the size of dimension 1 of a 2-D dynamic memref<?x?xi32>.",
+  "mlir": "module {\n  func.func @d1(%m: memref<?x?xi32>) -> index {\n    %c1 = arith.constant 1 : index\n    %0 = memref.dim %m, %c1 : memref<?x?xi32>\n    return %0 : index\n  }\n}\n",
+  "notes": "memref.dim dim-1"
+}

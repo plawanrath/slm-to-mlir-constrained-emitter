@@ -1,0 +1,8 @@
+{
+  "id": "007_select-by-predicate",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes a boolean `cond` (i1) and two f32 values `t`, `f`, and returns `t` if `cond` is true else `f`.",
+  "mlir": "module {\n  func.func @pick(%cond: i1, %t: f32, %f: f32) -> f32 {\n    %0 = arith.select %cond, %t, %f : f32\n    return %0 : f32\n  }\n}\n",
+  "notes": "seed example; arith.select"
+}

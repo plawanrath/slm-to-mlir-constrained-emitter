@@ -1,0 +1,8 @@
+{
+  "id": "001_add-two-ints",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function `add` that takes two i32 values and returns their sum.",
+  "mlir": "module {\n  func.func @add(%a: i32, %b: i32) -> i32 {\n    %0 = arith.addi %a, %b : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; tests arith.addi + func.func + return"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "072_sub-two-f64",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that subtracts two f64 values and returns the result.",
+  "mlir": "module {\n  func.func @sub64(%a: f64, %b: f64) -> f64 {\n    %0 = arith.subf %a, %b : f64\n    return %0 : f64\n  }\n}\n",
+  "notes": "f64 arithmetic"
+}

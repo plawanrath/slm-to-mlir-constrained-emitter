@@ -1,0 +1,8 @@
+{
+  "id": "15_broadcast-1d-to-2d",
+  "dialect": "linalg+memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that broadcasts a 1-D f32 memref to a 2-D f32 memref along the 0th dimension.",
+  "mlir": "module {\n  func.func @b1(%s: memref<?xf32>, %d: memref<?x?xf32>) {\n    linalg.broadcast ins(%s : memref<?xf32>) outs(%d : memref<?x?xf32>) dimensions = [0]\n    return\n  }\n}\n",
+  "notes": "1D to 2D broadcast, dim 0"
+}

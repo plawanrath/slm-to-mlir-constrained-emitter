@@ -1,0 +1,8 @@
+{
+  "id": "23_div-elemwise",
+  "dialect": "linalg+memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that divides two 1-D f32 memrefs element-wise.",
+  "mlir": "module {\n  func.func @de(%a: memref<?xf32>, %b: memref<?xf32>, %c: memref<?xf32>) {\n    linalg.div ins(%a, %b : memref<?xf32>, memref<?xf32>) outs(%c : memref<?xf32>)\n    return\n  }\n}\n",
+  "notes": "elemwise div"
+}

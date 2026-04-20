@@ -1,0 +1,8 @@
+{
+  "id": "084_max-three-floats",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns the maximum of three f32 values using arith.maximumf (returns the larger of each pair).",
+  "mlir": "module {\n  func.func @max3(%a: f32, %b: f32, %c: f32) -> f32 {\n    %0 = arith.maximumf %a, %b : f32\n    %1 = arith.maximumf %0, %c : f32\n    return %1 : f32\n  }\n}\n",
+  "notes": "maximumf reduction"
+}

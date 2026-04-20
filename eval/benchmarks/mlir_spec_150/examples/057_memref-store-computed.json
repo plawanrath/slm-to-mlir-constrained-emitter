@@ -1,0 +1,8 @@
+{
+  "id": "057_memref-store-computed",
+  "dialect": "memref+arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes a memref<?xi32> `m`, an index `i`, and an i32 `x`, and stores `x + 1` at position `i`.",
+  "mlir": "module {\n  func.func @sinc(%m: memref<?xi32>, %i: index, %x: i32) {\n    %0 = arith.constant 1 : i32\n    %1 = arith.addi %x, %0 : i32\n    memref.store %1, %m[%i] : memref<?xi32>\n    return\n  }\n}\n",
+  "notes": "arith then memref.store, void return"
+}

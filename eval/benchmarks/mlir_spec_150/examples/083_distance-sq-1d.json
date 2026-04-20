@@ -1,0 +1,8 @@
+{
+  "id": "083_distance-sq-1d",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns the squared distance between two i32 points: `(b-a) * (b-a)`.",
+  "mlir": "module {\n  func.func @d1(%a: i32, %b: i32) -> i32 {\n    %0 = arith.subi %b, %a : i32\n    %1 = arith.muli %0, %0 : i32\n    return %1 : i32\n  }\n}\n",
+  "notes": "value reuse in self-mul"
+}

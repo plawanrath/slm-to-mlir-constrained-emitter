@@ -1,0 +1,8 @@
+{
+  "id": "19_matvec-f64",
+  "dialect": "linalg+memref+func",
+  "difficulty": "medium",
+  "nl": "Write a function that performs a matvec on f64 inputs.",
+  "mlir": "module {\n  func.func @mvd(%A: memref<?x?xf64>, %x: memref<?xf64>, %y: memref<?xf64>) {\n    linalg.matvec ins(%A, %x : memref<?x?xf64>, memref<?xf64>) outs(%y : memref<?xf64>)\n    return\n  }\n}\n",
+  "notes": "f64 matvec"
+}

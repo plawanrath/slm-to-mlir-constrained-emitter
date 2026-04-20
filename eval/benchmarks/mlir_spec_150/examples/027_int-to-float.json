@@ -1,0 +1,8 @@
+{
+  "id": "027_int-to-float",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that converts a signed i32 to f32.",
+  "mlir": "module {\n  func.func @i2f(%a: i32) -> f32 {\n    %0 = arith.sitofp %a : i32 to f32\n    return %0 : f32\n  }\n}\n",
+  "notes": "seed example; arith.sitofp"
+}

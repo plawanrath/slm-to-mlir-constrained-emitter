@@ -1,0 +1,8 @@
+{
+  "id": "047_not-float-cmp",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that returns true if two f32 values are NOT equal in an ordered way.",
+  "mlir": "module {\n  func.func @fne(%a: f32, %b: f32) -> i1 {\n    %0 = arith.cmpf one, %a, %b : f32\n    return %0 : i1\n  }\n}\n",
+  "notes": "seed example; cmpf one (ordered not equal)"
+}

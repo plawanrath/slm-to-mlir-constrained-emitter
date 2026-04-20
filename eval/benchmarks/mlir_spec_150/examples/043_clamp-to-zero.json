@@ -1,0 +1,8 @@
+{
+  "id": "043_clamp-to-zero",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes a signed i32 and returns 0 if the value is negative, otherwise returns the value.",
+  "mlir": "module {\n  func.func @clamp_pos(%a: i32) -> i32 {\n    %c0 = arith.constant 0 : i32\n    %cond = arith.cmpi slt, %a, %c0 : i32\n    %0 = arith.select %cond, %c0, %a : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; ReLU-like clamp"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "069_index-arith-chain",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes two index values `i` and `j` and returns `i*2 + j` as an index.",
+  "mlir": "module {\n  func.func @ij(%i: index, %j: index) -> index {\n    %0 = arith.constant 2 : index\n    %1 = arith.muli %i, %0 : index\n    %2 = arith.addi %1, %j : index\n    return %2 : index\n  }\n}\n",
+  "notes": "index arithmetic"
+}

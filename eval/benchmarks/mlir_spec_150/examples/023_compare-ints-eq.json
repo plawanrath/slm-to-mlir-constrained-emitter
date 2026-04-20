@@ -1,0 +1,8 @@
+{
+  "id": "023_compare-ints-eq",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that returns true (i1) if two i64 values are equal.",
+  "mlir": "module {\n  func.func @eq(%a: i64, %b: i64) -> i1 {\n    %0 = arith.cmpi eq, %a, %b : i64\n    return %0 : i1\n  }\n}\n",
+  "notes": "seed example; arith.cmpi eq"
+}

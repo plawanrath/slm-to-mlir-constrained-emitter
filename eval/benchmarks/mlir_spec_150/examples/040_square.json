@@ -1,0 +1,8 @@
+{
+  "id": "040_square",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that computes x squared for an i32 x.",
+  "mlir": "module {\n  func.func @square(%x: i32) -> i32 {\n    %0 = arith.muli %x, %x : i32\n    return %0 : i32\n  }\n}\n",
+  "notes": "seed example; muli with same operand"
+}

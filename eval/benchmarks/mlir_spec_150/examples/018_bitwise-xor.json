@@ -1,0 +1,8 @@
+{
+  "id": "018_bitwise-xor",
+  "dialect": "arith+func",
+  "difficulty": "easy",
+  "nl": "Write a function that computes the bitwise XOR of two i16 values.",
+  "mlir": "module {\n  func.func @bxor(%a: i16, %b: i16) -> i16 {\n    %0 = arith.xori %a, %b : i16\n    return %0 : i16\n  }\n}\n",
+  "notes": "seed example; arith.xori i16"
+}

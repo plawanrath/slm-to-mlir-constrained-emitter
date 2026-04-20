@@ -1,0 +1,8 @@
+{
+  "id": "100_cast-roundtrip-f32-i64",
+  "dialect": "arith+func",
+  "difficulty": "medium",
+  "nl": "Write a function that takes an f32 value, converts it to i32 via fptosi, then widens to i64 via extsi.",
+  "mlir": "module {\n  func.func @fi64(%x: f32) -> i64 {\n    %0 = arith.fptosi %x : f32 to i32\n    %1 = arith.extsi %0 : i32 to i64\n    return %1 : i64\n  }\n}\n",
+  "notes": "float→int→widen"
+}
