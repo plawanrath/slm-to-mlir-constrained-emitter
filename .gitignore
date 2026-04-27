@@ -108,6 +108,7 @@ docs/paper/*.ind
 RESUME.md                                                                                                                                      submission_artifact/                                                                                                                       
 docs/paper/                                                                                                                                  
 docs/daily_log/ 
+CONTACT.md
 
 # Submission build artifacts (regenerate via scripts/build_submission_artifact.sh; upload to OpenReview/Zenodo)
 overleaf_upload.zip
