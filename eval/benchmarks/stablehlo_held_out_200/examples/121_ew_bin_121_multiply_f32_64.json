@@ -1,0 +1,9 @@
+{
+  "id": "121_ew_bin_121_multiply_f32_64",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.multiply elementwise to two f32 tensors of shape 64.",
+  "mlir": "module {\n  func.func @f(%a: tensor<64xf32>, %b: tensor<64xf32>) -> tensor<64xf32> {\n    %0 = stablehlo.multiply %a, %b : tensor<64xf32>\n    return %0 : tensor<64xf32>\n  }\n}",
+  "notes": "multiply f32 64",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

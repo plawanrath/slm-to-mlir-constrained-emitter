@@ -1,0 +1,9 @@
+{
+  "id": "150_ew_bin_150_multiply_i32_8x8",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.multiply elementwise to two i32 tensors of shape 8x8.",
+  "mlir": "module {\n  func.func @f(%a: tensor<8x8xi32>, %b: tensor<8x8xi32>) -> tensor<8x8xi32> {\n    %0 = stablehlo.multiply %a, %b : tensor<8x8xi32>\n    return %0 : tensor<8x8xi32>\n  }\n}",
+  "notes": "multiply i32 8x8",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

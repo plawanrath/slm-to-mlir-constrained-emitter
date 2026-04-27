@@ -1,0 +1,8 @@
+{
+  "id": "14_rsqrt",
+  "nl": "Compute elementwise reciprocal square root of a 16-element f32 tensor.",
+  "mlir": "module {\n  func.func @f(%a: tensor<16xf32>) -> tensor<16xf32> {\n    %0 = stablehlo.rsqrt %a : tensor<16xf32>\n    return %0 : tensor<16xf32>\n  }\n}",
+  "op": "rsqrt",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

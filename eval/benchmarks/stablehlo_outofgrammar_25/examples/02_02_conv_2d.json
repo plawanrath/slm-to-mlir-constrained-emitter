@@ -1,0 +1,8 @@
+{
+  "id": "02_conv_2d",
+  "nl": "Apply a 2-D convolution of an input tensor 1x4x4x3 (NHWC) with a filter 3x3x3x8.",
+  "mlir": "module {\n  func.func @f(%a: tensor<1x4x4x3xf32>, %w: tensor<3x3x3x8xf32>) -> tensor<1x2x2x8xf32> {\n    %0 = stablehlo.convolution(%a, %w)\n      dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f],\n      window = {stride = [1, 1], pad = [[0, 0], [0, 0]]}\n      {batch_group_count = 1 : i64, feature_group_count = 1 : i64}\n      : (tensor<1x4x4x3xf32>, tensor<3x3x3x8xf32>) -> tensor<1x2x2x8xf32>\n    return %0 : tensor<1x2x2x8xf32>\n  }\n}",
+  "op": "convolution",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

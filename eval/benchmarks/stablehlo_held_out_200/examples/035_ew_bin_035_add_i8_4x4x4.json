@@ -1,0 +1,9 @@
+{
+  "id": "035_ew_bin_035_add_i8_4x4x4",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.add elementwise to two i8 tensors of shape 4x4x4.",
+  "mlir": "module {\n  func.func @f(%a: tensor<4x4x4xi8>, %b: tensor<4x4x4xi8>) -> tensor<4x4x4xi8> {\n    %0 = stablehlo.add %a, %b : tensor<4x4x4xi8>\n    return %0 : tensor<4x4x4xi8>\n  }\n}",
+  "notes": "add i8 4x4x4",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

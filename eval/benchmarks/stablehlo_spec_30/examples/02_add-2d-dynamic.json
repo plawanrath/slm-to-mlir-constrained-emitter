@@ -1,0 +1,8 @@
+{
+  "id": "02_add-2d-dynamic",
+  "difficulty": "easy",
+  "nl": "Write a function that adds two 2-D f32 tensors with dynamic shapes and returns the result.",
+  "mlir": "module {\n  func.func @add2d(%a: tensor<?x?xf32>, %b: tensor<?x?xf32>) -> tensor<?x?xf32> {\n    %0 = stablehlo.add %a, %b : tensor<?x?xf32>\n    return %0 : tensor<?x?xf32>\n  }\n}",
+  "notes": "dynamic-shape addition",
+  "dialect": "stablehlo+func"
+}

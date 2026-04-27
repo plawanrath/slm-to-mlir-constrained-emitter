@@ -1,0 +1,8 @@
+{
+  "id": "11_conv_1d",
+  "nl": "Apply a 1-D convolution to an input tensor of shape 1x16x4 (NWC) with filter 3x4x8.",
+  "mlir": "module {\n  func.func @f(%a: tensor<1x16x4xf32>, %w: tensor<3x4x8xf32>) -> tensor<1x14x8xf32> {\n    %0 = stablehlo.convolution(%a, %w)\n      dim_numbers = [b, 0, f]x[0, i, o]->[b, 0, f],\n      window = {stride = [1], pad = [[0, 0]]}\n      {batch_group_count = 1 : i64, feature_group_count = 1 : i64}\n      : (tensor<1x16x4xf32>, tensor<3x4x8xf32>) -> tensor<1x14x8xf32>\n    return %0 : tensor<1x14x8xf32>\n  }\n}",
+  "op": "convolution",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

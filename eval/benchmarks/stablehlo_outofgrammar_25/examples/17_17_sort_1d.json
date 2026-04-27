@@ -1,0 +1,8 @@
+{
+  "id": "17_sort_1d",
+  "nl": "Sort a 1-D f32 tensor of 16 elements in ascending order using stablehlo.sort.",
+  "mlir": "module {\n  func.func @f(%a: tensor<16xf32>) -> tensor<16xf32> {\n    %0 = \"stablehlo.sort\"(%a) ({\n      ^bb0(%x: tensor<f32>, %y: tensor<f32>):\n        %cmp = stablehlo.compare LT, %x, %y, FLOAT : (tensor<f32>, tensor<f32>) -> tensor<i1>\n        stablehlo.return %cmp : tensor<i1>\n    }) {dimension = 0 : i64, is_stable = true} : (tensor<16xf32>) -> tensor<16xf32>\n    return %0 : tensor<16xf32>\n  }\n}",
+  "op": "sort",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

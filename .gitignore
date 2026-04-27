@@ -12,26 +12,65 @@ env/
 dist/
 build/
 
-# ML artifacts
+# Test / type / lint caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.hypothesis/
+
+# ML / experiment tracking
 data/raw/
 data/processed/
 checkpoints/
+models/
 wandb/
 mlruns/
+runs/
+tensorboard/
+lightning_logs/
+ray_results/
+outputs/
+multirun/
+.hydra/
+
+# Model weight formats (keep pointers only)
 *.safetensors
 *.bin
 *.gguf
 *.pt
 *.pth
+*.ckpt
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.onnx
+*.tflite
+*.npz
+*.npy
+
+# Run results / caches (keep aggregated CSVs/JSONs needed for figures via `git add -f`)
 results/
-outputs/
+*.sqlite
+*.sqlite3
+*.db
 
 # Logs
 *.log
 logs/
 
+# Notebooks
+.ipynb_checkpoints/
+
 # macOS
 .DS_Store
+**/.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -41,10 +80,12 @@ logs/
 *.swp
 *.swo
 
-# Notebooks
-.ipynb_checkpoints/
+# Local agent / Claude state
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
+.claude/cache/
 
-# Paper artifacts
+# Paper / LaTeX build artifacts
 docs/paper/*.aux
 docs/paper/*.bbl
 docs/paper/*.blg
@@ -52,6 +93,21 @@ docs/paper/*.log
 docs/paper/*.out
 docs/paper/*.synctex.gz
 docs/paper/*.toc
+docs/paper/*.fdb_latexmk
+docs/paper/*.fls
+docs/paper/*.lof
+docs/paper/*.lot
+docs/paper/*.nav
+docs/paper/*.snm
+docs/paper/*.vrb
+docs/paper/*.bcf
+docs/paper/*.run.xml
+docs/paper/*.idx
+docs/paper/*.ilg
+docs/paper/*.ind
 
-# Large-model weights (keep pointers only)
-models/
+# Submission build artifacts (regenerate via scripts/build_submission_artifact.sh; upload to OpenReview/Zenodo)
+overleaf_upload.zip
+*.tar.gz
+!eval/**/*.tar.gz
+!data/pipelines/**/*.tar.gz

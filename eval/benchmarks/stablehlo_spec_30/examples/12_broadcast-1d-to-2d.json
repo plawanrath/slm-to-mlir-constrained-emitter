@@ -1,0 +1,8 @@
+{
+  "id": "12_broadcast-1d-to-2d",
+  "difficulty": "medium",
+  "nl": "Write a function that broadcasts a 1-D f32 tensor of 8 elements to a 4x8 2-D tensor along dimension 1.",
+  "mlir": "module {\n  func.func @b(%a: tensor<8xf32>) -> tensor<4x8xf32> {\n    %0 = stablehlo.broadcast_in_dim %a, dims = [1] : (tensor<8xf32>) -> tensor<4x8xf32>\n    return %0 : tensor<4x8xf32>\n  }\n}",
+  "notes": "broadcast 1D to 2D",
+  "dialect": "stablehlo+func"
+}

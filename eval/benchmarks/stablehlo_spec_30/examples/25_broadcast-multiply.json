@@ -1,0 +1,8 @@
+{
+  "id": "25_broadcast-multiply",
+  "difficulty": "hard",
+  "nl": "Broadcast a length-8 1-D f32 tensor to a 4x8 tensor, then multiply with an existing 4x8 tensor.",
+  "mlir": "module {\n  func.func @bm(%a: tensor<8xf32>, %b: tensor<4x8xf32>) -> tensor<4x8xf32> {\n    %0 = stablehlo.broadcast_in_dim %a, dims = [1] : (tensor<8xf32>) -> tensor<4x8xf32>\n    %1 = stablehlo.multiply %0, %b : tensor<4x8xf32>\n    return %1 : tensor<4x8xf32>\n  }\n}",
+  "notes": "broadcast+multiply",
+  "dialect": "stablehlo+func"
+}

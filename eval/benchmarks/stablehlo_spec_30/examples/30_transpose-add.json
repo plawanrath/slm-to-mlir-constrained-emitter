@@ -1,0 +1,8 @@
+{
+  "id": "30_transpose-add",
+  "difficulty": "medium",
+  "nl": "Transpose a 4x4 f32 tensor then add it back to the original.",
+  "mlir": "module {\n  func.func @ta(%a: tensor<4x4xf32>) -> tensor<4x4xf32> {\n    %0 = stablehlo.transpose %a, dims = [1, 0] : (tensor<4x4xf32>) -> tensor<4x4xf32>\n    %1 = stablehlo.add %0, %a : tensor<4x4xf32>\n    return %1 : tensor<4x4xf32>\n  }\n}",
+  "notes": "symmetric sum",
+  "dialect": "stablehlo+func"
+}

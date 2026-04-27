@@ -1,0 +1,8 @@
+{
+  "id": "11_transpose-square",
+  "difficulty": "easy",
+  "nl": "Write a function that transposes a 3x3 f32 tensor.",
+  "mlir": "module {\n  func.func @t(%a: tensor<3x3xf32>) -> tensor<3x3xf32> {\n    %0 = stablehlo.transpose %a, dims = [1, 0] : (tensor<3x3xf32>) -> tensor<3x3xf32>\n    return %0 : tensor<3x3xf32>\n  }\n}",
+  "notes": "square transpose",
+  "dialect": "stablehlo+func"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "09_concatenate",
+  "nl": "Concatenate two 4x4 f32 tensors along axis 0 to produce an 8x4 tensor.",
+  "mlir": "module {\n  func.func @f(%a: tensor<4x4xf32>, %b: tensor<4x4xf32>) -> tensor<8x4xf32> {\n    %0 = stablehlo.concatenate %a, %b, dim = 0 : (tensor<4x4xf32>, tensor<4x4xf32>) -> tensor<8x4xf32>\n    return %0 : tensor<8x4xf32>\n  }\n}",
+  "op": "concatenate",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "14_reshape-flatten",
+  "difficulty": "medium",
+  "nl": "Write a function that flattens a 4x8 f32 tensor into a 1-D tensor of 32 elements.",
+  "mlir": "module {\n  func.func @r(%a: tensor<4x8xf32>) -> tensor<32xf32> {\n    %0 = stablehlo.reshape %a : (tensor<4x8xf32>) -> tensor<32xf32>\n    return %0 : tensor<32xf32>\n  }\n}",
+  "notes": "flatten",
+  "dialect": "stablehlo+func"
+}

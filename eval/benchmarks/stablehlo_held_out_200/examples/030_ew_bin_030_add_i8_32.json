@@ -1,0 +1,9 @@
+{
+  "id": "030_ew_bin_030_add_i8_32",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.add elementwise to two i8 tensors of shape 32.",
+  "mlir": "module {\n  func.func @f(%a: tensor<32xi8>, %b: tensor<32xi8>) -> tensor<32xi8> {\n    %0 = stablehlo.add %a, %b : tensor<32xi8>\n    return %0 : tensor<32xi8>\n  }\n}",
+  "notes": "add i8 32",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

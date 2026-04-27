@@ -1,0 +1,8 @@
+{
+  "id": "28_dot_general-f16",
+  "difficulty": "medium",
+  "nl": "Multiply two 16x16 f16 tensors using stablehlo.dot_general.",
+  "mlir": "module {\n  func.func @m(%a: tensor<16x16xf16>, %b: tensor<16x16xf16>) -> tensor<16x16xf16> {\n    %0 = stablehlo.dot_general %a, %b, contracting_dims = [1] x [0] : (tensor<16x16xf16>, tensor<16x16xf16>) -> tensor<16x16xf16>\n    return %0 : tensor<16x16xf16>\n  }\n}",
+  "notes": "f16 matmul",
+  "dialect": "stablehlo+func"
+}

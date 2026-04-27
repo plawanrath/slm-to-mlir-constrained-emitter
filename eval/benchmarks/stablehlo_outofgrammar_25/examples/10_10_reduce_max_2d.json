@@ -1,0 +1,8 @@
+{
+  "id": "10_reduce_max_2d",
+  "nl": "Reduce max across rows of a 4x8 f32 tensor, producing a 4-element vector.",
+  "mlir": "module {\n  func.func @f(%a: tensor<4x8xf32>) -> tensor<4xf32> {\n    %init = stablehlo.constant dense<0xFF800000> : tensor<f32>\n    %0 = stablehlo.reduce(%a init: %init) across dimensions = [1] : (tensor<4x8xf32>, tensor<f32>) -> tensor<4xf32>\n      reducer(%arg0: tensor<f32>, %arg1: tensor<f32>) {\n        %m = stablehlo.maximum %arg0, %arg1 : tensor<f32>\n        stablehlo.return %m : tensor<f32>\n      }\n    return %0 : tensor<4xf32>\n  }\n}",
+  "op": "reduce",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

@@ -1,0 +1,8 @@
+{
+  "id": "08_compare_lt",
+  "nl": "Elementwise less-than comparison of two f32 tensors of shape 16.",
+  "mlir": "module {\n  func.func @f(%a: tensor<16xf32>, %b: tensor<16xf32>) -> tensor<16xi1> {\n    %0 = stablehlo.compare LT, %a, %b, FLOAT : (tensor<16xf32>, tensor<16xf32>) -> tensor<16xi1>\n    return %0 : tensor<16xi1>\n  }\n}",
+  "op": "compare",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

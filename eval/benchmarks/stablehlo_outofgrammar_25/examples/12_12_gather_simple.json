@@ -1,0 +1,8 @@
+{
+  "id": "12_gather_simple",
+  "nl": "Gather 4 rows from an 8x16 f32 tensor using a 4-element i32 index vector.",
+  "mlir": "module {\n  func.func @f(%a: tensor<8x16xf32>, %idx: tensor<4x1xi32>) -> tensor<4x16xf32> {\n    %0 = \"stablehlo.gather\"(%a, %idx) {\n      dimension_numbers = #stablehlo.gather<\n        offset_dims = [1],\n        collapsed_slice_dims = [0],\n        start_index_map = [0],\n        index_vector_dim = 1\n      >,\n      slice_sizes = array<i64: 1, 16>,\n      indices_are_sorted = false\n    } : (tensor<8x16xf32>, tensor<4x1xi32>) -> tensor<4x16xf32>\n    return %0 : tensor<4x16xf32>\n  }\n}",
+  "op": "gather",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

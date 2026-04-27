@@ -1,0 +1,8 @@
+{
+  "id": "10_transpose-3d",
+  "difficulty": "medium",
+  "nl": "Write a function that transposes a 2x3x4 f32 tensor with permutation [2, 0, 1] producing a 4x2x3 tensor.",
+  "mlir": "module {\n  func.func @t3(%a: tensor<2x3x4xf32>) -> tensor<4x2x3xf32> {\n    %0 = stablehlo.transpose %a, dims = [2, 0, 1] : (tensor<2x3x4xf32>) -> tensor<4x2x3xf32>\n    return %0 : tensor<4x2x3xf32>\n  }\n}",
+  "notes": "3D transpose",
+  "dialect": "stablehlo+func"
+}

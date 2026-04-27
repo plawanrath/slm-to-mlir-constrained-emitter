@@ -1,0 +1,8 @@
+{
+  "id": "21_abs-exp-chain",
+  "difficulty": "medium",
+  "nl": "Write a function that computes the exponential of the absolute value of a 1-D f32 tensor.",
+  "mlir": "module {\n  func.func @c(%a: tensor<16xf32>) -> tensor<16xf32> {\n    %0 = stablehlo.abs %a : tensor<16xf32>\n    %1 = stablehlo.exponential %0 : tensor<16xf32>\n    return %1 : tensor<16xf32>\n  }\n}",
+  "notes": "abs then exp",
+  "dialect": "stablehlo+func"
+}

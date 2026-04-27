@@ -1,0 +1,9 @@
+{
+  "id": "09_ew_bin_09_add_f64_4x4x4",
+  "difficulty": "programmatic",
+  "nl": "Write a function that applies stablehlo.add elementwise to two f64 tensors of shape 4x4x4.",
+  "mlir": "module {\n  func.func @f(%a: tensor<4x4x4xf64>, %b: tensor<4x4x4xf64>) -> tensor<4x4x4xf64> {\n    %0 = stablehlo.add %a, %b : tensor<4x4x4xf64>\n    return %0 : tensor<4x4x4xf64>\n  }\n}",
+  "notes": "add f64 4x4x4",
+  "dialect": "stablehlo+func",
+  "source": "day41_programmatic_sweep"
+}

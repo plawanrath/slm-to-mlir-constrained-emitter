@@ -1,0 +1,8 @@
+{
+  "id": "01_reduce_sum_1d",
+  "nl": "Sum a 1-D f32 tensor of 16 elements using stablehlo.reduce with an add body.",
+  "mlir": "module {\n  func.func @f(%a: tensor<16xf32>) -> tensor<f32> {\n    %init = stablehlo.constant dense<0.0> : tensor<f32>\n    %0 = stablehlo.reduce(%a init: %init) across dimensions = [0] : (tensor<16xf32>, tensor<f32>) -> tensor<f32>\n      reducer(%arg0: tensor<f32>, %arg1: tensor<f32>) {\n        %sum = stablehlo.add %arg0, %arg1 : tensor<f32>\n        stablehlo.return %sum : tensor<f32>\n      }\n    return %0 : tensor<f32>\n  }\n}",
+  "op": "reduce",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

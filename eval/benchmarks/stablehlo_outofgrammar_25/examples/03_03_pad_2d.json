@@ -1,0 +1,8 @@
+{
+  "id": "03_pad_2d",
+  "nl": "Pad a 4x4 f32 tensor with 1-pixel borders of zero on each side, producing 6x6.",
+  "mlir": "module {\n  func.func @f(%a: tensor<4x4xf32>) -> tensor<6x6xf32> {\n    %pad = stablehlo.constant dense<0.0> : tensor<f32>\n    %0 = stablehlo.pad %a, %pad, low = [1, 1], high = [1, 1], interior = [0, 0]\n      : (tensor<4x4xf32>, tensor<f32>) -> tensor<6x6xf32>\n    return %0 : tensor<6x6xf32>\n  }\n}",
+  "op": "pad",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

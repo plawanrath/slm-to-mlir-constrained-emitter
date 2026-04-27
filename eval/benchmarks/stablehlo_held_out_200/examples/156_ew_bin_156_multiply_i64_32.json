@@ -1,0 +1,9 @@
+{
+  "id": "156_ew_bin_156_multiply_i64_32",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.multiply elementwise to two i64 tensors of shape 32.",
+  "mlir": "module {\n  func.func @f(%a: tensor<32xi64>, %b: tensor<32xi64>) -> tensor<32xi64> {\n    %0 = stablehlo.multiply %a, %b : tensor<32xi64>\n    return %0 : tensor<32xi64>\n  }\n}",
+  "notes": "multiply i64 32",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

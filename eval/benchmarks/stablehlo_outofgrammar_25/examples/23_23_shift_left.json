@@ -1,0 +1,8 @@
+{
+  "id": "23_shift_left",
+  "nl": "Elementwise left-shift of two 16-element i32 tensors.",
+  "mlir": "module {\n  func.func @f(%a: tensor<16xi32>, %b: tensor<16xi32>) -> tensor<16xi32> {\n    %0 = stablehlo.shift_left %a, %b : tensor<16xi32>\n    return %0 : tensor<16xi32>\n  }\n}",
+  "op": "shift_left",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

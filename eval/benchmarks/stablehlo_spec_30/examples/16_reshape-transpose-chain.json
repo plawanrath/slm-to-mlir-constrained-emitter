@@ -1,0 +1,8 @@
+{
+  "id": "16_reshape-transpose-chain",
+  "difficulty": "hard",
+  "nl": "Write a function that flattens a 4x8 f32 tensor, then transposes the result \u2014 no wait, simpler: reshape a 4x8 tensor into 8x4.",
+  "mlir": "module {\n  func.func @r(%a: tensor<4x8xf32>) -> tensor<8x4xf32> {\n    %0 = stablehlo.reshape %a : (tensor<4x8xf32>) -> tensor<8x4xf32>\n    return %0 : tensor<8x4xf32>\n  }\n}",
+  "notes": "reshape shape change",
+  "dialect": "stablehlo+func"
+}

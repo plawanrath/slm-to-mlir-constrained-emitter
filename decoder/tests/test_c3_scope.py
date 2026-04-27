@@ -408,3 +408,116 @@ def test_parse_linalg_clause_two_ins():
     from decoder.c3_scope import _parse_linalg_clause
     pairs = _parse_linalg_clause("%a, %b : memref<?xf32>, memref<?xf32>")
     assert pairs == [("a", "memref<?xf32>"), ("b", "memref<?xf32>")]
+
+
+# -------------- StableHLO C3 (ADR-0008 Phase C) --------------
+
+def test_stablehlo_elemwise_bin_passes():
+    src = textwrap.dedent("""\
+        module {
+          func.func @f(%a: tensor<4xf32>, %b: tensor<4xf32>) -> tensor<4xf32> {
+            %0 = stablehlo.add %a, %b : tensor<4xf32>
+            return %0 : tensor<4xf32>
+          }
+        }
+    """)
+    rep = validate(src)
+    assert rep.passed, rep.violations
+
+
+def test_stablehlo_elemwise_un_passes():
+    src = textwrap.dedent("""\
+        module {
+          func.func @g(%a: tensor<4xf32>) -> tensor<4xf32> {
+            %0 = stablehlo.abs %a : tensor<4xf32>
+            return %0 : tensor<4xf32>
+          }
+        }
+    """)
+    rep = validate(src)
+    assert rep.passed, rep.violations
+
+
+def test_stablehlo_undef_ssa_rejected():
+    src = textwrap.dedent("""\
+        module {
+          func.func @f(%a: tensor<4xf32>) -> tensor<4xf32> {
+            %0 = stablehlo.add %a, %undef : tensor<4xf32>
+            return %0 : tensor<4xf32>
+          }
+        }
+    """)
+    rep = validate(src)
+    assert not rep.passed
+    assert any(v.kind == "undef_use" for v in rep.violations)
+
+
+def test_stablehlo_transpose_typed_sig_passes():
+    src = textwrap.dedent("""\
+        module {
+          func.func @g(%a: tensor<4x8xf32>) -> tensor<8x4xf32> {
+            %0 = stablehlo.transpose %a, permutation = [1, 0] : (tensor<4x8xf32>) -> tensor<8x4xf32>
+            return %0 : tensor<8x4xf32>
+          }
+        }
+    """)
+    rep = validate(src)
+    assert rep.passed, rep.violations
+
+
+def test_stablehlo_transpose_input_type_mismatch_rejected():
+    # Param has tensor<4x8xf32>, transpose expects tensor<2x2xf32> input
+    src = textwrap.dedent("""\
+        module {
+          func.func @g(%a: tensor<4x8xf32>) -> tensor<2x2xf32> {
+            %0 = stablehlo.transpose %a, permutation = [1, 0] : (tensor<2x2xf32>) -> tensor<2x2xf32>
+            return %0 : tensor<2x2xf32>
+          }
+        }
+    """)
+    rep = validate(src)
+    assert not rep.passed
+    assert any(v.kind == "type_mismatch" for v in rep.violations)
+
+
+def test_stablehlo_dot_general_binary_sig_passes():
+    src = textwrap.dedent("""\
+        module {
+          func.func @m(%a: tensor<4x8xf32>, %b: tensor<8x16xf32>) -> tensor<4x16xf32> {
+            %0 = stablehlo.dot_general %a, %b, contracting_dims = [1] x [0] : (tensor<4x8xf32>, tensor<8x16xf32>) -> tensor<4x16xf32>
+            return %0 : tensor<4x16xf32>
+          }
+        }
+    """)
+    rep = validate(src)
+    assert rep.passed, rep.violations
+
+
+def test_stablehlo_chain_ops_passes():
+    src = textwrap.dedent("""\
+        module {
+          func.func @c(%a: tensor<4x8xf32>, %b: tensor<4x8xf32>) -> tensor<4x8xf32> {
+            %0 = stablehlo.add %a, %b : tensor<4x8xf32>
+            %1 = stablehlo.multiply %0, %a : tensor<4x8xf32>
+            return %1 : tensor<4x8xf32>
+          }
+        }
+    """)
+    rep = validate(src)
+    assert rep.passed, rep.violations
+
+
+def test_stablehlo_type_sig_helper():
+    from decoder.c3_scope import _stablehlo_type_sig
+    rhs = "stablehlo.transpose %a, permutation = [1, 0] : (tensor<4x8xf32>) -> tensor<8x4xf32>"
+    in_ty, out_ty = _stablehlo_type_sig(rhs)
+    assert in_ty == "tensor<4x8xf32>"
+    assert out_ty == "tensor<8x4xf32>"
+
+
+def test_stablehlo_binary_sig_helper():
+    from decoder.c3_scope import _stablehlo_binary_sig
+    rhs = "stablehlo.dot_general %a, %b, contracting_dims = [1] x [0] : (tensor<4x8xf32>, tensor<8x16xf32>) -> tensor<4x16xf32>"
+    in_tys, out_ty = _stablehlo_binary_sig(rhs)
+    assert in_tys == ["tensor<4x8xf32>", "tensor<8x16xf32>"]
+    assert out_ty == "tensor<4x16xf32>"

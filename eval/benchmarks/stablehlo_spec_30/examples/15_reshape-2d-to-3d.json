@@ -1,0 +1,8 @@
+{
+  "id": "15_reshape-2d-to-3d",
+  "difficulty": "medium",
+  "nl": "Write a function that reshapes a 12x8 f32 tensor into a 3x4x8 3-D tensor.",
+  "mlir": "module {\n  func.func @r(%a: tensor<12x8xf32>) -> tensor<3x4x8xf32> {\n    %0 = stablehlo.reshape %a : (tensor<12x8xf32>) -> tensor<3x4x8xf32>\n    return %0 : tensor<3x4x8xf32>\n  }\n}",
+  "notes": "2D to 3D reshape",
+  "dialect": "stablehlo+func"
+}

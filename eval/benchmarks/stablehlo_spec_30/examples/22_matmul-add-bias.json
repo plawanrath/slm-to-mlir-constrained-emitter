@@ -1,0 +1,8 @@
+{
+  "id": "22_matmul-add-bias",
+  "difficulty": "hard",
+  "nl": "Matrix-multiply a 4x8 f32 tensor by an 8x16 f32 tensor, then add a 4x16 bias tensor.",
+  "mlir": "module {\n  func.func @lin(%a: tensor<4x8xf32>, %b: tensor<8x16xf32>, %bias: tensor<4x16xf32>) -> tensor<4x16xf32> {\n    %0 = stablehlo.dot_general %a, %b, contracting_dims = [1] x [0] : (tensor<4x8xf32>, tensor<8x16xf32>) -> tensor<4x16xf32>\n    %1 = stablehlo.add %0, %bias : tensor<4x16xf32>\n    return %1 : tensor<4x16xf32>\n  }\n}",
+  "notes": "linear layer",
+  "dialect": "stablehlo+func"
+}

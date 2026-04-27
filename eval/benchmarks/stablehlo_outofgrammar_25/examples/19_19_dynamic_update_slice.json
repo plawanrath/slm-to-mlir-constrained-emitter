@@ -1,0 +1,8 @@
+{
+  "id": "19_dynamic_update_slice",
+  "nl": "Update a 4-element slice of a 32-element f32 tensor at a dynamic index.",
+  "mlir": "module {\n  func.func @f(%a: tensor<32xf32>, %u: tensor<4xf32>, %i: tensor<i32>) -> tensor<32xf32> {\n    %0 = stablehlo.dynamic_update_slice %a, %u, %i : (tensor<32xf32>, tensor<4xf32>, tensor<i32>) -> tensor<32xf32>\n    return %0 : tensor<32xf32>\n  }\n}",
+  "op": "dynamic_update_slice",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

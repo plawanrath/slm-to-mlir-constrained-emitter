@@ -1,0 +1,8 @@
+{
+  "id": "26_add-3d",
+  "difficulty": "easy",
+  "nl": "Write a function that adds two 2x3x4 f32 tensors elementwise.",
+  "mlir": "module {\n  func.func @a3(%a: tensor<2x3x4xf32>, %b: tensor<2x3x4xf32>) -> tensor<2x3x4xf32> {\n    %0 = stablehlo.add %a, %b : tensor<2x3x4xf32>\n    return %0 : tensor<2x3x4xf32>\n  }\n}",
+  "notes": "3D add",
+  "dialect": "stablehlo+func"
+}

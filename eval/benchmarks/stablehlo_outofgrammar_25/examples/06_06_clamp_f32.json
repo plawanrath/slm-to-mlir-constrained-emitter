@@ -1,0 +1,8 @@
+{
+  "id": "06_clamp_f32",
+  "nl": "Clamp a 1-D f32 tensor of 16 elements to the [0, 1] range.",
+  "mlir": "module {\n  func.func @f(%a: tensor<16xf32>) -> tensor<16xf32> {\n    %lo = stablehlo.constant dense<0.0> : tensor<16xf32>\n    %hi = stablehlo.constant dense<1.0> : tensor<16xf32>\n    %0 = stablehlo.clamp %lo, %a, %hi : tensor<16xf32>\n    return %0 : tensor<16xf32>\n  }\n}",
+  "op": "clamp",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

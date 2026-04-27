@@ -1,0 +1,8 @@
+{
+  "id": "17_dot_general-matmul",
+  "difficulty": "medium",
+  "nl": "Write a function that performs a matrix multiplication of a 4x8 f32 tensor and an 8x16 f32 tensor using stablehlo.dot_general.",
+  "mlir": "module {\n  func.func @m(%a: tensor<4x8xf32>, %b: tensor<8x16xf32>) -> tensor<4x16xf32> {\n    %0 = stablehlo.dot_general %a, %b, contracting_dims = [1] x [0] : (tensor<4x8xf32>, tensor<8x16xf32>) -> tensor<4x16xf32>\n    return %0 : tensor<4x16xf32>\n  }\n}",
+  "notes": "canonical matmul",
+  "dialect": "stablehlo+func"
+}

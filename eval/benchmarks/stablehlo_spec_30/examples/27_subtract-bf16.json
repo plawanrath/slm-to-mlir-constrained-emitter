@@ -1,0 +1,8 @@
+{
+  "id": "27_subtract-bf16",
+  "difficulty": "easy",
+  "nl": "Write a function that subtracts two 16-element bf16 tensors elementwise.",
+  "mlir": "module {\n  func.func @s(%a: tensor<16xbf16>, %b: tensor<16xbf16>) -> tensor<16xbf16> {\n    %0 = stablehlo.subtract %a, %b : tensor<16xbf16>\n    return %0 : tensor<16xbf16>\n  }\n}",
+  "notes": "bf16 arithmetic",
+  "dialect": "stablehlo+func"
+}

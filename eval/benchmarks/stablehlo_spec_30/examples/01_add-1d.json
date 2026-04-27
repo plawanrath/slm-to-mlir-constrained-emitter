@@ -1,0 +1,8 @@
+{
+  "id": "01_add-1d",
+  "difficulty": "easy",
+  "nl": "Write a function that adds two 1-D f32 tensors of 16 elements using stablehlo.add.",
+  "mlir": "module {\n  func.func @a(%a: tensor<16xf32>, %b: tensor<16xf32>) -> tensor<16xf32> {\n    %0 = stablehlo.add %a, %b : tensor<16xf32>\n    return %0 : tensor<16xf32>\n  }\n}",
+  "notes": "canonical stablehlo.add",
+  "dialect": "stablehlo+func"
+}

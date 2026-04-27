@@ -1,0 +1,8 @@
+{
+  "id": "18_dot_general-square",
+  "difficulty": "medium",
+  "nl": "Write a function that multiplies two 8x8 f32 tensors using stablehlo.dot_general.",
+  "mlir": "module {\n  func.func @m(%a: tensor<8x8xf32>, %b: tensor<8x8xf32>) -> tensor<8x8xf32> {\n    %0 = stablehlo.dot_general %a, %b, contracting_dims = [1] x [0] : (tensor<8x8xf32>, tensor<8x8xf32>) -> tensor<8x8xf32>\n    return %0 : tensor<8x8xf32>\n  }\n}",
+  "notes": "square matmul",
+  "dialect": "stablehlo+func"
+}

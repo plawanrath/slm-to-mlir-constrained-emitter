@@ -25,8 +25,8 @@
 
 ## Current state
 
-**As of**: **Day 17 end (2026-04-24) — M1 SUBMISSION-READY.** All gates met (Week-1/2/3); cross-dialect §5.2 matrix frozen at `results/frozen/day10_final_matrix/`; reproducibility tarball at `submission_artifact.tar.gz` (312 KB, SHA256 `8afd555300c902ec…`). Submission can be filed any time before the 2026-05-20 NeurIPS deadline (~26 days buffer).
-**Next action**: none — M1 execution plan complete. Follow-on work is M2 scope (LoRA appendix, linalg.generic, cross-target dialects, functional-equivalence benchmark).
+**As of**: **Day 17 end (2026-04-24) — M1 submission-ready for D&B track.** Scope expanded per ADR-0008 to main-track target over 21 additional days (Days 18-38). Core addition: in-line joint CFG + dynamic symbol-table decoder (Tier 1 novelty) + cross-IR generalization on StableHLO (Tier 3) + formal soundness theorems (Tier 2).
+**Next action**: Day 18 — 30B + C3 rejection sampling on both dialects (Phase A item 1). Running in background; see `logs/day18_30b_c3.log`.
 
 **Day-4 numbers locked** (n=200 per cell, few-shot, arith+func):
 
@@ -294,3 +294,190 @@ Mark `[!]` if a risk actually materializes.
 - [ ] 30B baseline wall-clock worse than estimated → drop to n=200 + widen CI reporting
 - [ ] MLIR-Spec-150 authoring slipping behind daily targets
 - [ ] `linalg` C2 lattice too complex by Day 8 → freeze at arith+func
+
+---
+
+## §10 — Main-track extension (Days 18–38, per ADR-0008)
+
+**Scope**: see `docs/decisions/ADR-0008-main-track-scope-expansion.md`.
+
+### Per-day Definition of Done (applies to EVERY day below)
+
+Every entry in §10 is not complete until all four:
+
+1. Result artifacts written under `results/dayNN/` (or appropriate frozen path)
+2. `docs/paper/` figures / tables regenerated if numbers changed
+3. `docs/daily_log/dayNN.md` entry written using the template in
+   `docs/daily_log/README.md`
+4. `docs/daily_log/README.md` index updated with a link to the new entry
+
+Skipping (3) or (4) blocks forward progress — paper-narrative material must
+not be reconstructed from memory later.
+
+### Phase A — low-cost high-ROI fills (Days 18–21)
+
+- [ ] **Day 18** (2026-04-25): 30B + C3 rejection sampling on both dialects.
+  - `results/day18/{30b_c3_arith,30b_c3_linalg}.jsonl`
+  - Update `results/frozen/day10_final_matrix/` if headline changes
+  - `docs/daily_log/day18.md` with paired deltas vs C1-only baselines
+- [ ] **Day 19** (2026-04-25 end): StarCoder2-15B via Ollama, free + C1 on both dialects.
+  - `results/day19/starcoder2_baselines.jsonl`
+  - Updated §5.2 matrix with new row
+  - `docs/daily_log/day19.md`
+- [ ] **Day 20** (2026-04-26): novelty reframe in `main.tex` (abstract, intro, contributions, related work).
+  - `docs/paper/main.tex` diff committed
+  - `docs/daily_log/day20.md` noting before/after framing
+- [ ] **Day 21** (2026-04-26 end): integrate Phase-A results.
+  - Regenerate `fig1_main_matrix.pdf`, `fig4_efficiency_frontier.pdf` with new cells
+  - Update `docs/paper/figures/FIGURES.md`
+  - `docs/daily_log/day21.md` with Phase-A summary table + gate-evaluation
+  - ◆ **Gate**: if 30B + C3 flips headline, halt and reassess
+
+### Phase B — Tier 1 in-line C3 (Days 22–28)
+
+- [ ] **Day 22**: LARK → token-automaton compilation bypassing Outlines.
+  - New module under `decoder/` (e.g. `decoder/in_line_grammar.py`)
+  - Unit tests: token-level acceptance equivalent to Earley parse
+  - `docs/daily_log/day22.md`
+- [ ] **Day 23**: joint `(parser_state, symbol_table)` state machine.
+  - `decoder/c3_inline.py` with reduction hooks + scope lifecycle
+  - `docs/daily_log/day23.md`
+- [ ] **Day 24**: BPE-aware in-scope name trie.
+  - Tokenizer-specific trie construction + per-step mask intersection
+  - Edge-case tests on SmolLM2 tokenizer (multi-token SSA names)
+  - `docs/daily_log/day24.md`
+- [ ] **Day 25**: MLX sampling-loop integration + unit tests.
+  - Custom `mlx_generate_c3_inline(prompt, …)` replacing Outlines Generator
+  - `docs/daily_log/day25.md`
+- [ ] **Day 26**: equivalence test in-line vs rejection-sampled C3.
+  - `results/day26/c3_inline_vs_rejection.jsonl`, n=200 paired
+  - ◆ **Gate**: if in-line significantly lower than rejection, debug
+  - `docs/daily_log/day26.md`
+- [ ] **Day 27**: full SmolLM2 × in-line C3 matrix (arith+func + linalg).
+  - `results/day27/in_line_c3_matrix.jsonl`
+  - Expected: attempts → 1.0, ~2× speedup, tighter CIs
+  - `docs/daily_log/day27.md`
+- [ ] **Day 28**: Tier 2 — soundness + coverage theorems appendix.
+  - `docs/paper/appendix_soundness.tex`
+  - `docs/daily_log/day28.md`
+
+### Phase C — strong additions (Days 29–35)
+
+- [ ] **Day 29** (AM): StableHLO grammar extension for 10 named ops.
+- [ ] **Day 29** (PM) / **Day 30**: C3 scope handlers for StableHLO ops (tensor semantics).
+  - `decoder/c3_scope.py` extension + tests
+  - `docs/daily_log/day29.md`, `day30.md`
+- [ ] **Day 31**: author **StableHLO-Spec-30** benchmark.
+  - `eval/benchmarks/stablehlo_spec_30/` with 30 verify-clean pairs
+  - `docs/daily_log/day31.md`
+- [ ] **Day 32**: SmolLM2 × 4 constraint cells × StableHLO matrix.
+  - `results/day32/stablehlo_smoke.jsonl`
+  - `docs/daily_log/day32.md`
+- [ ] **Day 33**: 30B + StarCoder2 baselines on StableHLO.
+  - `results/day33/stablehlo_baselines.jsonl`
+  - `docs/daily_log/day33.md`
+- [ ] **Day 34**: seeds 0,1,2 × n=100 on 5 critical cells for multi-seed CIs.
+  - `results/day34/multiseed.jsonl`
+  - `docs/daily_log/day34.md`
+- [ ] **Day 35**: functional-equivalence spot check on 20 arith+func samples.
+  - `results/day35/func_equiv.jsonl`
+  - `docs/daily_log/day35.md`
+
+### Phase D — paper + submission (Days 36–38)
+
+- [ ] **Day 36**: rewrite §Method + §Results + regenerate all figures.
+  - All fig{1..8}_*.pdf + StableHLO cross-IR figure (fig9?) regenerated
+  - `docs/daily_log/day36.md`
+- [ ] **Day 37**: §Cross-IR-generalization + §Functional-equivalence appendix + theorem integration.
+  - `docs/daily_log/day37.md`
+- [ ] **Day 38**: rebuild `submission_artifact.tar.gz`, final review, pin SHA256.
+  - `docs/daily_log/day38.md` with main-track final state
+  - `results/frozen/day38_main_track/` with all pinned numbers
+
+### Main-track decision gates
+
+| Gate | Day | Criterion | Action if fails |
+|------|-----|-----------|-----------------|
+| Phase A | 21 | 30B + C3 does not flip headline | Halt, reassess paper framing |
+| Phase B | 26 | in-line C3 verify ≥ rejection-sampled C3 verify | Debug in-line implementation |
+| Phase C | 33 | StableHLO matrix reproduces arith/linalg pattern | Downgrade StableHLO to appendix |
+| Submission | 38 | All gates passed; paper integrates all new results | Fall back to Phase-A-enhanced D&B submission |
+
+---
+
+## §11 — Main-track REVISION for reviewer credibility (Days 39–49, post-Day-38 critique)
+
+**Motivation**: Sharp reviewer-style critique after Day 38 flagged 3
+main-track showstoppers:
+
+1. **Abstract/data tension**: abstract claimed "ties 15B on arith+func"
+   but multi-seed mean shows SmolLM2 trails StarCoder2 by −20pp on
+   arith+func. Abstract and Limitations now tell contradictory stories.
+2. **Tier-1 novelty is code + theorem, not running algorithm**: the
+   in-line coupled decoder's MLX integration has a known race condition
+   and never produced valid output on a real model.
+3. **StableHLO methodology gaps**: different verify tool
+   (iree-compile vs mlir-opt), author-written grammar + benchmark,
+   30B baselines via parse-rejection not CFG mask — re-introduces the
+   constraint-asymmetry problem we fixed on MLIR.
+
+**Strategy**: honest reframe + fix the fixable. Lead with the two clean
+wins (linalg, StableHLO); acknowledge arith+func mean trails modern
+mid-size; fix the MLX race; test on held-out StableHLO; install
+stablehlo-opt.
+
+### Phase E — honest-paper revision (Days 39–49)
+
+Per-day DoD same as §10 Phase A-D: (1) results artifacts, (2) paper
+updates, (3) `docs/daily_log/dayNN.md`, (4) README index.
+
+**P1 — must-do (Days 39–41)**:
+
+- [~] **Day 39 AM**: Fix Day-26 MLX terminal-closure race. Defer
+  mask computation until after close-terminals runs. ~2-3 hr.
+  Task #80.
+- [ ] **Day 39 PM**: Launch full-n multi-seed (n=200/125, seeds 1,2) on
+  5 critical cells in background. Task #81.
+- [ ] **Day 40**: In-line vs rejection equivalence test on fixed MLX.
+  Measure paired verify + wall-clock speedup. Task #82.
+- [ ] **Day 41**: Pull IREE held-out StableHLO corpus; filter to our
+  10-op scope. Target ~100 held-out prompts. Task #83.
+
+**P2 — strongly recommended (Days 42–43)**:
+
+- [ ] **Day 42**: Re-run StableHLO matrix on held-out corpus. Task #84.
+- [ ] **Day 43**: Build `stablehlo-opt` (or scope-downgrade). Task #85.
+
+**P3 — polish (Days 44–47)**:
+
+- [ ] **Day 44**: Rewrite abstract + §Results for multi-seed honesty.
+  Task #86.
+- [ ] **Day 45 AM**: Finalize `refs.bib` — no placeholders. Task #87.
+- [ ] **Day 45 PM**: Add zero-false-rejects caveat + Thm 2 BPE-boundary
+  refinement. Task #88.
+- [ ] **Day 46**: Regenerate all figures with full-n multi-seed + held-
+  out StableHLO data. Task #89.
+- [ ] **Day 47**: External reader pass (someone outside the loop).
+  Task #90.
+
+**P4 — submission prep (Days 48–49)**:
+
+- [ ] **Day 48**: Copy-edit + formatting pass. Task #91.
+- [ ] **Day 49**: Rebuild tarball + pin new SHA256 + submit. Task #92.
+
+### Revision gates
+
+| Gate | Day | Criterion | Action if fails |
+|------|-----|-----------|-----------------|
+| Race fix | 39 | MLX in-line decoder produces parse-valid output | Revert to theorem-only claim in paper |
+| Equivalence | 40 | in-line ≥ rejection verify (paired, CI_low ≥ 0) | Debug (should not happen — theorem) |
+| Full-n multi-seed | 41 | seeds 1,2 arith CI matches Day 34 first-100 trend | Widen paper's reported CIs |
+| Held-out StableHLO | 42 | Pattern replicates (SmolLM2 beats baselines) | Downgrade StableHLO to "grammar-construction transfer" |
+| stablehlo-opt | 43 | build succeeds; numbers match iree-compile | Explicitly scope StableHLO claim |
+| Abstract rewrite | 44 | abstract and Limitations tell same story | Iterate |
+| External review | 47 | no killshot objections | Address + extend by 2 days |
+| Submission | 49 | paper + tarball submission-ready | — |
+
+**Expected outcome**: credible main-track submission with 40-55%
+acceptance odds (up from borderline-reject of the current Day-38
+state).

@@ -1,0 +1,8 @@
+{
+  "id": "07_select_f32",
+  "nl": "Elementwise select between two f32 tensors of shape 16 based on a bool mask.",
+  "mlir": "module {\n  func.func @f(%p: tensor<16xi1>, %x: tensor<16xf32>, %y: tensor<16xf32>) -> tensor<16xf32> {\n    %0 = stablehlo.select %p, %x, %y : (tensor<16xi1>, tensor<16xf32>, tensor<16xf32>) -> tensor<16xf32>\n    return %0 : tensor<16xf32>\n  }\n}",
+  "op": "select",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

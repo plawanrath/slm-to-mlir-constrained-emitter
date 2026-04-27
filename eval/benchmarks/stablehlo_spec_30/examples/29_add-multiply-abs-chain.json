@@ -1,0 +1,8 @@
+{
+  "id": "29_add-multiply-abs-chain",
+  "difficulty": "hard",
+  "nl": "Write a function that computes the absolute value of (a + b) * a for two 1-D f32 tensors.",
+  "mlir": "module {\n  func.func @c(%a: tensor<16xf32>, %b: tensor<16xf32>) -> tensor<16xf32> {\n    %0 = stablehlo.add %a, %b : tensor<16xf32>\n    %1 = stablehlo.multiply %0, %a : tensor<16xf32>\n    %2 = stablehlo.abs %1 : tensor<16xf32>\n    return %2 : tensor<16xf32>\n  }\n}",
+  "notes": "3-op chain",
+  "dialect": "stablehlo+func"
+}

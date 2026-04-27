@@ -1,0 +1,9 @@
+{
+  "id": "069_ew_bin_069_subtract_f32_8x8",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.subtract elementwise to two f32 tensors of shape 8x8.",
+  "mlir": "module {\n  func.func @f(%a: tensor<8x8xf32>, %b: tensor<8x8xf32>) -> tensor<8x8xf32> {\n    %0 = stablehlo.subtract %a, %b : tensor<8x8xf32>\n    return %0 : tensor<8x8xf32>\n  }\n}",
+  "notes": "subtract f32 8x8",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

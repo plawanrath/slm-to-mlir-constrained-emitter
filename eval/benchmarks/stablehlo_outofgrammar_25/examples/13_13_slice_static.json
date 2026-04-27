@@ -1,0 +1,8 @@
+{
+  "id": "13_slice_static",
+  "nl": "Take the first 4x4 block of an 8x8 f32 tensor using stablehlo.slice.",
+  "mlir": "module {\n  func.func @f(%a: tensor<8x8xf32>) -> tensor<4x4xf32> {\n    %0 = stablehlo.slice %a [0:4, 0:4] : (tensor<8x8xf32>) -> tensor<4x4xf32>\n    return %0 : tensor<4x4xf32>\n  }\n}",
+  "op": "slice",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

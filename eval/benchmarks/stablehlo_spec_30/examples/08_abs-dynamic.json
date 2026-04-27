@@ -1,0 +1,8 @@
+{
+  "id": "08_abs-dynamic",
+  "difficulty": "medium",
+  "nl": "Write a function that computes the elementwise absolute value of a dynamic-shape 2-D f32 tensor.",
+  "mlir": "module {\n  func.func @abd(%a: tensor<?x?xf32>) -> tensor<?x?xf32> {\n    %0 = stablehlo.abs %a : tensor<?x?xf32>\n    return %0 : tensor<?x?xf32>\n  }\n}",
+  "notes": "dynamic abs",
+  "dialect": "stablehlo+func"
+}

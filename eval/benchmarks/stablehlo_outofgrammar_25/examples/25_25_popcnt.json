@@ -1,0 +1,8 @@
+{
+  "id": "25_popcnt",
+  "nl": "Elementwise population-count of a 16-element i32 tensor.",
+  "mlir": "module {\n  func.func @f(%a: tensor<16xi32>) -> tensor<16xi32> {\n    %0 = stablehlo.popcnt %a : tensor<16xi32>\n    return %0 : tensor<16xi32>\n  }\n}",
+  "op": "popcnt",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

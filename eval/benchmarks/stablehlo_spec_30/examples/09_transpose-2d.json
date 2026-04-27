@@ -1,0 +1,8 @@
+{
+  "id": "09_transpose-2d",
+  "difficulty": "medium",
+  "nl": "Write a function that transposes a 4x8 f32 tensor producing an 8x4 tensor.",
+  "mlir": "module {\n  func.func @t(%a: tensor<4x8xf32>) -> tensor<8x4xf32> {\n    %0 = stablehlo.transpose %a, dims = [1, 0] : (tensor<4x8xf32>) -> tensor<8x4xf32>\n    return %0 : tensor<8x4xf32>\n  }\n}",
+  "notes": "transpose 2D",
+  "dialect": "stablehlo+func"
+}

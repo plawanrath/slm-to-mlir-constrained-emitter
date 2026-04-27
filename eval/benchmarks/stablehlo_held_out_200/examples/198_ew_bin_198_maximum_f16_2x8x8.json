@@ -1,0 +1,9 @@
+{
+  "id": "198_ew_bin_198_maximum_f16_2x8x8",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.maximum elementwise to two f16 tensors of shape 2x8x8.",
+  "mlir": "module {\n  func.func @f(%a: tensor<2x8x8xf16>, %b: tensor<2x8x8xf16>) -> tensor<2x8x8xf16> {\n    %0 = stablehlo.maximum %a, %b : tensor<2x8x8xf16>\n    return %0 : tensor<2x8x8xf16>\n  }\n}",
+  "notes": "maximum f16 2x8x8",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

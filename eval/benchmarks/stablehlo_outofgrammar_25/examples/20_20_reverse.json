@@ -1,0 +1,8 @@
+{
+  "id": "20_reverse",
+  "nl": "Reverse the order of elements in a 1-D f32 tensor of 16 elements.",
+  "mlir": "module {\n  func.func @f(%a: tensor<16xf32>) -> tensor<16xf32> {\n    %0 = stablehlo.reverse %a, dims = [0] : tensor<16xf32>\n    return %0 : tensor<16xf32>\n  }\n}",
+  "op": "reverse",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

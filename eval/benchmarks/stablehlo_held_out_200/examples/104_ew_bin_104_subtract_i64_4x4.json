@@ -1,0 +1,9 @@
+{
+  "id": "104_ew_bin_104_subtract_i64_4x4",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.subtract elementwise to two i64 tensors of shape 4x4.",
+  "mlir": "module {\n  func.func @f(%a: tensor<4x4xi64>, %b: tensor<4x4xi64>) -> tensor<4x4xi64> {\n    %0 = stablehlo.subtract %a, %b : tensor<4x4xi64>\n    return %0 : tensor<4x4xi64>\n  }\n}",
+  "notes": "subtract i64 4x4",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

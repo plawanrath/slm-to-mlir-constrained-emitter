@@ -1,0 +1,9 @@
+{
+  "id": "05_ew_bin_05_add_f32_8x8",
+  "difficulty": "programmatic",
+  "nl": "Write a function that applies stablehlo.add elementwise to two f32 tensors of shape 8x8.",
+  "mlir": "module {\n  func.func @f(%a: tensor<8x8xf32>, %b: tensor<8x8xf32>) -> tensor<8x8xf32> {\n    %0 = stablehlo.add %a, %b : tensor<8x8xf32>\n    return %0 : tensor<8x8xf32>\n  }\n}",
+  "notes": "add f32 8x8",
+  "dialect": "stablehlo+func",
+  "source": "day41_programmatic_sweep"
+}

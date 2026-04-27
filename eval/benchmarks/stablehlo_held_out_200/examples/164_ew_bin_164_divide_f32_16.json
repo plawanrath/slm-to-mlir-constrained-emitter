@@ -1,0 +1,9 @@
+{
+  "id": "164_ew_bin_164_divide_f32_16",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.divide elementwise to two f32 tensors of shape 16.",
+  "mlir": "module {\n  func.func @f(%a: tensor<16xf32>, %b: tensor<16xf32>) -> tensor<16xf32> {\n    %0 = stablehlo.divide %a, %b : tensor<16xf32>\n    return %0 : tensor<16xf32>\n  }\n}",
+  "notes": "divide f32 16",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

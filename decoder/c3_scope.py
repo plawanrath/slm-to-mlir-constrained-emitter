@@ -89,6 +89,27 @@ def _normalize(t: str) -> str:
     return t.strip().rstrip(",;)")
 
 
+def _stablehlo_type_sig(rhs: str) -> tuple[str | None, str | None]:
+    """For stablehlo ops with `(tensor<IN>) -> tensor<OUT>` signatures, return
+    (in_type, out_type) or (None, None) if not matched."""
+    m = re.search(r"\(\s*(tensor<[^)]*?>)\s*\)\s*->\s*(tensor<[^>]*?>)", rhs)
+    if m is None:
+        return None, None
+    return _normalize(m.group(1)), _normalize(m.group(2))
+
+
+def _stablehlo_binary_sig(rhs: str) -> tuple[list[str] | None, str | None]:
+    """For stablehlo ops with `(tensor<A>, tensor<B>) -> tensor<C>` signatures,
+    return ([in_a, in_b], out_type) or (None, None) if not matched."""
+    m = re.search(
+        r"\(\s*(tensor<[^,]*?>)\s*,\s*(tensor<[^)]*?>)\s*\)\s*->\s*(tensor<[^>]*?>)",
+        rhs,
+    )
+    if m is None:
+        return None, None
+    return [_normalize(m.group(1)), _normalize(m.group(2))], _normalize(m.group(3))
+
+
 def _memref_element_type(memref_type: str) -> str | None:
     """Pull the element type out of `memref<SHAPExELEM>` or `memref<ELEM>`.
 
@@ -179,6 +200,28 @@ _LINALG_SCALAR_IN_ONE_OUT = {
     "linalg.fill",
 }
 _LINALG_OPS = _LINALG_TWO_IN_ONE_OUT | _LINALG_ONE_IN_ONE_OUT | _LINALG_SCALAR_IN_ONE_OUT
+
+# StableHLO named ops (tensor semantics, Phase-C per ADR-0008).
+# Unlike linalg, StableHLO uses direct operand syntax rather than ins/outs.
+_STABLEHLO_EW_BIN = {
+    "stablehlo.add", "stablehlo.subtract", "stablehlo.multiply", "stablehlo.divide",
+}
+_STABLEHLO_EW_UN = {
+    "stablehlo.abs", "stablehlo.exponential",
+}
+# Ops that carry a (tensor<IN>) -> tensor<OUT> type signature:
+_STABLEHLO_TYPED_SIG = {
+    "stablehlo.transpose", "stablehlo.broadcast_in_dim",
+    "stablehlo.reshape", "stablehlo.convert",
+}
+# Ops with a (tensor<A>, tensor<B>) -> tensor<C> signature:
+_STABLEHLO_BINARY_TYPED = {
+    "stablehlo.dot_general",
+}
+_STABLEHLO_OPS = (
+    _STABLEHLO_EW_BIN | _STABLEHLO_EW_UN
+    | _STABLEHLO_TYPED_SIG | _STABLEHLO_BINARY_TYPED
+)
 
 
 def _extract_clause(line: str, keyword: str) -> str | None:
@@ -505,6 +548,47 @@ def _handle_op_line(
                         line,
                     ))
         return
+
+    # StableHLO named ops (tensor semantics, ADR-0008 Phase C).
+    if head in _STABLEHLO_OPS:
+        if head in _STABLEHLO_EW_BIN:
+            # %c = stablehlo.add %a, %b : tensor<NxT>
+            refs = _ssa_refs(rhs)
+            ty = _last_colon_type(rhs)
+            if ty and len(refs) >= 2:
+                _check_use(refs[0], ty, scope, line, violations)
+                _check_use(refs[1], ty, scope, line, violations)
+            if def_name and ty:
+                scope[def_name] = ty
+            return
+        if head in _STABLEHLO_EW_UN:
+            # %c = stablehlo.abs %a : tensor<NxT>
+            refs = _ssa_refs(rhs)
+            ty = _last_colon_type(rhs)
+            if ty and len(refs) >= 1:
+                _check_use(refs[0], ty, scope, line, violations)
+            if def_name and ty:
+                scope[def_name] = ty
+            return
+        if head in _STABLEHLO_TYPED_SIG:
+            # %c = stablehlo.transpose %a, attr = ... : (tensor<IN>) -> tensor<OUT>
+            refs = _ssa_refs(rhs)
+            in_ty, out_ty = _stablehlo_type_sig(rhs)
+            if in_ty and len(refs) >= 1:
+                _check_use(refs[0], in_ty, scope, line, violations)
+            if def_name and out_ty:
+                scope[def_name] = out_ty
+            return
+        if head in _STABLEHLO_BINARY_TYPED:
+            # %c = stablehlo.dot_general %a, %b, attr = ... : (tensor<A>, tensor<B>) -> tensor<C>
+            refs = _ssa_refs(rhs)
+            in_tys, out_ty = _stablehlo_binary_sig(rhs)
+            if in_tys and len(refs) >= 2:
+                _check_use(refs[0], in_tys[0], scope, line, violations)
+                _check_use(refs[1], in_tys[1], scope, line, violations)
+            if def_name and out_ty:
+                scope[def_name] = out_ty
+            return
 
     # Abstain: unknown op. If there's an LHS, record the def with the trailing
     # type so downstream uses don't spuriously fire undef_use.

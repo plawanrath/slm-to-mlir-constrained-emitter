@@ -1,0 +1,110 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "sc": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "dct": "http://purl.org/dc/terms/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    }
+  },
+  "@type": "sc:Dataset",
+  "name": "MLIR-Spec-150",
+  "description": "Hand-authored NL\u2192MLIR pairs for arith+func+memref dialects; 38/44/18% easy/medium/hard mix; all reference MLIR verify-clean under mlir-opt --verify-diagnostics.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "license": "https://spdx.org/licenses/Apache-2.0.html",
+  "version": "1.0.0",
+  "datePublished": "2026-04-21",
+  "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
+  "url": "<populated-at-camera-ready>",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "MLIR-Spec-150-archive",
+      "name": "MLIR-Spec-150.zip",
+      "contentUrl": "<populated-at-camera-ready>",
+      "encodingFormat": "application/zip",
+      "sha256": "<populated-at-camera-ready>"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "records",
+      "name": "records",
+      "description": "One MLIR prompt/reference pair per record.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "records/id",
+          "name": "id",
+          "dataType": "sc:Text",
+          "description": "Unique record identifier."
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/nl",
+          "name": "nl",
+          "dataType": "sc:Text",
+          "description": "Natural-language description."
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/mlir",
+          "name": "mlir",
+          "dataType": "sc:Text",
+          "description": "Reference MLIR that verifies under mlir-opt/iree-compile."
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/dialect",
+          "name": "dialect",
+          "dataType": "sc:Text",
+          "description": "MLIR dialect of the reference program."
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/difficulty",
+          "name": "difficulty",
+          "dataType": "sc:Text",
+          "description": "Author-assigned difficulty or 'programmatic'."
+        }
+      ]
+    }
+  ],
+  "rai:dataCollection": "Hand-authored by the submitting author against the target MLIR dialect's ODS.",
+  "rai:dataBiases": [
+    "Author-curated: prompts reflect the submitting author's mental model of the target dialect; may under-represent op combinations not present in the spec examples.",
+    "No human-subject data; no PII; no demographic bias dimensions apply."
+  ],
+  "rai:dataLimitations": [
+    "Verify-valid pass-rate measures structural validity under mlir-opt/iree-compile, not functional correctness. Programs that pass the gate may still compute the wrong function.",
+    "English natural-language descriptions only.",
+    "Small n (30-200 prompts per dataset) yields CI half-widths of ~3-10pp at p=0.5."
+  ],
+  "rai:annotationsPerExample": 0,
+  "rai:annotationDemographics": "N/A \u2014 no human annotators.",
+  "rai:personalSensitiveInformation": "None.",
+  "rai:useCases": [
+    "Evaluating NL\u2192MLIR generation systems (constrained or unconstrained) under a verifier-based pass-rate metric."
+  ],
+  "rai:excludedUseCases": [
+    "Evaluating functional correctness without an additional lowering + execution harness.",
+    "Training or fine-tuning production code-generation models without a separate held-out corpus."
+  ],
+  "extra": {
+    "size": 150,
+    "sampling": "Author-curated (single author), covering the 12 named ops in scope."
+  }
+}

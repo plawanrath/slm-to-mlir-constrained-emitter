@@ -1,0 +1,9 @@
+{
+  "id": "170_ew_bin_170_divide_f32_4x4x4",
+  "difficulty": "programmatic-wide",
+  "nl": "Write a function that applies stablehlo.divide elementwise to two f32 tensors of shape 4x4x4.",
+  "mlir": "module {\n  func.func @f(%a: tensor<4x4x4xf32>, %b: tensor<4x4x4xf32>) -> tensor<4x4x4xf32> {\n    %0 = stablehlo.divide %a, %b : tensor<4x4x4xf32>\n    return %0 : tensor<4x4x4xf32>\n  }\n}",
+  "notes": "divide f32 4x4x4",
+  "dialect": "stablehlo+func",
+  "source": "day_f8_wide_sweep"
+}

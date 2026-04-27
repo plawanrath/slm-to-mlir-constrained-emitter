@@ -1,0 +1,8 @@
+{
+  "id": "24_reshape-add",
+  "difficulty": "medium",
+  "nl": "Reshape a 4x4 f32 tensor into a 16-element 1-D tensor, then add to an existing 16-element tensor.",
+  "mlir": "module {\n  func.func @ra(%a: tensor<4x4xf32>, %b: tensor<16xf32>) -> tensor<16xf32> {\n    %0 = stablehlo.reshape %a : (tensor<4x4xf32>) -> tensor<16xf32>\n    %1 = stablehlo.add %0, %b : tensor<16xf32>\n    return %1 : tensor<16xf32>\n  }\n}",
+  "notes": "reshape+add",
+  "dialect": "stablehlo+func"
+}

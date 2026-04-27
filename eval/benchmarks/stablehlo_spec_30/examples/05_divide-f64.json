@@ -1,0 +1,8 @@
+{
+  "id": "05_divide-f64",
+  "difficulty": "easy",
+  "nl": "Write a function that divides two 1-D f64 tensors of 32 elements using stablehlo.divide.",
+  "mlir": "module {\n  func.func @div(%a: tensor<32xf64>, %b: tensor<32xf64>) -> tensor<32xf64> {\n    %0 = stablehlo.divide %a, %b : tensor<32xf64>\n    return %0 : tensor<32xf64>\n  }\n}",
+  "notes": "f64 division",
+  "dialect": "stablehlo+func"
+}

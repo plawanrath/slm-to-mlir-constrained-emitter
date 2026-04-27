@@ -1,0 +1,8 @@
+{
+  "id": "04_dynamic_slice_1d",
+  "nl": "Slice 8 elements from a 1-D f32 tensor of 32 starting at dynamic index.",
+  "mlir": "module {\n  func.func @f(%a: tensor<32xf32>, %i: tensor<i32>) -> tensor<8xf32> {\n    %0 = stablehlo.dynamic_slice %a, %i, sizes = [8] : (tensor<32xf32>, tensor<i32>) -> tensor<8xf32>\n    return %0 : tensor<8xf32>\n  }\n}",
+  "op": "dynamic_slice",
+  "dialect": "stablehlo+func",
+  "source": "outofgrammar_phase_f"
+}

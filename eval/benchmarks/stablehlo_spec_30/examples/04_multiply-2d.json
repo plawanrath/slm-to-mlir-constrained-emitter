@@ -1,0 +1,8 @@
+{
+  "id": "04_multiply-2d",
+  "difficulty": "easy",
+  "nl": "Write a function that multiplies two 4x4 f32 tensors elementwise using stablehlo.multiply.",
+  "mlir": "module {\n  func.func @mul(%a: tensor<4x4xf32>, %b: tensor<4x4xf32>) -> tensor<4x4xf32> {\n    %0 = stablehlo.multiply %a, %b : tensor<4x4xf32>\n    return %0 : tensor<4x4xf32>\n  }\n}",
+  "notes": "static 4x4 multiply",
+  "dialect": "stablehlo+func"
+}
