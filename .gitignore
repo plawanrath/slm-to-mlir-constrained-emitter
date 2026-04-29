@@ -105,6 +105,7 @@ docs/paper/*.run.xml
 docs/paper/*.idx
 docs/paper/*.ilg
 docs/paper/*.ind
+docs/design.md
 # Personal / contact artifacts (do not publish on the public repo)
 RESUME.md
 CONTACT.md
