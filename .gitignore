@@ -125,6 +125,9 @@ CHANGELOG_*camera_ready*.md
 *_camera_ready.md
 *_camera_ready_notes.md
 
+# Submission-artifact build tooling (process-internal; not redistributed)
+scripts/build_submission_artifact.sh
+
 # Internal planning docs (work-log, execution plan, scratch)
 # These are tracked historically; new copies will not be tracked. To stop
 # tracking the existing files, run `git rm --cached <path>` separately.
