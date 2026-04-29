@@ -10,7 +10,7 @@ from __future__ import annotations
 import json, os, sys
 from pathlib import Path
 
-REPO = "/Users/plawanrath/Documents/GitHub-public/slm-to-mlir-constrained-emitter"
+REPO = str(Path(__file__).resolve().parents[1])
 os.chdir(REPO); sys.path.insert(0, REPO)
 
 from scripts.env.verify_stablehlo import verify_stablehlo

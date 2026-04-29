@@ -105,13 +105,41 @@ docs/paper/*.run.xml
 docs/paper/*.idx
 docs/paper/*.ilg
 docs/paper/*.ind
-RESUME.md                                                                                                                                      submission_artifact/                                                                                                                       
-docs/paper/                                                                                                                                  
-docs/daily_log/ 
+# Personal / contact artifacts (do not publish on the public repo)
+RESUME.md
 CONTACT.md
 
-# Submission build artifacts (regenerate via scripts/build_submission_artifact.sh; upload to OpenReview/Zenodo)
+# Paper / submission build outputs (regenerate locally; upload to OpenReview/Zenodo)
+docs/paper/
+docs/daily_log/
+submission_artifact/
 overleaf_upload.zip
 *.tar.gz
 !eval/**/*.tar.gz
 !data/pipelines/**/*.tar.gz
+
+# Paper-process / camera-ready edit notes (internal; never publish)
+CHANGELOG_for_camera_ready.md
+CHANGELOG_*camera_ready*.md
+*_camera_ready.md
+*_camera_ready_notes.md
+
+# Internal planning docs (work-log, execution plan, scratch)
+# These are tracked historically; new copies will not be tracked. To stop
+# tracking the existing files, run `git rm --cached <path>` separately.
+TODO.md
+docs/execution_plan.md
+NOTES.md
+SCRATCH.md
+scratch/
+wip/
+*.draft.md
+
+# Misc OS / editor artifacts
+Thumbs.db
+*.bak
+*.tmp
+*~
+.history/
+.aider*
+.cursor/

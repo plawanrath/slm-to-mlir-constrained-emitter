@@ -1,7 +1,8 @@
 """Live step-by-step trace of the MLX in-line decoder."""
 from __future__ import annotations
 import os, sys, math
-REPO = "/Users/plawanrath/Documents/GitHub-public/slm-to-mlir-constrained-emitter"
+from pathlib import Path
+REPO = str(Path(__file__).resolve().parents[1])
 os.chdir(REPO); sys.path.insert(0, REPO)
 
 import mlx.core as mx

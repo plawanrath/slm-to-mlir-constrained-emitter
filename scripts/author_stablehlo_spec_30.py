@@ -19,7 +19,7 @@ import json
 import os
 from pathlib import Path
 
-REPO = "/Users/plawanrath/Documents/GitHub-public/slm-to-mlir-constrained-emitter"
+REPO = str(Path(__file__).resolve().parents[1])
 os.chdir(REPO)
 
 OUT = Path("eval/benchmarks/stablehlo_spec_30/examples")

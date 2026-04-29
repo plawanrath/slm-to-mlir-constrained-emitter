@@ -24,7 +24,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-REPO = "/Users/plawanrath/Documents/GitHub-public/slm-to-mlir-constrained-emitter"
+REPO = str(Path(__file__).resolve().parents[1])
 os.chdir(REPO); sys.path.insert(0, REPO)
 
 import matplotlib
@@ -231,48 +231,79 @@ def fig3_error_collapse():
 # =============== FIG 4: efficiency frontier ===============
 
 def fig4_efficiency_frontier():
-    summary = _load_summary()
-    # Points: (wall_clock_s, verify%, label, color, dialect_marker)
-    # Gen times in seconds/sample — Day-10 log numbers
-    points = [
-        ("SmolLM2 +C1+C2+C3",       1.86, summary["arith_func"]["smollm2-c1_c2_c3"]["point"]*100, C_SLM, "o"),
-        ("SmolLM2 +C1+C2+C3 (linalg)", 1.86, summary["linalg"]["smollm2-c1_c2_c3"]["point"]*100, C_SLM, "s"),
-        ("Granite-34B +C1",          40.0, summary["arith_func"]["granite-c1"]["point"]*100, C_GRN, "o"),
-        ("Granite-34B +C1 (linalg)",  40.0, summary["linalg"]["granite-c1"]["point"]*100, C_GRN, "s"),
-        ("CodeLlama-34B +C1",        16.0, summary["arith_func"]["codellama-c1"]["point"]*100, C_CLL, "o"),
-        ("CodeLlama-34B +C1 (linalg)",16.0, summary["linalg"]["codellama-c1"]["point"]*100, C_CLL, "s"),
+    # Three-seed mean verify rates from apples-to-apples cells; wall-clock
+    # per generation from per-prompt JSONL dt fields, aggregated by dialect.
+    # 5 systems x 2 dialects = 10 points. Color = system, marker = dialect.
+    systems = [
+        # (display name,                                 color,     ours)
+        ("SmolLM2 1.7B + C1+C2+C3 (ours)",               C_SLM,     True),
+        ("Granite-Code-34B + C1+C3",                     C_GRN,     False),
+        ("CodeLlama-34B + C1+C3",                        C_CLL,     False),
+        ("StarCoder2-15B + C1+C3",                       "#2ca02c", False),
+        ("Granite-Code-8B-fp16 + C1+C3 (prec. control)", "#e377c2", False),
     ]
-    fig, ax = plt.subplots(figsize=(7.0, 4.0))
-    for lbl, t, v, color, m in points:
-        ax.scatter(t, v, s=140, color=color, marker=m, edgecolor="black",
-                   linewidth=0.6, zorder=3, label=None)
-        # Offset annotation so points don't collide
-        dx, dy = (0.8, 1.5) if "SmolLM2" in lbl else (1.2, -3.0)
-        if "linalg" in lbl and "Granite" in lbl: dy = 1.5
-        if "linalg" in lbl and "CodeLlama" in lbl: dy = -4
-        ax.annotate(lbl, xy=(t, v), xytext=(t + dx, v + dy),
-                    fontsize=7.5, color=color)
-    # Pareto front
-    ax.axhline(y=72.8, linestyle="--", color="crimson", alpha=0.5, lw=0.9)
-    ax.text(2.1, 73.5, "SmolLM2 +C1+C2+C3 linalg (72.8%)",
-            fontsize=7.5, color="crimson")
-    # Legend for marker shape vs. color
+    # (system_idx, marker, wall_s, verify%)
+    data = [
+        (0, "o", 1.65,  53.2),  # SmolLM2 arith+func
+        (0, "s", 1.86,  80.0),  # SmolLM2 linalg
+        (1, "o", 40.0,  51.5),  # Granite-34B arith+func
+        (1, "s", 40.0,  35.7),  # Granite-34B linalg
+        (2, "o", 16.0,  59.8),  # CodeLlama-34B arith+func
+        (2, "s", 16.0,  58.7),  # CodeLlama-34B linalg
+        (3, "o", 11.6,  66.8),  # StarCoder2-15B arith+func
+        (3, "s", 15.8,  54.9),  # StarCoder2-15B linalg
+        (4, "o", 11.9,  68.2),  # Granite-8B-fp16 arith+func
+        (4, "s", 45.6,  50.1),  # Granite-8B-fp16 linalg
+    ]
+
+    fig, ax = plt.subplots(figsize=(8.5, 5.0))
+    for idx, m, t, v in data:
+        _, color, ours = systems[idx]
+        lw = 1.4 if ours else 0.6
+        sz = 200 if ours else 140
+        ax.scatter(t, v, s=sz, color=color, marker=m, edgecolor="black",
+                   linewidth=lw, zorder=3)
+
+    # Annotate the SmolLM2 "ours" points with their headline numbers
+    ax.annotate("80.0% / 1.86 s\n(ours, linalg)", xy=(1.86, 80.0),
+                xytext=(2.7, 82.5), fontsize=9.5, color=C_SLM, weight="bold")
+    ax.annotate("53.2% / 1.65 s\n(ours, arith+func)", xy=(1.65, 53.2),
+                xytext=(2.7, 47), fontsize=9.5, color=C_SLM, weight="bold")
+
+    # Reference line at the headline 80.0% verify rate
+    ax.axhline(y=80.0, linestyle=":", color=C_SLM, alpha=0.45, lw=1.0)
+
     from matplotlib.lines import Line2D
-    legend_handles = [
-        Line2D([0],[0], marker="o", color="w", label="arith+func",
-               markerfacecolor="gray", markersize=10, markeredgecolor="black"),
-        Line2D([0],[0], marker="s", color="w", label="linalg",
-               markerfacecolor="gray", markersize=10, markeredgecolor="black"),
+    # System legend (upper-right; mostly-empty quadrant)
+    sys_handles = [
+        Line2D([0], [0], marker="o", color="w", label=name,
+               markerfacecolor=color, markersize=11,
+               markeredgecolor="black", markeredgewidth=1.4 if ours else 0.6)
+        for name, color, ours in systems
     ]
-    ax.legend(handles=legend_handles, loc="lower right", framealpha=0.95, fontsize=8)
+    sys_legend = ax.legend(handles=sys_handles, loc="upper right",
+                           framealpha=0.95, fontsize=8.5,
+                           title="System", title_fontsize=9.5)
+    ax.add_artist(sys_legend)
+
+    # Dialect legend (lower-right) — circle vs square
+    marker_handles = [
+        Line2D([0], [0], marker="o", color="w", label="arith+func",
+               markerfacecolor="gray", markersize=11, markeredgecolor="black"),
+        Line2D([0], [0], marker="s", color="w", label="linalg",
+               markerfacecolor="gray", markersize=11, markeredgecolor="black"),
+    ]
+    ax.legend(handles=marker_handles, loc="lower right",
+              framealpha=0.95, fontsize=9,
+              title="Dialect", title_fontsize=10)
+
     ax.set_xscale("log")
-    ax.set_xlabel("wall-clock per generation (s, log scale)")
-    ax.set_ylabel("verify-valid %")
+    ax.set_xlabel("Wall-clock per generation (s, log scale)", fontsize=11)
+    ax.set_ylabel("Verify-valid rate (%)", fontsize=11)
     ax.set_xlim(1.2, 60)
-    ax.set_ylim(15, 95)
+    ax.set_ylim(25, 95)
+    ax.tick_params(labelsize=10)
     ax.grid(alpha=0.25, which="both")
-    ax.set_title("Efficiency frontier — SmolLM2 dominates the Pareto front\n"
-                 "(top-left is best: low latency, high verify rate)")
     fig.tight_layout()
     fig.savefig(OUT / "fig4_efficiency_frontier.pdf")
     plt.close(fig)

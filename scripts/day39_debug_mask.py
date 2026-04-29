@@ -1,7 +1,8 @@
 """Debug: what's in the mask at step 1 (after MODULE closed)?"""
 from __future__ import annotations
 import os, sys
-REPO = "/Users/plawanrath/Documents/GitHub-public/slm-to-mlir-constrained-emitter"
+from pathlib import Path
+REPO = str(Path(__file__).resolve().parents[1])
 os.chdir(REPO); sys.path.insert(0, REPO)
 
 from decoder.inline_c3 import CFGAutomaton
