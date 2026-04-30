@@ -1,0 +1,140 @@
+{
+  "@context": {
+    "@language": "en",
+    "@vocab": "https://schema.org/",
+    "sc": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "dct": "http://purl.org/dc/terms/",
+    "data": {
+      "@id": "cr:data",
+      "@type": "@json"
+    },
+    "dataType": {
+      "@id": "cr:dataType",
+      "@type": "@vocab"
+    },
+    "examples": {
+      "@id": "cr:examples",
+      "@type": "@json"
+    }
+  },
+  "@type": "sc:Dataset",
+  "name": "MLIR-Functional-Reference-30",
+  "description": "Hand-authored functional-correctness reference set for arith+func, linalg+memref, and StableHLO (n=30, 10 per dialect). Each record specifies a canonical function name, signature, concrete inputs, and the expected output under a dialect-specific execution wrapper.",
+  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "license": "https://spdx.org/licenses/Apache-2.0.html",
+  "version": "1.0.0",
+  "datePublished": "2026-04-30",
+  "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
+  "citation": "Anonymous submission to NeurIPS 2026 Datasets and Benchmarks Track.",
+  "url": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/functional/",
+  "distribution": [
+    {
+      "@type": "sc:FileObject",
+      "@id": "MLIR-Functional-Reference-30-test-jsonl",
+      "name": "test.jsonl",
+      "description": "One JSON record per line for the MLIR-Functional-Reference-30 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
+      "contentUrl": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/functional/test.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "701d6b459525f1fe7dd4475c108a15d9fa2a1f4c7cfeec28004a73aa91e62475"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "records",
+      "name": "records",
+      "description": "One functional-reference record per row.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "@id": "records/id",
+          "name": "id",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/dialect",
+          "name": "dialect",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/source_benchmark",
+          "name": "source_benchmark",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/source_id",
+          "name": "source_id",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/canonical_fn_name",
+          "name": "canonical_fn_name",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/canonical_signature",
+          "name": "canonical_signature",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/result_type",
+          "name": "result_type",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/inputs",
+          "name": "inputs",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/expected_output",
+          "name": "expected_output",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/expected_stdout_regex",
+          "name": "expected_stdout_regex",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/nl",
+          "name": "nl",
+          "dataType": "sc:Text"
+        }
+      ]
+    }
+  ],
+  "rai:dataCollection": "Hand-authored by the submitting author. Each functional reference specifies a canonical MLIR function name, signature, concrete inputs, and the expected scalar/array output under the dialect's execution wrapper (mlir-cpu-runner for arith and linalg+memref; iree-run-module for StableHLO).",
+  "rai:dataBiases": [
+    "Author-curated: prompts reflect the submitting author's mental model of the target dialect; the 10-per-dialect sample biases toward elementary numerical operations.",
+    "No human-subject data; no PII; no demographic bias dimensions apply."
+  ],
+  "rai:dataLimitations": [
+    "Functional correctness is checked via stdout pattern matching and scalar/array equality on a small set of fixed inputs; this is a coarser signal than property-based or random-input testing.",
+    "Each task has exactly one reference implementation; alternate valid implementations may diverge on edge cases.",
+    "n=30 is a regression-style spot check, not a comprehensive functional benchmark."
+  ],
+  "rai:annotationsPerExample": 0,
+  "rai:annotationDemographics": "N/A \u2014 no human annotators.",
+  "rai:personalSensitiveInformation": "None.",
+  "rai:useCases": [
+    "Spot-checking that verify-valid generations on the sibling Spec-30/Spec-150 benchmarks compute the intended function.",
+    "Reporting a verify-vs-functional gap on a hand-authored sample."
+  ],
+  "rai:excludedUseCases": [
+    "Comprehensive functional benchmark suitable as the sole metric for ranking systems \u2014 size and coverage are insufficient.",
+    "Training or fine-tuning production code-generation models."
+  ]
+}

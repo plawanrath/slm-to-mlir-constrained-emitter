@@ -27,15 +27,16 @@
   "version": "1.0.0",
   "datePublished": "2026-04-21",
   "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
-  "url": "<populated-at-camera-ready>",
+  "url": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/linalg_spec_30/",
   "distribution": [
     {
-      "@type": "cr:FileObject",
-      "@id": "Linalg-Spec-30-archive",
-      "name": "Linalg-Spec-30.zip",
-      "contentUrl": "<populated-at-camera-ready>",
-      "encodingFormat": "application/zip",
-      "sha256": "<populated-at-camera-ready>"
+      "@type": "sc:FileObject",
+      "@id": "Linalg-Spec-30-test-jsonl",
+      "name": "test.jsonl",
+      "description": "One JSON record per line for the Linalg-Spec-30 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
+      "contentUrl": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/linalg_spec_30/test.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "ae9c4971fa69f3c9f6025b1e880efbc3bcf02a31495e1438daf19b800d1847b2"
     }
   ],
   "recordSet": [
@@ -106,5 +107,6 @@
   "extra": {
     "size": 30,
     "sampling": "Author-curated (single author), 12 linalg named ops."
-  }
+  },
+  "citation": "(anonymous submission to NeurIPS 2026 E&D track)"
 }

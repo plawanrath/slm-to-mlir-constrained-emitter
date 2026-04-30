@@ -133,6 +133,13 @@ hf_uploads/
 scripts/build_hf_uploads.py
 scripts/upload_hf_datasets.py
 
+# Anonymous-review bundle for NeurIPS double-blind submission
+anon_review_bundle/
+anon_review_bundle.zip
+croissant_metadata.zip
+scripts/build_anon_review_bundle.py
+scripts/sync_repo_for_anon_review.py
+
 # Camera-ready URL substitution log (process-internal; do not publish)
 # Implicitly covered by `docs/paper/` above; explicit entry for clarity.
 docs/paper/artifacts_links.md

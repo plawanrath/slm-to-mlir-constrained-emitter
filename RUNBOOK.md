@@ -29,7 +29,7 @@ If you cannot `brew install` and want to stay 100% Docker, use `docker run -it p
 ### 0.2. Build the pinned LLVM container
 
 ```bash
-cd /Users/plawanrath/Documents/GitHub-public/slm-to-mlir-constrained-emitter
+cd <repo-root>
 docker compose -f scripts/env/docker-compose.yml build
 docker compose -f scripts/env/docker-compose.yml up -d
 # sanity:
