@@ -27,14 +27,14 @@
   "version": "1.0.0",
   "datePublished": "2026-04-21",
   "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
-  "url": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/stablehlo_outofgrammar_25/",
+  "url": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/stablehlo_outofgrammar_25/",
   "distribution": [
     {
       "@type": "sc:FileObject",
       "@id": "StableHLO-OutOfGrammar-25-test-jsonl",
       "name": "test.jsonl",
       "description": "One JSON record per line for the StableHLO-OutOfGrammar-25 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
-      "contentUrl": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/stablehlo_outofgrammar_25/test.jsonl",
+      "contentUrl": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/stablehlo_outofgrammar_25/test.jsonl",
       "encodingFormat": "application/jsonlines",
       "sha256": "6ea2e22f4563b8ca94fa6743b380109c339d331b3b08de4af787d9aa2e045060"
     }

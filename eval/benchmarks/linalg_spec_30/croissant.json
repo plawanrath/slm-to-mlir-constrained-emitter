@@ -27,14 +27,14 @@
   "version": "1.0.0",
   "datePublished": "2026-04-21",
   "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
-  "url": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/linalg_spec_30/",
+  "url": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/linalg_spec_30/",
   "distribution": [
     {
       "@type": "sc:FileObject",
       "@id": "Linalg-Spec-30-test-jsonl",
       "name": "test.jsonl",
       "description": "One JSON record per line for the Linalg-Spec-30 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
-      "contentUrl": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/linalg_spec_30/test.jsonl",
+      "contentUrl": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/linalg_spec_30/test.jsonl",
       "encodingFormat": "application/jsonlines",
       "sha256": "ae9c4971fa69f3c9f6025b1e880efbc3bcf02a31495e1438daf19b800d1847b2"
     }

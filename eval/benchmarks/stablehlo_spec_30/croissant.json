@@ -27,14 +27,14 @@
   "version": "1.0.0",
   "datePublished": "2026-04-21",
   "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
-  "url": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/stablehlo_spec_30/",
+  "url": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/stablehlo_spec_30/",
   "distribution": [
     {
       "@type": "sc:FileObject",
       "@id": "StableHLO-Spec-30-test-jsonl",
       "name": "test.jsonl",
       "description": "One JSON record per line for the StableHLO-Spec-30 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
-      "contentUrl": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/stablehlo_spec_30/test.jsonl",
+      "contentUrl": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/stablehlo_spec_30/test.jsonl",
       "encodingFormat": "application/jsonlines",
       "sha256": "921eee53012cce78a7054fbba6f537eef2b8cb6721668e47cb8ab740d76f1272"
     }

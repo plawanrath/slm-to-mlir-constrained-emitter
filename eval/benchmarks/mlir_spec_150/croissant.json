@@ -27,14 +27,14 @@
   "version": "1.0.0",
   "datePublished": "2026-04-21",
   "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
-  "url": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/mlir_spec_150/",
+  "url": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/mlir_spec_150/",
   "distribution": [
     {
       "@type": "sc:FileObject",
       "@id": "MLIR-Spec-150-test-jsonl",
       "name": "test.jsonl",
       "description": "One JSON record per line for the MLIR-Spec-150 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
-      "contentUrl": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/benchmarks/mlir_spec_150/test.jsonl",
+      "contentUrl": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/mlir_spec_150/test.jsonl",
       "encodingFormat": "application/jsonlines",
       "sha256": "de83a25b8c0ed2f330614ad9013fdab6dfa6194d7dd1ac3dbefe713c693bf1ac"
     }

@@ -28,14 +28,14 @@
   "datePublished": "2026-04-30",
   "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
   "citation": "Anonymous submission to NeurIPS 2026 Datasets and Benchmarks Track.",
-  "url": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/functional/",
+  "url": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/functional/",
   "distribution": [
     {
       "@type": "sc:FileObject",
       "@id": "MLIR-Functional-Reference-30-test-jsonl",
       "name": "test.jsonl",
       "description": "One JSON record per line for the MLIR-Functional-Reference-30 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
-      "contentUrl": "https://anonymous.4open.science/r/<REPLACE-AFTER-UPLOAD>/eval/functional/test.jsonl",
+      "contentUrl": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/functional/test.jsonl",
       "encodingFormat": "application/jsonlines",
       "sha256": "701d6b459525f1fe7dd4475c108a15d9fa2a1f4c7cfeec28004a73aa91e62475"
     }
