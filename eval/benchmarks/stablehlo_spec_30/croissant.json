@@ -97,13 +97,12 @@
   "rai:annotationsPerExample": 0,
   "rai:annotationDemographics": "N/A \u2014 no human annotators.",
   "rai:personalSensitiveInformation": "None.",
-  "rai:useCases": [
-    "Evaluating NL\u2192MLIR generation systems (constrained or unconstrained) under a verifier-based pass-rate metric."
+  "rai:dataUseCases": [
+    "Evaluating NL\u2192MLIR generation systems (constrained or unconstrained) under a verifier-based pass-rate metric.",
+    "Out of scope: evaluating functional correctness without an additional lowering + execution harness; training or fine-tuning production code-generation models without a separate held-out corpus."
   ],
-  "rai:excludedUseCases": [
-    "Evaluating functional correctness without an additional lowering + execution harness.",
-    "Training or fine-tuning production code-generation models without a separate held-out corpus."
-  ],
+  "rai:dataSocialImpact": "These benchmarks are intended to evaluate compiler-IR generation systems against MLIR/StableHLO verifiers. They contain no human-subject, demographic, or PII content, and pose no direct risk to individuals or groups. The principal social risk is methodological: over-reliance on verifier-pass-rate as a proxy for functional correctness could lead to overstated claims about model capability. Downstream users should pair these benchmarks with execution/property-based testing before drawing conclusions about deployment readiness.",
+  "rai:hasSyntheticData": false,
   "extra": {
     "size": 30,
     "sampling": "Author-curated (single author), 10 op families."

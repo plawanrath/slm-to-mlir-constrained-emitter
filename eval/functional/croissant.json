@@ -129,12 +129,11 @@
   "rai:annotationsPerExample": 0,
   "rai:annotationDemographics": "N/A \u2014 no human annotators.",
   "rai:personalSensitiveInformation": "None.",
-  "rai:useCases": [
+  "rai:dataUseCases": [
     "Spot-checking that verify-valid generations on the sibling Spec-30/Spec-150 benchmarks compute the intended function.",
-    "Reporting a verify-vs-functional gap on a hand-authored sample."
+    "Reporting a verify-vs-functional gap on a hand-authored sample.",
+    "Out of scope: comprehensive functional benchmark suitable as the sole metric for ranking systems \u2014 size and coverage are insufficient; training or fine-tuning production code-generation models."
   ],
-  "rai:excludedUseCases": [
-    "Comprehensive functional benchmark suitable as the sole metric for ranking systems \u2014 size and coverage are insufficient.",
-    "Training or fine-tuning production code-generation models."
-  ]
+  "rai:dataSocialImpact": "This benchmark is intended to spot-check functional correctness of MLIR generations evaluated against verifier-only metrics. It contains no human-subject, demographic, or PII content, and poses no direct risk to individuals or groups. The principal social risk is methodological: at n=30, results are a regression-style spot check, not a deployment-readiness signal \u2014 over-reliance on this set could lead to overstated claims about model capability. Pair with property-based or random-input testing before drawing conclusions.",
+  "rai:hasSyntheticData": false
 }

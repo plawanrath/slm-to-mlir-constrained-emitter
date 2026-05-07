@@ -31,7 +31,7 @@ def _context():
 
 
 def _emit(name: str, description: str, n: int, sampling_note: str,
-          out_dir: Path, author_curated: bool) -> None:
+          out_dir: Path, author_curated: bool, has_synthetic_data: bool) -> None:
     out = {
         "@context": _context(),
         "@type": "sc:Dataset",
@@ -103,13 +103,18 @@ def _emit(name: str, description: str, n: int, sampling_note: str,
         "rai:annotationsPerExample": 0,
         "rai:annotationDemographics": "N/A — no human annotators.",
         "rai:personalSensitiveInformation": "None.",
-        "rai:useCases": [
-            "Evaluating NL→MLIR generation systems (constrained or unconstrained) under a verifier-based pass-rate metric."
+        "rai:dataUseCases": [
+            "Evaluating NL→MLIR generation systems (constrained or unconstrained) under a verifier-based pass-rate metric.",
+            "Out of scope: evaluating functional correctness without an additional lowering + execution harness; training or fine-tuning production code-generation models without a separate held-out corpus."
         ],
-        "rai:excludedUseCases": [
-            "Evaluating functional correctness without an additional lowering + execution harness.",
-            "Training or fine-tuning production code-generation models without a separate held-out corpus."
-        ],
+        "rai:dataSocialImpact": (
+            "These benchmarks are intended to evaluate compiler-IR generation systems against MLIR/StableHLO verifiers. "
+            "They contain no human-subject, demographic, or PII content, and pose no direct risk to individuals or groups. "
+            "The principal social risk is methodological: over-reliance on verifier-pass-rate as a proxy for functional "
+            "correctness could lead to overstated claims about model capability. Downstream users should pair these "
+            "benchmarks with execution/property-based testing before drawing conclusions about deployment readiness."
+        ),
+        "rai:hasSyntheticData": has_synthetic_data,
         "extra": {
             "size": n,
             "sampling": sampling_note
@@ -125,27 +130,27 @@ def main():
         ("MLIR-Spec-150", 150,
          "Hand-authored NL→MLIR pairs for arith+func+memref dialects; 38/44/18% easy/medium/hard mix; all reference MLIR verify-clean under mlir-opt --verify-diagnostics.",
          "Author-curated (single author), covering the 12 named ops in scope.",
-         Path("eval/benchmarks/mlir_spec_150"), True),
+         Path("eval/benchmarks/mlir_spec_150"), True, False),
         ("Linalg-Spec-30", 30,
          "Hand-authored NL→MLIR pairs for linalg named ops under memref semantics (matmul, matvec, fill, copy, transpose, broadcast, add, sub, mul, div, exp, abs).",
          "Author-curated (single author), 12 linalg named ops.",
-         Path("eval/benchmarks/linalg_spec_30"), True),
+         Path("eval/benchmarks/linalg_spec_30"), True, False),
         ("StableHLO-Spec-30", 30,
          "Hand-authored NL→MLIR pairs for StableHLO dialect covering 10 op families.",
          "Author-curated (single author), 10 op families.",
-         Path("eval/benchmarks/stablehlo_spec_30"), True),
+         Path("eval/benchmarks/stablehlo_spec_30"), True, False),
         ("StableHLO-Held-Out-200", 200,
          "Programmatically generated StableHLO programs via parametric sweep over 7 op families × 6 dtypes × 3 shape ranks × multi-op compositions (585 candidates); kept only those that iree-compile accepts.",
          "Parametric sweep, verifier-filtered.",
-         Path("eval/benchmarks/stablehlo_held_out_200"), False),
+         Path("eval/benchmarks/stablehlo_held_out_200"), False, True),
         ("StableHLO-OutOfGrammar-25", 25,
          "StableHLO programs using ops NOT in our 10-op grammar scope (reduce, convolution, pad, dynamic_slice, iota, clamp, select, compare, concatenate, slice, rsqrt, sign, tanh, sort, power, reverse, round_nearest_even, is_finite, shift_left, xor, popcnt, gather, dynamic_update_slice). Used to document graceful degradation of the constraint stack.",
          "Hand-authored out-of-grammar; verifier-filtered (all 25 iree-compile-clean).",
-         Path("eval/benchmarks/stablehlo_outofgrammar_25"), True),
+         Path("eval/benchmarks/stablehlo_outofgrammar_25"), True, False),
     ]
-    for name, n, desc, sampling, out_dir, author_curated in specs:
+    for name, n, desc, sampling, out_dir, author_curated, has_synthetic in specs:
         if out_dir.exists():
-            _emit(name, desc, n, sampling, out_dir, author_curated)
+            _emit(name, desc, n, sampling, out_dir, author_curated, has_synthetic)
 
 
 if __name__ == "__main__":

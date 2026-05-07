@@ -140,6 +140,11 @@ croissant_metadata.zip
 scripts/build_anon_review_bundle.py
 scripts/sync_repo_for_anon_review.py
 
+# NeurIPS Supplementary Material (per-prompt results tarball)
+paper_results/
+paper_results.tar.gz
+scripts/build_paper_results_supplementary.sh
+
 # Camera-ready URL substitution log (process-internal; do not publish)
 # Implicitly covered by `docs/paper/` above; explicit entry for clarity.
 docs/paper/artifacts_links.md
