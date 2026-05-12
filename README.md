@@ -1,6 +1,6 @@
 # SLM-to-MLIR Constrained Emitter
 
-A NeurIPS 2026 Evaluations & Datasets (E&D) track submission on training-free, ODS-aware constrained decoding for NL→MLIR generation with small language models.
+Anonymous research artifact for "Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for MLIR" — a paper on training-free, ODS-aware constrained decoding for NL→MLIR generation with small language models. Anonymous review mirror: https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256
 
 **Thesis**: For formal intermediate representations, ODS-derived structural priors (C1 syntactic + C2 type-domain + C3 SSA-scope) applied at inference time close most of the capability gap between a **1.7B SLM** and 30B+ models — without fine-tuning, without RL, without distillation.
 

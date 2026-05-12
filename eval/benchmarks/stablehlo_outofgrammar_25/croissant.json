@@ -26,7 +26,7 @@
   "license": "https://spdx.org/licenses/Apache-2.0.html",
   "version": "1.0.0",
   "datePublished": "2026-04-21",
-  "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
+  "citeAs": "Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for MLIR. Anonymous submission, currently under review.",
   "url": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/stablehlo_outofgrammar_25/",
   "distribution": [
     {
@@ -107,5 +107,5 @@
     "size": 25,
     "sampling": "Hand-authored out-of-grammar; verifier-filtered (all 25 iree-compile-clean)."
   },
-  "citation": "(anonymous submission to NeurIPS 2026 E&D track)"
+  "citation": "Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for MLIR. Anonymous submission, currently under review."
 }

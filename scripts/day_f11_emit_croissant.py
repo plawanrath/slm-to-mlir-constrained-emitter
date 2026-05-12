@@ -1,5 +1,5 @@
 """Phase F F11: emit Croissant metadata (core + RAI fields) for each
-benchmark, per NeurIPS 2026 E&D track requirement.
+benchmark, for venue-required machine-readable dataset metadata.
 
 Writes `croissant.json` at each
 `eval/benchmarks/<name>/croissant.json`. Each file follows MLCommons
@@ -41,7 +41,10 @@ def _emit(name: str, description: str, n: int, sampling_note: str,
         "license": "https://spdx.org/licenses/Apache-2.0.html",
         "version": "1.0.0",
         "datePublished": "2026-04-21",
-        "citeAs": "(anonymous submission to NeurIPS 2026 E&D track)",
+        "citeAs": ("Cross-Dialect Generalization Without Retraining: "
+                   "Benchmarks and Evaluation of Schema-Derived "
+                   "Constrained Decoding for MLIR. Anonymous "
+                   "submission, currently under review."),
         "url": "<populated-at-camera-ready>",
         "distribution": [
             {

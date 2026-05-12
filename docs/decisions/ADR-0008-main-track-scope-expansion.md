@@ -7,8 +7,8 @@
 
 The M1 execution plan (ADR-0004, 17 days) delivered a submission-ready paper
 on Day 17. The paper's current shape — "training-free method + phenomenon +
-mechanism" backed by a strong cross-dialect matrix — is a plausible NeurIPS
-Datasets & Benchmarks track submission.
+mechanism" backed by a strong cross-dialect matrix — is a plausible
+datasets-and-benchmarks-track submission.
 
 External analysis flagged three gaps that separate D&B-track from main-track:
 
@@ -29,8 +29,8 @@ Separate list of reviewer-objection-killers (30B + C3 rejection sampling,
 modern baseline, multi-seed, functional equivalence, novelty reframing) is
 low-cost and high-value; no reason not to bundle.
 
-Buffer: 26 calendar days before NeurIPS 2026-05-20 deadline. Current M1 is
-complete, so every additional day is a net add.
+Buffer: 26 calendar days before the originally targeted 2026-05-20 deadline.
+Current M1 is complete, so every additional day is a net add.
 
 ## Decision
 
@@ -98,7 +98,7 @@ Total extension: 21 days. Buffer after: ~5 days before May 20.
 
 ## Consequences
 
-- Paper track target shifts from D&B to **NeurIPS main track**.
+- Paper track target shifts from D&B to **main track** (top-tier general venue).
 - Core contribution reframed: mechanical ODS→constraint synthesis (method)
   + in-line joint CFG + dynamic-scope decoder (algorithm) + phenomenon
   across 3 schema-rich IRs (result).

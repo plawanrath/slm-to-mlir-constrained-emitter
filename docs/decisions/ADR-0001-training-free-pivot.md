@@ -5,7 +5,7 @@
 
 ## Context
 
-Original framing centered on SFT + GRPO with verifier-shaped rewards (RLVR on formal IR). Two constraints surfaced during planning that made this infeasible for the 4-week NeurIPS 2026 main-track window:
+Original framing centered on SFT + GRPO with verifier-shaped rewards (RLVR on formal IR). Two constraints surfaced during planning that made this infeasible for the originally targeted 4-week submission window:
 
 1. **Hardware**: single Apple M4 Max 128GB. No GPU cluster. MLX/llama.cpp work; vLLM and distributed training stacks do not. GRPO iteration loops are 10× slower than on H100 and cannot fit in 4 weeks.
 2. **Novelty crowding**: RLVR on structured outputs is already the dominant 2025-2026 framing (AutoTriton, TritonRL, Kevin, KernelEvolve). Yet-another-RLVR-paper-on-a-new-domain risks reviewer fatigue.
@@ -36,5 +36,5 @@ Pivot M1 to **training-free at inference** for the main empirical claim. The pap
 ## Alternatives considered
 
 1. **Original RLVR framing on GPU rental**: rejected — user hardware constraint is fixed; GPU rental out of budget.
-2. **Cut scope but keep training**: would require 6-month timeline and miss NeurIPS 2026 main deadline.
+2. **Cut scope but keep training**: would require 6-month timeline and miss the original 4-week submission window.
 3. **Workshop-only submission**: rejected in favor of swinging for main with this tighter scope.

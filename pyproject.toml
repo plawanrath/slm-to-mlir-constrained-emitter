@@ -1,7 +1,7 @@
 [project]
 name = "slm-mlir"
 version = "0.1.0"
-description = "SLM-to-MLIR constrained emitter (NeurIPS 2026 M1)."
+description = "SLM-to-MLIR constrained emitter: training-free, ODS-aware constrained decoding for NL-to-MLIR with small language models."
 readme = "README.md"
 requires-python = ">=3.10"
 

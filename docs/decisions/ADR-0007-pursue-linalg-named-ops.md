@@ -81,7 +81,7 @@ Existing arith+func+memref results are **frozen** (see
 ## Alternatives considered
 
 1. **Freeze at arith+func+memref** — defensible, would put ~2 days into
-   paper polish + LoRA + error-bucket taxonomy. Rejected because NeurIPS
+   paper polish + LoRA + error-bucket taxonomy. Rejected because top-tier
    reviewers may see single-dialect as narrow, especially for a thesis
    about "formal intermediate representations" (plural).
 2. **Pursue linalg including generic** — too much work for M1. `linalg.generic`

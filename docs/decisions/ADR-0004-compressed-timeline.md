@@ -5,10 +5,10 @@
 
 ## Context
 
-Original timeline (`design.md` §6) was 28 days (Apr 17 – May 15, 2026), with the NeurIPS main-track deadline ~May 20. On review, two separable questions emerged:
+Original timeline (`design.md` §6) was 28 days (Apr 17 – May 15, 2026), with the originally targeted submission deadline ~May 20. On review, two separable questions emerged:
 
 1. **Can we finish sooner?** Most components are <300 LoC each; the real time sinks are data-pipeline runtime, 30B baseline inference, grammar iteration, and hand-authoring the gold benchmark. Code-writing is a fraction of wall-clock.
-2. **Is the originally-planned eval n adequate for NeurIPS reviewers?** An earlier proposal to run at n=200 per cell was rejected as reviewer-vulnerable: at n=200 with p≈0.5, 95% CI half-width is ±6.9pp — making the paper's claimed 3-5pp effects statistically indistinguishable from noise. The hand-authored MLIR-Spec-50 at n=50 has ±14pp half-width, far below code-gen-benchmark norms (HumanEval=164, MBPP=974).
+2. **Is the originally-planned eval n adequate for top-tier reviewers?** An earlier proposal to run at n=200 per cell was rejected as reviewer-vulnerable: at n=200 with p≈0.5, 95% CI half-width is ±6.9pp — making the paper's claimed 3-5pp effects statistically indistinguishable from noise. The hand-authored MLIR-Spec-50 at n=50 has ±14pp half-width, far below code-gen-benchmark norms (HumanEval=164, MBPP=974).
 
 ## Decision
 
@@ -28,7 +28,7 @@ Compress execution to **17 days** (Apr 18 – May 4, 2026) while **increasing** 
 | Paper | Days 22-28 | Days 12-17 |
 | Submission-ready | Day 28 (May 15) | Day 17 (May 4) |
 
-Net buffer before NeurIPS deadline: ~16 days instead of ~5.
+Net buffer before the submission deadline: ~16 days instead of ~5.
 
 ### Eval methodology (locked)
 
@@ -48,7 +48,7 @@ Net buffer before NeurIPS deadline: ~16 days instead of ~5.
 - Data pipelines (L0, L1, L3) are independent and parallelizable.
 - 30B baselines run as background compute across 5 days, not as a sequential 3-day block.
 - Hand-authoring MLIR-Spec-150 spread across 5 days (Days 3-7) rather than concentrated on a single day.
-- Earlier submission-ready date provides ~2 weeks of buffer before the NeurIPS deadline — useful for polish, rebuttal-prep, and catching missed ablations.
+- Earlier submission-ready date provides ~2 weeks of buffer before the submission deadline, useful for polish, rebuttal-prep, and catching missed ablations.
 
 ### Eval size increase
 
@@ -61,7 +61,7 @@ Net buffer before NeurIPS deadline: ~16 days instead of ~5.
 ## Consequences
 
 **Positive**:
-- Submission-ready by May 4 with ~16 days of buffer before NeurIPS deadline.
+- Submission-ready by May 4 with ~16 days of buffer before the submission deadline.
 - Statistical claims robust to reviewer challenge (n ≥ HumanEval for gold benchmark; paired tests; pre-registered gates).
 - Cost transparency (n per cell, wall-clock table) pre-empts "cherry-picked eval" critiques.
 - No change to thesis, contributions, methodology, or scope.

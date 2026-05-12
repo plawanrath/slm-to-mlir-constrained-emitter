@@ -1,4 +1,4 @@
-"""Final publication-quality figure generator for the NeurIPS paper.
+"""Final publication-quality figure generator for the paper.
 
 Deterministic: re-running on the same inputs produces byte-identical PDFs.
 Headless: uses matplotlib Agg backend; no display needed.
