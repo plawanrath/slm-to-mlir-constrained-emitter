@@ -47,7 +47,7 @@ plt.rcParams.update({
     "ytick.labelsize": 9,
     "figure.dpi": 150,
     "savefig.bbox": "tight",
-    "pdf.fonttype": 42,  # TrueType, reviewer-friendly
+    "pdf.fonttype": 42,  # TrueType (embeddable, editable text)
 })
 
 # Consistent palette

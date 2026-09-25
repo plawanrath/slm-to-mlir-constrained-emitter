@@ -59,7 +59,7 @@ ollama pull granite-code:34b-instruct-q4_K_M
 ollama list
 ```
 
-For non-macOS reviewers: the Day-16 reproducibility Dockerfile will include a llama.cpp CPU fallback (~20-30× slower but fully Docker-native).
+For non-macOS users: the reproducibility Dockerfile will include a llama.cpp CPU fallback (~20-30× slower but fully Docker-native).
 
 ### 0.4. Project venv
 

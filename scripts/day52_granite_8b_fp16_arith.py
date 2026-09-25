@@ -1,9 +1,8 @@
 """Day-52: Granite-Code-8B fp16 (MLX-LM) on arith+func — fp16 control extension.
 
 Day-51 / Item 3 closed the quantization-asymmetry concern on linalg only.
-A reviewer pass on the paper flagged that the fp16 control should run on
-arith+func too so the precision-asymmetry argument is symmetric across
-dialects. This script adds the arith+func cell at n=200 × seeds 0/1/2 under
+The fp16 control should run on arith+func too so the precision-asymmetry
+argument is symmetric across dialects. This script adds the arith+func cell at n=200 × seeds 0/1/2 under
 the same C1+C3 protocol as the apples_to_apples 34B/15B baselines.
 
 Cell name: granite-8b-fp16-c1c3::arith+func

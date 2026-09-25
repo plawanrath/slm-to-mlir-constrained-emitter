@@ -1,8 +1,8 @@
 """Day-51 / Item 3: Granite-Code-8B fp16 (MLX-LM) baseline on linalg.
 
 Closes the quantization-asymmetry concern: SmolLM2 runs fp16 (MLX) while
-the published 30B baselines all run Q4_K_M (Ollama). A reviewer will ask
-whether the SmolLM2 win is a quantization artifact. This script adds
+the published 30B baselines all run Q4_K_M (Ollama), which raises the
+question of whether the SmolLM2 win is a quantization artifact. This script adds
 Granite-Code-8B at fp16 via MLX-LM under the same C1+C3 protocol as the
 linalg cells in Day-50 (n=125, seeds 0/1/2).
 

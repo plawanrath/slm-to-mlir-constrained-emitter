@@ -54,7 +54,7 @@ cp docs/execution_plan.md "$OUT_DIR/execution_plan.md"
 # Top-level
 cp README.md RUNBOOK.md TODO.md "$OUT_DIR/"
 
-# Dockerfile.reproduce pinned LLVM/mlir-opt + CPU-only llama.cpp for non-macOS reviewers
+# Dockerfile.reproduce pinned LLVM/mlir-opt + CPU-only llama.cpp for non-macOS users
 cp scripts/env/Dockerfile.llvm "$OUT_DIR/Dockerfile.reproduce" 2>/dev/null || true
 
 # Hash manifest for deterministic verification

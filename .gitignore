@@ -115,6 +115,7 @@ docs/paper/
 docs/daily_log/
 submission_artifact/
 overleaf_upload.zip
+overleaf_*.zip
 *.tar.gz
 !eval/**/*.tar.gz
 !data/pipelines/**/*.tar.gz

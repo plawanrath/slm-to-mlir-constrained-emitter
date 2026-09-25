@@ -2,7 +2,7 @@
 
 The Phase-E held-out-50 corpus sampled the SAME 10 ops that our
 grammar covers (add/subtract/multiply/divide/abs/exponential/transpose/
-broadcast_in_dim/reshape/dot_general). A reviewer-grade concern is
+broadcast_in_dim/reshape/dot_general). A natural concern is
 ``that's a coverage tautology --- your grammar was authored for those
 ops, so of course constraints hit 100\%.''
 

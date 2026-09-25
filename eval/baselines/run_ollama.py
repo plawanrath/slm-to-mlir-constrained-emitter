@@ -4,7 +4,7 @@ We do NOT run Ollama in Docker — Docker on macOS has no Metal access and would
 force CPU-only inference (unusable for 30B Q4). Ollama is therefore the single
 documented host-level dependency (see RUNBOOK.md §0).
 
-Reproducibility for non-macOS reviewers: ship a llama.cpp CPU fallback in the
+Reproducibility for non-macOS users: ship a llama.cpp CPU fallback in the
 final reproducibility Dockerfile (Day 16). The paper reports the Metal numbers
 as primary; the CPU numbers are a ~20-30× slower sanity check.
 """
