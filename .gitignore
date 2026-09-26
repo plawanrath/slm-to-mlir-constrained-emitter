@@ -81,10 +81,8 @@ logs/
 *.swp
 *.swo
 
-# Local agent / Claude state
-.claude/scheduled_tasks.lock
-.claude/settings.local.json
-.claude/cache/
+# Local agent / Claude state (settings, in-repo skills, caches); never published
+.claude/
 
 # Paper / LaTeX build artifacts
 docs/paper/*.aux
