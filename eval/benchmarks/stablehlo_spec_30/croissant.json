@@ -5,7 +5,13 @@
     "sc": "https://schema.org/",
     "cr": "http://mlcommons.org/croissant/",
     "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
     "dct": "http://purl.org/dc/terms/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "containedIn": "cr:containedIn",
     "data": {
       "@id": "cr:data",
       "@type": "@json"
@@ -14,27 +20,72 @@
       "@id": "cr:dataType",
       "@type": "@vocab"
     },
+    "equivalentProperty": "cr:equivalentProperty",
     "examples": {
       "@id": "cr:examples",
       "@type": "@json"
-    }
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
   },
   "@type": "sc:Dataset",
   "name": "StableHLO-Spec-30",
-  "description": "Hand-authored NL\u2192MLIR pairs for StableHLO dialect covering 10 op families.",
-  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "description": "Hand-authored NL→MLIR pairs for StableHLO dialect covering 10 op families.",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "url": "https://huggingface.co/datasets/plawanrath/StableHLO-Spec-30",
+  "sameAs": [
+    "https://github.com/plawanrath/slm-to-mlir-constrained-emitter/tree/main/eval/benchmarks/stablehlo_spec_30"
+  ],
   "license": "https://spdx.org/licenses/Apache-2.0.html",
-  "version": "1.0.0",
+  "creator": {
+    "@type": "Person",
+    "name": "Plawan Kumar Rath",
+    "url": "https://huggingface.co/plawanrath"
+  },
   "datePublished": "2026-04-21",
-  "citeAs": "Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for MLIR. Anonymous submission, currently under review.",
-  "url": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/stablehlo_spec_30/",
+  "dateModified": "2026-09-25",
+  "version": "1.0.0",
+  "inLanguage": "en",
+  "keywords": [
+    "MLIR",
+    "StableHLO",
+    "compiler IR",
+    "code generation",
+    "constrained decoding",
+    "benchmark",
+    "NeurIPS 2026"
+  ],
+  "citeAs": "@inproceedings{rath2026crossdialect,\n  title     = {Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for {MLIR}},\n  author    = {Rath, Plawan Kumar},\n  booktitle = {Advances in Neural Information Processing Systems (NeurIPS), Evaluations and Datasets Track},\n  year      = {2026},\n  eprint    = {2607.18254},\n  archivePrefix = {arXiv}\n}",
+  "isAccessibleForFree": true,
   "distribution": [
     {
-      "@type": "sc:FileObject",
-      "@id": "StableHLO-Spec-30-test-jsonl",
+      "@type": "cr:FileObject",
+      "@id": "test.jsonl",
       "name": "test.jsonl",
-      "description": "One JSON record per line for the StableHLO-Spec-30 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
-      "contentUrl": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/stablehlo_spec_30/test.jsonl",
+      "description": "All records (single test split).",
+      "contentUrl": "https://huggingface.co/datasets/plawanrath/StableHLO-Spec-30/resolve/main/data/test.jsonl",
       "encodingFormat": "application/jsonlines",
       "sha256": "921eee53012cce78a7054fbba6f537eef2b8cb6721668e47cb8ab740d76f1272"
     }
@@ -50,13 +101,44 @@
           "@type": "cr:Field",
           "@id": "records/id",
           "name": "id",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          },
           "dataType": "sc:Text",
           "description": "Unique record identifier."
         },
         {
           "@type": "cr:Field",
+          "@id": "records/difficulty",
+          "name": "difficulty",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "difficulty"
+            }
+          },
+          "dataType": "sc:Text",
+          "description": "Author-assigned difficulty or 'programmatic'."
+        },
+        {
+          "@type": "cr:Field",
           "@id": "records/nl",
           "name": "nl",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "nl"
+            }
+          },
           "dataType": "sc:Text",
           "description": "Natural-language description."
         },
@@ -64,29 +146,52 @@
           "@type": "cr:Field",
           "@id": "records/mlir",
           "name": "mlir",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "mlir"
+            }
+          },
           "dataType": "sc:Text",
           "description": "Reference MLIR that verifies under mlir-opt/iree-compile."
         },
         {
           "@type": "cr:Field",
-          "@id": "records/dialect",
-          "name": "dialect",
-          "dataType": "sc:Text",
-          "description": "MLIR dialect of the reference program."
+          "@id": "records/notes",
+          "name": "notes",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "notes"
+            }
+          },
+          "dataType": "sc:Text"
         },
         {
           "@type": "cr:Field",
-          "@id": "records/difficulty",
-          "name": "difficulty",
+          "@id": "records/dialect",
+          "name": "dialect",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "dialect"
+            }
+          },
           "dataType": "sc:Text",
-          "description": "Author-assigned difficulty or 'programmatic'."
+          "description": "MLIR dialect of the reference program."
         }
       ]
     }
   ],
-  "rai:dataCollection": "Hand-authored by the submitting author against the target MLIR dialect's ODS.",
+  "rai:dataCollection": "Hand-authored by the dataset author against the target MLIR dialect's ODS.",
   "rai:dataBiases": [
-    "Author-curated: prompts reflect the submitting author's mental model of the target dialect; may under-represent op combinations not present in the spec examples.",
+    "Author-curated: prompts reflect the dataset author's mental model of the target dialect; may under-represent op combinations not present in the spec examples.",
     "No human-subject data; no PII; no demographic bias dimensions apply."
   ],
   "rai:dataLimitations": [
@@ -95,17 +200,38 @@
     "Small n (30-200 prompts per dataset) yields CI half-widths of ~3-10pp at p=0.5."
   ],
   "rai:annotationsPerExample": 0,
-  "rai:annotationDemographics": "N/A \u2014 no human annotators.",
+  "rai:annotationDemographics": "N/A — no human annotators.",
   "rai:personalSensitiveInformation": "None.",
   "rai:dataUseCases": [
-    "Evaluating NL\u2192MLIR generation systems (constrained or unconstrained) under a verifier-based pass-rate metric.",
+    "Evaluating NL→MLIR generation systems (constrained or unconstrained) under a verifier-based pass-rate metric.",
     "Out of scope: evaluating functional correctness without an additional lowering + execution harness; training or fine-tuning production code-generation models without a separate held-out corpus."
   ],
   "rai:dataSocialImpact": "These benchmarks are intended to evaluate compiler-IR generation systems against MLIR/StableHLO verifiers. They contain no human-subject, demographic, or PII content, and pose no direct risk to individuals or groups. The principal social risk is methodological: over-reliance on verifier-pass-rate as a proxy for functional correctness could lead to overstated claims about model capability. Downstream users should pair these benchmarks with execution/property-based testing before drawing conclusions about deployment readiness.",
   "rai:hasSyntheticData": false,
-  "extra": {
-    "size": 30,
-    "sampling": "Author-curated (single author), 10 op families."
-  },
-  "citation": "Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for MLIR. Anonymous submission, currently under review."
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "https://openxla.org/stablehlo/spec"
+    }
+  ],
+  "prov:wasGeneratedBy": [
+    {
+      "@type": "prov:Activity",
+      "prov:label": "Data collection / authoring",
+      "description": "Hand-authored NL/StableHLO pairs across 10 op families, written against the StableHLO specification.",
+      "prov:wasAssociatedWith": {
+        "@type": "prov:Agent",
+        "prov:label": "Plawan Kumar Rath"
+      }
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:label": "Verification",
+      "description": "Every reference program was checked before inclusion: stablehlo-opt v1.4.0 and iree-compile --compile-to=input (iree-compiler 20241104.1068, pinned). Only verifier-clean programs are included in the release."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:label": "Freeze and export",
+      "description": "Source records (examples/*.json in the code repository) frozen and exported 1-to-1 to data/test.jsonl; no filtering, deduplication or annotation beyond the steps above. Details: the paper (https://arxiv.org/abs/2607.18254) and the datasheet (https://github.com/plawanrath/slm-to-mlir-constrained-emitter/blob/main/docs/datasheets/datasheet.md)."
+    }
+  ]
 }

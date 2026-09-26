@@ -1,0 +1,13 @@
+# Pinned upstream model revisions (HF commit hashes) for reproducibility.
+# When converting to MLX format, pass --revision <hash> to mlx_lm.convert.
+
+# SmolLM2-1.7B-Instruct (primary SLM, fp16 via mlx-lm load)
+HuggingFaceTB/SmolLM2-1.7B-Instruct@1.7
+
+# Granite-Code-8B-Instruct (Item 3 fp16 baseline; converted via mlx_lm.convert)
+ibm-granite/granite-8b-code-instruct@b996987fb31d62d4cb4a19adad1f06ee8a3d6109
+
+# Ollama 30B/15B baselines (loaded via Ollama daemon, not HF; recorded for clarity)
+# - granite-code:34b-instruct-q4_K_M  (sha id=74723d97951a, ~21 GB Q4_K_M)
+# - codellama:34b-instruct-q4_K_M     (sha id=e12e86e65362, ~20 GB Q4_K_M)
+# - starcoder2:instruct                (sha id=432973cfbc4c, ~9.1 GB Q4_K_M)

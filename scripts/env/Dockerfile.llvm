@@ -1,0 +1,77 @@
+# LLVM + MLIR + Polygeist toolchain, pinned for reproducibility.
+# Built once, then accessed via long-lived container + `docker exec` wrappers.
+#
+# Pin policy (ADR-0004): one LLVM commit for the duration of M1. Bump only via ADR.
+
+FROM ubuntu:22.04
+
+ARG LLVM_COMMIT=llvmorg-19.1.7
+ARG POLYGEIST_COMMIT=main
+ARG DEBIAN_FRONTEND=noninteractive
+# -j4 with link-jobs=1 keeps peak RAM around ~12-14GB. Raise BUILD_JOBS if the
+# Docker Desktop VM has ≥24GB allocated. With <16GB, set BUILD_JOBS=2.
+ARG BUILD_JOBS=4
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        git \
+        cmake \
+        ninja-build \
+        build-essential \
+        python3 \
+        python3-pip \
+        zlib1g-dev \
+        libncurses5-dev \
+        libxml2-dev \
+        lsb-release \
+        wget \
+        gnupg \
+        software-properties-common \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /src
+
+# --- LLVM + MLIR ---
+RUN git clone --depth 1 --branch ${LLVM_COMMIT} https://github.com/llvm/llvm-project.git
+WORKDIR /src/llvm-project
+RUN mkdir build && cd build && \
+    cmake -G Ninja ../llvm \
+        -DLLVM_ENABLE_PROJECTS="mlir;clang" \
+        -DLLVM_TARGETS_TO_BUILD="host" \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DLLVM_ENABLE_ASSERTIONS=OFF \
+        -DLLVM_PARALLEL_LINK_JOBS=1 \
+        -DLLVM_PARALLEL_COMPILE_JOBS=${BUILD_JOBS} \
+        -DLLVM_USE_SPLIT_DWARF=ON \
+        -DCMAKE_INSTALL_PREFIX=/opt/llvm \
+        -DLLVM_INSTALL_UTILS=ON \
+    && ninja -j${BUILD_JOBS} install \
+    && rm -rf /src/llvm-project/build
+
+# FileCheck is installed by LLVM_INSTALL_UTILS=ON in the step above.
+# Sanity-check it exists; fail loudly if the LLVM install policy ever changes.
+RUN test -x /opt/llvm/bin/FileCheck
+
+ENV PATH=/opt/llvm/bin:$PATH
+
+# --- Polygeist (depends on pinned MLIR) ---
+WORKDIR /src
+RUN git clone --depth 1 --branch ${POLYGEIST_COMMIT} https://github.com/llvm/Polygeist.git || true
+WORKDIR /src/Polygeist
+RUN if [ -d /src/Polygeist ]; then \
+        mkdir -p build && cd build && \
+        cmake -G Ninja .. \
+            -DMLIR_DIR=/opt/llvm/lib/cmake/mlir \
+            -DLLVM_DIR=/opt/llvm/lib/cmake/llvm \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/opt/polygeist \
+        && ninja -j${BUILD_JOBS} \
+        && cp tools/cgeist/cgeist /opt/llvm/bin/polygeist || echo "Polygeist build optional; fallback to clang+mlir-translate is available" ; \
+    fi
+
+WORKDIR /work
+
+RUN mkdir -p /work /cache
+
+RUN echo '#!/bin/bash\ntail -f /dev/null' > /entrypoint.sh && chmod +x /entrypoint.sh
+CMD ["/entrypoint.sh"]

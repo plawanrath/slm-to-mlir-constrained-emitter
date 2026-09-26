@@ -1,0 +1,17 @@
+services:
+  llvm:
+    build:
+      context: .
+      dockerfile: Dockerfile.llvm
+    image: slm-mlir/llvm-pinned:latest
+    container_name: slm-mlir-llvm
+    volumes:
+      - ../..:/work
+      - llvm-cache:/cache
+    working_dir: /work
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+
+volumes:
+  llvm-cache:

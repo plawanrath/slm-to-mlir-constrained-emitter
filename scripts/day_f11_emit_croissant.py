@@ -4,6 +4,11 @@ benchmark, for venue-required machine-readable dataset metadata.
 Writes `croissant.json` at each
 `eval/benchmarks/<name>/croissant.json`. Each file follows MLCommons
 Croissant 1.0 schema with Responsible-AI extensions.
+
+Superseded for release: the committed `croissant.json` files are the
+Croissant 1.1 versions published on Hugging Face (HF-hosted URLs,
+provenance fields, full recordSet sources). Re-running this script
+overwrites them with the original 1.0 metadata.
 """
 from __future__ import annotations
 import json, os, sys

@@ -1,6 +1,6 @@
 # RUNBOOK — SLM-to-MLIR M1
 
-Step-by-step commands for executing the 17-day plan (`docs/execution_plan.md`).
+Step-by-step commands for setting up the environment and reproducing the paper's experiments.
 Everything runs in one of three environments:
 
 - **Docker** (`slm-mlir-llvm` container) — pinned LLVM, `mlir-opt`, Polygeist, `clang`, `FileCheck`.

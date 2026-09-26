@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+CONTAINER="${SLM_MLIR_CONTAINER:-slm-mlir-llvm}"
+if ! docker ps --format '{{.Names}}' | grep -q "^${CONTAINER}$"; then
+    echo "error: container '${CONTAINER}' not running." >&2
+    exit 127
+fi
+exec docker exec -i -w /work "${CONTAINER}" mlir-translate "$@"

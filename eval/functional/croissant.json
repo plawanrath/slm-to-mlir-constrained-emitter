@@ -5,7 +5,13 @@
     "sc": "https://schema.org/",
     "cr": "http://mlcommons.org/croissant/",
     "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
     "dct": "http://purl.org/dc/terms/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "containedIn": "cr:containedIn",
     "data": {
       "@id": "cr:data",
       "@type": "@json"
@@ -14,28 +20,72 @@
       "@id": "cr:dataType",
       "@type": "@vocab"
     },
+    "equivalentProperty": "cr:equivalentProperty",
     "examples": {
       "@id": "cr:examples",
       "@type": "@json"
-    }
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
   },
   "@type": "sc:Dataset",
   "name": "MLIR-Functional-Reference-30",
   "description": "Hand-authored functional-correctness reference set for arith+func, linalg+memref, and StableHLO (n=30, 10 per dialect). Each record specifies a canonical function name, signature, concrete inputs, and the expected output under a dialect-specific execution wrapper.",
-  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "url": "https://huggingface.co/datasets/plawanrath/MLIR-Functional-Reference-30",
+  "sameAs": [
+    "https://github.com/plawanrath/slm-to-mlir-constrained-emitter/tree/main/eval/functional"
+  ],
   "license": "https://spdx.org/licenses/Apache-2.0.html",
-  "version": "1.0.0",
+  "creator": {
+    "@type": "Person",
+    "name": "Plawan Kumar Rath",
+    "url": "https://huggingface.co/plawanrath"
+  },
   "datePublished": "2026-04-30",
-  "citeAs": "Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for MLIR. Anonymous submission, currently under review.",
-  "citation": "Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for MLIR. Anonymous submission, currently under review.",
-  "url": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/functional/",
+  "dateModified": "2026-09-25",
+  "version": "1.0.0",
+  "inLanguage": "en",
+  "keywords": [
+    "MLIR",
+    "StableHLO",
+    "compiler IR",
+    "code generation",
+    "constrained decoding",
+    "benchmark",
+    "NeurIPS 2026"
+  ],
+  "citeAs": "@inproceedings{rath2026crossdialect,\n  title     = {Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for {MLIR}},\n  author    = {Rath, Plawan Kumar},\n  booktitle = {Advances in Neural Information Processing Systems (NeurIPS), Evaluations and Datasets Track},\n  year      = {2026},\n  eprint    = {2607.18254},\n  archivePrefix = {arXiv}\n}",
+  "isAccessibleForFree": true,
   "distribution": [
     {
-      "@type": "sc:FileObject",
-      "@id": "MLIR-Functional-Reference-30-test-jsonl",
+      "@type": "cr:FileObject",
+      "@id": "test.jsonl",
       "name": "test.jsonl",
-      "description": "One JSON record per line for the MLIR-Functional-Reference-30 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
-      "contentUrl": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/functional/test.jsonl",
+      "description": "All records (single test split).",
+      "contentUrl": "https://huggingface.co/datasets/plawanrath/MLIR-Functional-Reference-30/resolve/main/data/test.jsonl",
       "encodingFormat": "application/jsonlines",
       "sha256": "701d6b459525f1fe7dd4475c108a15d9fa2a1f4c7cfeec28004a73aa91e62475"
     }
@@ -51,74 +101,454 @@
           "@type": "cr:Field",
           "@id": "records/id",
           "name": "id",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          },
           "dataType": "sc:Text"
         },
         {
           "@type": "cr:Field",
           "@id": "records/dialect",
           "name": "dialect",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "dialect"
+            }
+          },
           "dataType": "sc:Text"
         },
         {
           "@type": "cr:Field",
           "@id": "records/source_benchmark",
           "name": "source_benchmark",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "source_benchmark"
+            }
+          },
           "dataType": "sc:Text"
         },
         {
           "@type": "cr:Field",
           "@id": "records/source_id",
           "name": "source_id",
-          "dataType": "sc:Text"
-        },
-        {
-          "@type": "cr:Field",
-          "@id": "records/canonical_fn_name",
-          "name": "canonical_fn_name",
-          "dataType": "sc:Text"
-        },
-        {
-          "@type": "cr:Field",
-          "@id": "records/canonical_signature",
-          "name": "canonical_signature",
-          "dataType": "sc:Text"
-        },
-        {
-          "@type": "cr:Field",
-          "@id": "records/result_type",
-          "name": "result_type",
-          "dataType": "sc:Text"
-        },
-        {
-          "@type": "cr:Field",
-          "@id": "records/inputs",
-          "name": "inputs",
-          "dataType": "sc:Text"
-        },
-        {
-          "@type": "cr:Field",
-          "@id": "records/expected_output",
-          "name": "expected_output",
-          "dataType": "sc:Text"
-        },
-        {
-          "@type": "cr:Field",
-          "@id": "records/expected_stdout_regex",
-          "name": "expected_stdout_regex",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "source_id"
+            }
+          },
           "dataType": "sc:Text"
         },
         {
           "@type": "cr:Field",
           "@id": "records/nl",
           "name": "nl",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "nl"
+            }
+          },
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/canonical_fn_name",
+          "name": "canonical_fn_name",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "canonical_fn_name"
+            }
+          },
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/canonical_signature",
+          "name": "canonical_signature",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "canonical_signature"
+            }
+          },
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/inputs",
+          "name": "inputs",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "inputs"
+            }
+          },
+          "isArray": true,
+          "arrayShape": "-1",
+          "subField": [
+            {
+              "@type": "cr:Field",
+              "@id": "records/inputs/type",
+              "name": "type",
+              "dataType": "sc:Text",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "inputs"
+                },
+                "transform": {
+                  "jsonPath": "type"
+                }
+              }
+            },
+            {
+              "@type": "cr:Field",
+              "@id": "records/inputs/value",
+              "name": "value",
+              "dataType": "sc:Float",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "inputs"
+                },
+                "transform": {
+                  "jsonPath": "value"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/result_type",
+          "name": "result_type",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "result_type"
+            }
+          },
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/expected_output",
+          "name": "expected_output",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "expected_output"
+            }
+          },
+          "dataType": "sc:Float"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/expected_stdout_regex",
+          "name": "expected_stdout_regex",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "expected_stdout_regex"
+            }
+          },
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/memref_inputs",
+          "name": "memref_inputs",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "memref_inputs"
+            }
+          },
+          "isArray": true,
+          "arrayShape": "-1",
+          "subField": [
+            {
+              "@type": "cr:Field",
+              "@id": "records/memref_inputs/name",
+              "name": "name",
+              "dataType": "sc:Text",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "memref_inputs"
+                },
+                "transform": {
+                  "jsonPath": "name"
+                }
+              }
+            },
+            {
+              "@type": "cr:Field",
+              "@id": "records/memref_inputs/dtype",
+              "name": "dtype",
+              "dataType": "sc:Text",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "memref_inputs"
+                },
+                "transform": {
+                  "jsonPath": "dtype"
+                }
+              }
+            },
+            {
+              "@type": "cr:Field",
+              "@id": "records/memref_inputs/shape",
+              "name": "shape",
+              "dataType": "sc:Integer",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "memref_inputs"
+                },
+                "transform": {
+                  "jsonPath": "shape"
+                }
+              },
+              "isArray": true,
+              "arrayShape": "-1"
+            },
+            {
+              "@type": "cr:Field",
+              "@id": "records/memref_inputs/init",
+              "name": "init",
+              "dataType": "sc:Text",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "memref_inputs"
+                },
+                "transform": {
+                  "jsonPath": "init"
+                }
+              }
+            },
+            {
+              "@type": "cr:Field",
+              "@id": "records/memref_inputs/fill_value",
+              "name": "fill_value",
+              "dataType": "sc:Float",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "memref_inputs"
+                },
+                "transform": {
+                  "jsonPath": "fill_value"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/memref_print",
+          "name": "memref_print",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "memref_print"
+            }
+          },
+          "isArray": true,
+          "arrayShape": "-1",
+          "subField": [
+            {
+              "@type": "cr:Field",
+              "@id": "records/memref_print/name",
+              "name": "name",
+              "dataType": "sc:Text",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "memref_print"
+                },
+                "transform": {
+                  "jsonPath": "name"
+                }
+              }
+            },
+            {
+              "@type": "cr:Field",
+              "@id": "records/memref_print/dtype",
+              "name": "dtype",
+              "dataType": "sc:Text",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "memref_print"
+                },
+                "transform": {
+                  "jsonPath": "dtype"
+                }
+              }
+            },
+            {
+              "@type": "cr:Field",
+              "@id": "records/memref_print/shape",
+              "name": "shape",
+              "dataType": "sc:Integer",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "memref_print"
+                },
+                "transform": {
+                  "jsonPath": "shape"
+                }
+              },
+              "isArray": true,
+              "arrayShape": "-1"
+            }
+          ]
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/scalar_inputs",
+          "name": "scalar_inputs",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "scalar_inputs"
+            }
+          },
+          "isArray": true,
+          "arrayShape": "-1",
+          "subField": [
+            {
+              "@type": "cr:Field",
+              "@id": "records/scalar_inputs/type",
+              "name": "type",
+              "dataType": "sc:Text",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "scalar_inputs"
+                },
+                "transform": {
+                  "jsonPath": "type"
+                }
+              }
+            },
+            {
+              "@type": "cr:Field",
+              "@id": "records/scalar_inputs/value",
+              "name": "value",
+              "dataType": "sc:Float",
+              "source": {
+                "fileObject": {
+                  "@id": "test.jsonl"
+                },
+                "extract": {
+                  "column": "scalar_inputs"
+                },
+                "transform": {
+                  "jsonPath": "value"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/iree_inputs",
+          "name": "iree_inputs",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "iree_inputs"
+            }
+          },
+          "dataType": "sc:Text",
+          "isArray": true,
+          "arrayShape": "-1"
+        },
+        {
+          "@type": "cr:Field",
+          "@id": "records/expected_output_pattern",
+          "name": "expected_output_pattern",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "expected_output_pattern"
+            }
+          },
           "dataType": "sc:Text"
         }
       ]
     }
   ],
-  "rai:dataCollection": "Hand-authored by the submitting author. Each functional reference specifies a canonical MLIR function name, signature, concrete inputs, and the expected scalar/array output under the dialect's execution wrapper (mlir-cpu-runner for arith and linalg+memref; iree-run-module for StableHLO).",
+  "rai:dataCollection": "Hand-authored by the dataset author. Each functional reference specifies a canonical MLIR function name, signature, concrete inputs, and the expected scalar/array output under the dialect's execution wrapper (mlir-cpu-runner for arith and linalg+memref; iree-run-module for StableHLO).",
   "rai:dataBiases": [
-    "Author-curated: prompts reflect the submitting author's mental model of the target dialect; the 10-per-dialect sample biases toward elementary numerical operations.",
+    "Author-curated: prompts reflect the dataset author's mental model of the target dialect; the 10-per-dialect sample biases toward elementary numerical operations.",
     "No human-subject data; no PII; no demographic bias dimensions apply."
   ],
   "rai:dataLimitations": [
@@ -127,13 +557,45 @@
     "n=30 is a regression-style spot check, not a comprehensive functional benchmark."
   ],
   "rai:annotationsPerExample": 0,
-  "rai:annotationDemographics": "N/A \u2014 no human annotators.",
+  "rai:annotationDemographics": "N/A — no human annotators.",
   "rai:personalSensitiveInformation": "None.",
   "rai:dataUseCases": [
     "Spot-checking that verify-valid generations on the sibling Spec-30/Spec-150 benchmarks compute the intended function.",
     "Reporting a verify-vs-functional gap on a hand-authored sample.",
-    "Out of scope: comprehensive functional benchmark suitable as the sole metric for ranking systems \u2014 size and coverage are insufficient; training or fine-tuning production code-generation models."
+    "Out of scope: comprehensive functional benchmark suitable as the sole metric for ranking systems — size and coverage are insufficient; training or fine-tuning production code-generation models."
   ],
-  "rai:dataSocialImpact": "This benchmark is intended to spot-check functional correctness of MLIR generations evaluated against verifier-only metrics. It contains no human-subject, demographic, or PII content, and poses no direct risk to individuals or groups. The principal social risk is methodological: at n=30, results are a regression-style spot check, not a deployment-readiness signal \u2014 over-reliance on this set could lead to overstated claims about model capability. Pair with property-based or random-input testing before drawing conclusions.",
-  "rai:hasSyntheticData": false
+  "rai:dataSocialImpact": "This benchmark is intended to spot-check functional correctness of MLIR generations evaluated against verifier-only metrics. It contains no human-subject, demographic, or PII content, and poses no direct risk to individuals or groups. The principal social risk is methodological: at n=30, results are a regression-style spot check, not a deployment-readiness signal — over-reliance on this set could lead to overstated claims about model capability. Pair with property-based or random-input testing before drawing conclusions.",
+  "rai:hasSyntheticData": false,
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "https://huggingface.co/datasets/plawanrath/MLIR-Spec-150"
+    },
+    {
+      "@id": "https://huggingface.co/datasets/plawanrath/Linalg-Spec-30"
+    },
+    {
+      "@id": "https://huggingface.co/datasets/plawanrath/StableHLO-Spec-30"
+    }
+  ],
+  "prov:wasGeneratedBy": [
+    {
+      "@type": "prov:Activity",
+      "prov:label": "Data collection / authoring",
+      "description": "Hand-authored functional references (10 per dialect) built on prompts from MLIR-Spec-150, Linalg-Spec-30 and StableHLO-Spec-30; each specifies a canonical function name, signature, concrete inputs and expected output.",
+      "prov:wasAssociatedWith": {
+        "@type": "prov:Agent",
+        "prov:label": "Plawan Kumar Rath"
+      }
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:label": "Verification",
+      "description": "Every reference program was checked before inclusion: Executed under dialect-specific wrappers: mlir-cpu-runner (LLVM/MLIR 19.1.7) for arith and linalg+memref; iree-run-module (iree 20241104.1068) for StableHLO. Only verifier-clean programs are included in the release."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:label": "Freeze and export",
+      "description": "Source records (references.json in the code repository) frozen and exported 1-to-1 to data/test.jsonl; no filtering, deduplication or annotation beyond the steps above. Details: the paper (https://arxiv.org/abs/2607.18254) and the datasheet (https://github.com/plawanrath/slm-to-mlir-constrained-emitter/blob/main/docs/datasheets/datasheet.md)."
+    }
+  ]
 }

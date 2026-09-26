@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Host wrapper: `docker exec` into the long-lived LLVM container.
+# Fast path: no per-invocation `docker run` startup cost.
+set -euo pipefail
+CONTAINER="${SLM_MLIR_CONTAINER:-slm-mlir-llvm}"
+
+if ! docker ps --format '{{.Names}}' | grep -q "^${CONTAINER}$"; then
+    echo "error: container '${CONTAINER}' not running." >&2
+    echo "       start it with: docker compose -f scripts/env/docker-compose.yml up -d" >&2
+    exit 127
+fi
+
+# stdin passthrough + tty off (so pipes work). `--workdir` pins the cwd inside the container.
+exec docker exec -i -w /work "${CONTAINER}" mlir-opt "$@"

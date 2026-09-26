@@ -1,0 +1,50 @@
+# Host-side Python deps (venv only; no global install).
+# Loose pins for initial install; Day-2 follow-up: `pip freeze > requirements.lock.txt`
+# to capture the actual resolved set for reproducibility.
+
+# Model runtime (Apple Silicon native via Metal)
+mlx>=0.21.0
+mlx-lm>=0.20.0
+
+# Constrained decoding
+outlines>=0.1.13
+xgrammar>=0.1.10
+
+# Grammar + parsing
+lark>=1.2.2
+
+# HF stack
+transformers>=4.46.0
+tokenizers>=0.20.0
+huggingface-hub>=0.26.0
+safetensors>=0.4.5
+
+# Numerical + stats
+numpy>=1.26.0,<3
+scipy>=1.14.0
+pandas>=2.2.0
+
+# Plotting
+matplotlib>=3.9.0
+
+# Experiment tracking
+wandb>=0.18.0
+
+# Ollama client for 30B baselines
+requests>=2.32.0
+httpx>=0.27.0
+
+# StableHLO verification (iree-compile --compile-to=input)
+iree-compiler==20241104.1068
+
+# Data pipeline
+datasets>=3.1.0
+
+# Testing
+pytest>=8.3.0
+pytest-xdist>=3.6.0
+
+# Utilities
+tqdm>=4.67.0
+click>=8.1.0
+rich>=13.9.0

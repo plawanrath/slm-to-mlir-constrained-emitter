@@ -5,7 +5,13 @@
     "sc": "https://schema.org/",
     "cr": "http://mlcommons.org/croissant/",
     "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#",
     "dct": "http://purl.org/dc/terms/",
+    "arrayShape": "cr:arrayShape",
+    "citeAs": "cr:citeAs",
+    "column": "cr:column",
+    "conformsTo": "dct:conformsTo",
+    "containedIn": "cr:containedIn",
     "data": {
       "@id": "cr:data",
       "@type": "@json"
@@ -14,27 +20,72 @@
       "@id": "cr:dataType",
       "@type": "@vocab"
     },
+    "equivalentProperty": "cr:equivalentProperty",
     "examples": {
       "@id": "cr:examples",
       "@type": "@json"
-    }
+    },
+    "extract": "cr:extract",
+    "field": "cr:field",
+    "fileProperty": "cr:fileProperty",
+    "fileObject": "cr:fileObject",
+    "fileSet": "cr:fileSet",
+    "format": "cr:format",
+    "includes": "cr:includes",
+    "isArray": "cr:isArray",
+    "isLiveDataset": "cr:isLiveDataset",
+    "jsonPath": "cr:jsonPath",
+    "key": "cr:key",
+    "md5": "cr:md5",
+    "parentField": "cr:parentField",
+    "path": "cr:path",
+    "recordSet": "cr:recordSet",
+    "references": "cr:references",
+    "regex": "cr:regex",
+    "repeated": "cr:repeated",
+    "replace": "cr:replace",
+    "samplingRate": "cr:samplingRate",
+    "separator": "cr:separator",
+    "source": "cr:source",
+    "subField": "cr:subField",
+    "transform": "cr:transform"
   },
   "@type": "sc:Dataset",
   "name": "StableHLO-Held-Out-200",
-  "description": "Programmatically generated StableHLO programs via parametric sweep over 7 op families \u00d7 6 dtypes \u00d7 3 shape ranks \u00d7 multi-op compositions (585 candidates); kept only those that iree-compile accepts.",
-  "conformsTo": "http://mlcommons.org/croissant/1.0",
+  "description": "Programmatically generated StableHLO programs via parametric sweep over 7 op families × 6 dtypes × 3 shape ranks × multi-op compositions (585 candidates); kept only those that iree-compile accepts.",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "url": "https://huggingface.co/datasets/plawanrath/StableHLO-Held-Out-200",
+  "sameAs": [
+    "https://github.com/plawanrath/slm-to-mlir-constrained-emitter/tree/main/eval/benchmarks/stablehlo_held_out_200"
+  ],
   "license": "https://spdx.org/licenses/Apache-2.0.html",
-  "version": "1.0.0",
+  "creator": {
+    "@type": "Person",
+    "name": "Plawan Kumar Rath",
+    "url": "https://huggingface.co/plawanrath"
+  },
   "datePublished": "2026-04-21",
-  "citeAs": "Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for MLIR. Anonymous submission, currently under review.",
-  "url": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/stablehlo_held_out_200/",
+  "dateModified": "2026-09-25",
+  "version": "1.0.0",
+  "inLanguage": "en",
+  "keywords": [
+    "MLIR",
+    "StableHLO",
+    "compiler IR",
+    "code generation",
+    "constrained decoding",
+    "benchmark",
+    "NeurIPS 2026"
+  ],
+  "citeAs": "@inproceedings{rath2026crossdialect,\n  title     = {Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for {MLIR}},\n  author    = {Rath, Plawan Kumar},\n  booktitle = {Advances in Neural Information Processing Systems (NeurIPS), Evaluations and Datasets Track},\n  year      = {2026},\n  eprint    = {2607.18254},\n  archivePrefix = {arXiv}\n}",
+  "isAccessibleForFree": true,
   "distribution": [
     {
-      "@type": "sc:FileObject",
-      "@id": "StableHLO-Held-Out-200-test-jsonl",
+      "@type": "cr:FileObject",
+      "@id": "test.jsonl",
       "name": "test.jsonl",
-      "description": "One JSON record per line for the StableHLO-Held-Out-200 dataset. Generated 1-to-1 from the per-record JSON files in the same directory.",
-      "contentUrl": "https://anonymous.4open.science/r/slm-to-mlir-constrained-emitter-1256/eval/benchmarks/stablehlo_held_out_200/test.jsonl",
+      "description": "All records (single test split).",
+      "contentUrl": "https://huggingface.co/datasets/plawanrath/StableHLO-Held-Out-200/resolve/main/data/test.jsonl",
       "encodingFormat": "application/jsonlines",
       "sha256": "cad82bf077d97ca4911a9c9c51d557b16c118aafc9f0a2d5f67fb3be2e7b9fa8"
     }
@@ -50,13 +101,44 @@
           "@type": "cr:Field",
           "@id": "records/id",
           "name": "id",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "id"
+            }
+          },
           "dataType": "sc:Text",
           "description": "Unique record identifier."
         },
         {
           "@type": "cr:Field",
+          "@id": "records/difficulty",
+          "name": "difficulty",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "difficulty"
+            }
+          },
+          "dataType": "sc:Text",
+          "description": "Author-assigned difficulty or 'programmatic'."
+        },
+        {
+          "@type": "cr:Field",
           "@id": "records/nl",
           "name": "nl",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "nl"
+            }
+          },
           "dataType": "sc:Text",
           "description": "Natural-language description."
         },
@@ -64,29 +146,66 @@
           "@type": "cr:Field",
           "@id": "records/mlir",
           "name": "mlir",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "mlir"
+            }
+          },
           "dataType": "sc:Text",
           "description": "Reference MLIR that verifies under mlir-opt/iree-compile."
         },
         {
           "@type": "cr:Field",
+          "@id": "records/notes",
+          "name": "notes",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "notes"
+            }
+          },
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
           "@id": "records/dialect",
           "name": "dialect",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "dialect"
+            }
+          },
           "dataType": "sc:Text",
           "description": "MLIR dialect of the reference program."
         },
         {
           "@type": "cr:Field",
-          "@id": "records/difficulty",
-          "name": "difficulty",
-          "dataType": "sc:Text",
-          "description": "Author-assigned difficulty or 'programmatic'."
+          "@id": "records/source",
+          "name": "source",
+          "source": {
+            "fileObject": {
+              "@id": "test.jsonl"
+            },
+            "extract": {
+              "column": "source"
+            }
+          },
+          "dataType": "sc:Text"
         }
       ]
     }
   ],
   "rai:dataCollection": "Generated by parametric sweep over the target dialect's opset and filtered by verifier acceptance; no sampling from crawled corpora.",
   "rai:dataBiases": [
-    "Parametric-sweep: coverage is uniform over the enumerated op \u00d7 dtype \u00d7 shape space; biases toward simple single-op programs after iree-compile filtering.",
+    "Parametric-sweep: coverage is uniform over the enumerated op × dtype × shape space; biases toward simple single-op programs after iree-compile filtering.",
     "No human-subject data; no PII; no demographic bias dimensions apply."
   ],
   "rai:dataLimitations": [
@@ -95,17 +214,41 @@
     "Small n (30-200 prompts per dataset) yields CI half-widths of ~3-10pp at p=0.5."
   ],
   "rai:annotationsPerExample": 0,
-  "rai:annotationDemographics": "N/A \u2014 no human annotators.",
+  "rai:annotationDemographics": "N/A — no human annotators.",
   "rai:personalSensitiveInformation": "None.",
   "rai:dataUseCases": [
-    "Evaluating NL\u2192MLIR generation systems (constrained or unconstrained) under a verifier-based pass-rate metric.",
+    "Evaluating NL→MLIR generation systems (constrained or unconstrained) under a verifier-based pass-rate metric.",
     "Out of scope: evaluating functional correctness without an additional lowering + execution harness; training or fine-tuning production code-generation models without a separate held-out corpus."
   ],
   "rai:dataSocialImpact": "These benchmarks are intended to evaluate compiler-IR generation systems against MLIR/StableHLO verifiers. They contain no human-subject, demographic, or PII content, and pose no direct risk to individuals or groups. The principal social risk is methodological: over-reliance on verifier-pass-rate as a proxy for functional correctness could lead to overstated claims about model capability. Downstream users should pair these benchmarks with execution/property-based testing before drawing conclusions about deployment readiness.",
   "rai:hasSyntheticData": true,
-  "extra": {
-    "size": 200,
-    "sampling": "Parametric sweep, verifier-filtered."
-  },
-  "citation": "Cross-Dialect Generalization Without Retraining: Benchmarks and Evaluation of Schema-Derived Constrained Decoding for MLIR. Anonymous submission, currently under review."
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "https://openxla.org/stablehlo/spec"
+    }
+  ],
+  "prov:wasGeneratedBy": [
+    {
+      "@type": "prov:Activity",
+      "prov:label": "Data collection / authoring",
+      "description": "Programmatic parametric sweep (scripts/day_f8_held_out_200.py) over 7 StableHLO op families x 6 dtypes x 3 shape ranks plus multi-op compositions (585 candidates); only verifier-accepted candidates kept.",
+      "prov:wasAssociatedWith": {
+        "@type": "prov:Agent",
+        "prov:label": "Plawan Kumar Rath"
+      },
+      "prov:used": {
+        "@id": "https://github.com/plawanrath/slm-to-mlir-constrained-emitter/blob/main/scripts/day_f8_held_out_200.py"
+      }
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:label": "Verification",
+      "description": "Every reference program was checked before inclusion: stablehlo-opt v1.4.0 and iree-compile --compile-to=input (iree-compiler 20241104.1068, pinned). Only verifier-clean programs are included in the release."
+    },
+    {
+      "@type": "prov:Activity",
+      "prov:label": "Freeze and export",
+      "description": "Source records (examples/*.json in the code repository) frozen and exported 1-to-1 to data/test.jsonl; no filtering, deduplication or annotation beyond the steps above. Details: the paper (https://arxiv.org/abs/2607.18254) and the datasheet (https://github.com/plawanrath/slm-to-mlir-constrained-emitter/blob/main/docs/datasheets/datasheet.md)."
+    }
+  ]
 }
