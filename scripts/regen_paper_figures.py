@@ -303,7 +303,7 @@ def fig_per_op_linalg():
                 ha="center", fontsize=7)
     ax.set_ylabel("verify-valid %")
     ax.set_ylim(0, 110)
-    ax.set_title("Per-op verify rate — SmolLM2 + C1+C2+C3 on linalg "
+    ax.set_title("Per-op verify rate: SmolLM2 + C1+C2+C3 on linalg "
                   "(seed-0, uniform $n{=}125$)")
     ax.grid(axis="y", alpha=0.25)
     plt.setp(ax.get_xticklabels(), rotation=25, ha="right")

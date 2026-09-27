@@ -14,6 +14,23 @@ cells. Caller can override via --candidates-jsonl.
 
 This is evaluation evidence, NOT a benchmark release. See
 eval/functional/__init__.py.
+
+Errata (camera-ready, 2026-09): the released results in
+results/day51/functional_n30.json were produced before two harness fixes and
+are kept unchanged as the released-protocol record.
+  * linalg elementwise exp: the linalg lowering pipeline lacked
+    --convert-math-to-llvm, so any generation using math ops failed at
+    execution. Fixed below.
+  * StableHLO 1-D exp: the candidate declares a different static input
+    shape than the reference's canonical input, so iree rejects the fixed
+    input. A fixed-input harness with a regex oracle cannot adapt the input
+    without changing the expected output; the gold-differential harness
+    (eval/functional_differential/) derives inputs from the declared
+    signature and scores this case correctly (5/5 randomized trials match).
+  * StableHLO divide (f64): reference-spec inconsistency (the reference
+    declares 8xf64 inputs while its gold source declares tensor<32xf64>; IREE
+    also demotes f64 to f32 by default). Documented as an erratum; the
+    released reference record is not modified.
 """
 from __future__ import annotations
 
@@ -245,6 +262,7 @@ def run_arith(generated: str, ref: dict) -> dict:
 LINALG_PIPELINE = [
     "--convert-linalg-to-loops",
     "--convert-scf-to-cf",
+    "--convert-math-to-llvm",   # math.* ops (e.g. from linalg.exp) need lowering
     "--convert-arith-to-llvm",
     "--convert-cf-to-llvm",
     "--finalize-memref-to-llvm",

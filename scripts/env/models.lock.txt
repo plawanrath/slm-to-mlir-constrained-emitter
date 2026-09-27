@@ -4,10 +4,17 @@
 # SmolLM2-1.7B-Instruct (primary SLM, fp16 via mlx-lm load)
 HuggingFaceTB/SmolLM2-1.7B-Instruct@1.7
 
+# Phi-3.5-mini-instruct (Hidden Cost of Structure replication; secondary SLM, fp16 via mlx-lm)
+microsoft/Phi-3.5-mini-instruct@2fe192450127e6a83f7441aef6e3ca586c338b77
+
 # Granite-Code-8B-Instruct (Item 3 fp16 baseline; converted via mlx_lm.convert)
 ibm-granite/granite-8b-code-instruct@b996987fb31d62d4cb4a19adad1f06ee8a3d6109
 
 # Ollama 30B/15B baselines (loaded via Ollama daemon, not HF; recorded for clarity)
 # - granite-code:34b-instruct-q4_K_M  (sha id=74723d97951a, ~21 GB Q4_K_M)
 # - codellama:34b-instruct-q4_K_M     (sha id=e12e86e65362, ~20 GB Q4_K_M)
-# - starcoder2:instruct                (sha id=432973cfbc4c, ~9.1 GB Q4_K_M)
+# - starcoder2:instruct                (sha id=432973cfbc4c, ~9.1 GB Q4_0; = starcoder2:15b-instruct-v0.1-q4_0)
+#
+# Runtime: the published baseline generations reproduce byte-identically under
+# Ollama 0.32.1 (verified 2026-09-26: 20/20 CodeLlama C1+C3 seed-0 outputs);
+# Ollama 0.34.0 does not (4/20). Pin Ollama 0.32.1 to reproduce them.

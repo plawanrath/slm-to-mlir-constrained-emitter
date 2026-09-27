@@ -25,7 +25,7 @@ DEFAULT_TIMEOUT = 600.0  # 30B Q4 can be slow on first load
 def ollama_generate_raw(
     prompt: str,
     model: str,
-    max_tokens: int = 512,
+    max_tokens: int = 256,  # the baselines' published budget (Appendix F)
     temperature: float = 0.2,
     seed: int = 0,
 ) -> tuple[str, dict]:

@@ -1,4 +1,4 @@
-"""Day-56 (E12c): differential execution of frozen-pool generations
+"""Day-56: differential execution of frozen-pool generations
 against the released gold reference modules, on randomized inputs.
 
 Context: measures functional correctness beyond the n=30 mini-benchmark.
@@ -51,6 +51,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import random
 import re
 import subprocess
@@ -365,7 +366,8 @@ def build_driver(callee_body: str, fn_name: str, sig, trial_data: dict,
 # ---------------- docker lower + execute ----------------
 
 def _docker(cmd: list[str], stdin_text: str, timeout: float):
-    return subprocess.run(["docker", "exec", "-i", "slm-mlir-llvm"] + cmd,
+    container = os.environ.get("SLM_MLIR_CONTAINER", "slm-mlir-llvm")  # same override as scripts/env/bin wrappers
+    return subprocess.run(["docker", "exec", "-i", container] + cmd,
                           input=stdin_text, capture_output=True, text=True,
                           timeout=timeout)
 

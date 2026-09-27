@@ -56,6 +56,28 @@ Datasheet: [`docs/datasheets/datasheet.md`](docs/datasheets/datasheet.md).
 - **Models**: SmolLM2-1.7B-Instruct (primary SLM, MLX); baselines CodeLlama-34B, Granite-Code-34B, StarCoder2-15B (Ollama, Q4) and Granite-Code-8B (fp16 control, MLX).
 - **Constrained decoding**: Outlines + llguidance with LARK grammars (C1), plus the C2/C3 layers in `decoder/`.
 - **Verifiers**: `mlir-opt --verify-diagnostics` (LLVM 19.1.7) for arith/func/memref/linalg; `stablehlo-opt` v1.4.0 and `iree-compile --compile-to=input` for StableHLO.
+- **Baseline runtime pin**: the published Ollama baseline generations reproduce byte-identically under **Ollama 0.32.1** (the official CLI binary can run beside a newer app: `OLLAMA_HOST=127.0.0.1:11435 ollama serve`, then point the client at it with `OLLAMA_HOST=http://127.0.0.1:11435`). Newer Ollama releases change seeded outputs. `scripts/day61_frozen_c1only_baselines.py` gates on this before generating anything.
+
+### Response-period and camera-ready results
+
+Every number reported during the NeurIPS 2026 E&D author response is recomputable from files in `results/`:
+
+| Evidence | Script | Results |
+|---|---|---|
+| Frozen-pool constraint ladders (arith+func, linalg) | `scripts/day53_e10_ladder_frozen.py`, `scripts/day59_e10b_ladder_linalg_frozen.py` | `results/day53/`, `results/day59/` |
+| SmolLM2 under the baselines' post-hoc protocol; 256-token cap | `scripts/day54_e11_smollm2_posthoc.py` | `results/day54/` |
+| Baselines rerun at 600 tokens | `scripts/day55_e9_baselines_600.py` | `results/day55/` |
+| Gold-differential functional evaluation (180 spec prompts) | `eval/functional_differential/` | `results/day56/`, `results/day61/functional_per_prompt_180.jsonl` |
+| Randomized trials on the 30 functional references | `scripts/day57_e12a_randomized_refs.py` | `results/day57/` |
+| Signature-adapted wrapper re-execution (linalg) | `scripts/day58_e12b_adapted_wrappers.py` | `results/day58/` |
+| StableHLO verifier version drift | `scripts/day60_e15_iree_drift.py` | `results/day60/` |
+| Pools, duplicates, 67.5-vs-52.0 forensics, truncation, best configuration, unique-prompt aggregation, leakage | `scripts/day61_rebuttal_numbers.py` | `results/day61/rebuttal_numbers.json` |
+| Frozen-pool arith+func baselines without C3 (C1-only, free) | `scripts/day61_frozen_c1only_baselines.py` | `results/day61/frozen_c1only_*` |
+| Frozen-pool error categories, paired rung deltas, Figures 5-7, both aggregations, provenance labels | `scripts/day61_ladder_derivatives.py`, `scripts/day61_aggregations.py` | `results/day61/` |
+| C3 scope validator vs `mlir-opt` (false rejects per system), Figure 1 | `scripts/day61_c3_false_rejects.py` | `results/day61/c3_false_rejects.json` |
+| Hidden Cost of Structure replication on the frozen pool (SmolLM2, Phi-3.5-mini), Figure 8 | `scripts/day61_hcs_frozen.py` | `results/day61/hcs_*` |
+
+Errata (no benchmark instance changed) are listed in the datasheet (`docs/datasheets/datasheet.md`, "Erratum / update policy") and in the paper's corrections appendix.
 
 ## Target dialects
 

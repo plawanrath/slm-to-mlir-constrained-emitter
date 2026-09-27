@@ -208,7 +208,7 @@ def fig3_error_collapse():
             ax.bar(labels, vals, bottom=bottoms, label=cat, color=colors[cat],
                    edgecolor="black", linewidth=0.3)
             bottoms += vals
-        ax.set_title(f"SmolLM2-1.7B — {dialect}")
+        ax.set_title(f"SmolLM2-1.7B, {dialect}")
         ax.set_ylabel("# of samples")
         ax.set_ylim(0, ntot * 1.05)
         ax.grid(axis="y", alpha=0.25)
@@ -221,7 +221,7 @@ def fig3_error_collapse():
                      fontsize=8, color=C_SYN, ha="center",
                      arrowprops=dict(arrowstyle="->", color=C_SYN, lw=1))
     axes[0].legend(loc="upper right", framealpha=0.95, fontsize=7)
-    fig.suptitle("Error-category progression — each constraint layer owns its bucket",
+    fig.suptitle("Error-category progression: each constraint layer owns its bucket",
                  fontsize=11, y=1.02)
     fig.tight_layout()
     fig.savefig(OUT / "fig3_error_collapse.pdf")
@@ -368,7 +368,7 @@ def fig6_hcs_null():
     ax.set_xticks(x); ax.set_xticklabels(labels)
     ax.set_ylabel("verify-valid %")
     ax.set_ylim(0, 80)
-    ax.set_title("Hidden Cost of Structure replication — null result\n"
+    ax.set_title("Hidden Cost of Structure replication: null result\n"
                  "C1 is monotonically beneficial on both SLMs under few-shot priming")
     ax.legend(framealpha=0.95, loc="upper left")
     ax.grid(axis="y", alpha=0.25)
@@ -420,7 +420,7 @@ def fig7_per_op_linalg():
                 ha="center", fontsize=7)
     ax.set_ylabel("verify-valid %")
     ax.set_ylim(0, 110)
-    ax.set_title("Per-op verify rate — SmolLM2 + C1+C2+C3 on linalg")
+    ax.set_title("Per-op verify rate: SmolLM2 + C1+C2+C3 on linalg")
     ax.grid(axis="y", alpha=0.25)
     plt.setp(ax.get_xticklabels(), rotation=25, ha="right")
     fig.tight_layout()

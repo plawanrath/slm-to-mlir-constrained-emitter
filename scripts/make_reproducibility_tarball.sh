@@ -25,6 +25,13 @@ mkdir -p "$OUT_DIR"
 # Frozen results (the paper's pinned numbers)
 cp -r results/frozen "$OUT_DIR/frozen"
 
+# Per-prompt sources of the paper's tables and the response-period evidence
+mkdir -p "$OUT_DIR/results"
+for d in day4 day10 day18 day19 day32 day33 day39pm day50 day51 day51_seed0_n200 day52 \
+         day53 day54 day55 day56 day57 day58 day59 day60 day61 day_f6 day_f8; do
+    [ -d "results/$d" ] && cp -r "results/$d" "$OUT_DIR/results/$d"
+done
+
 # Grammar + lattices
 cp -r grammar "$OUT_DIR/grammar"
 # Strip __pycache__

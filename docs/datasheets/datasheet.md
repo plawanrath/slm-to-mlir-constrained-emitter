@@ -210,7 +210,8 @@ uses these benchmarks.
   gold module, even after whitespace normalization (0 of 540
   spec-prompt generations across seeds). The 44 matches among 2,160
   generation–gold pairs are baseline outputs of short canonical
-  one-op programs.
+  programs (8 distinct prompts; seven single-op programs and one
+  two-op clamp). Recomputed by `scripts/day61_rebuttal_numbers.py`.
 - **Direction of bias.** To the extent LLVM/MLIR test files appear
   in pretraining data, they are at least as likely to be in the
   large public-code crawls behind the 15B–34B code baselines as in a
@@ -238,15 +239,18 @@ release as potentially exposed to it.
 
 ### Uses the dataset does not support?
 
-- **Functional-correctness testing**. Verify-valid ≠ functionally
-  correct; a program can pass the verifier while computing the
-  wrong function. `MLIR-Functional-Reference-30` gives a small
-  (n=30) execution-based check; it is not large enough to rank
-  systems on its own.
-- **Training-data for production code-generation**. These are
-  test-only benchmarks; fine-tuning on them is explicitly out of
-  scope for the paper, and doing so would contaminate future
-  evaluation.
+- **Functional-correctness testing from verify-valid alone**.
+  Verify-valid ≠ functionally correct; a program can pass the
+  verifier while computing the wrong function. Use the
+  gold-differential component (`eval/functional_differential/`),
+  which executes generations against the gold module of all 180
+  spec prompts on randomized inputs, alongside the 30 hand-authored
+  references of `MLIR-Functional-Reference-30`.
+- **Training data**. The benchmarks are intended for evaluation
+  only. We ask users not to fine-tune on them, because doing so
+  would contaminate future evaluation. This is an intended-use
+  request, not a license term: the Apache-2.0 license does not
+  restrict training.
 
 ### Impact on future uses?
 
@@ -306,12 +310,30 @@ GitHub issues at https://github.com/plawanrath/slm-to-mlir-constrained-emitter/i
 Tagged releases. Errata filed against the current tag result in a
 new tag; the old tag remains available.
 
+Errata for the NeurIPS 2026 camera-ready (no benchmark instance changed):
+
+- `MLIR-Functional-Reference-30`, StableHLO `divide` (f64) reference:
+  the reference declares 8xf64 inputs while its gold source declares
+  `tensor<32xf64>`, and IREE demotes f64 to f32 by default. The
+  record is left unchanged; this reference is excluded from
+  gold-gated scoring.
+- Harness: the released linalg lowering pipeline lacked
+  `--convert-math-to-llvm`, so the linalg elementwise `exp`
+  reference failed at execution; fixed in
+  `eval/functional/run_functional.py`. The StableHLO 1-D `exp`
+  reference's failure is a fixed-input limitation (the candidate
+  declares a different static shape); the gold-differential harness
+  scores it correctly. The
+  released fixed-input results are kept as the released-protocol
+  record.
+
 ### Newer versions?
 
-Planned extensions in the paper's future-work section: (i) a
-larger functional-correctness benchmark via lowering + random-input
-testing, beyond the current n=30 functional reference set, (ii)
-cross-target generation for LLHD/NVVM/SPIR-V.
+Planned extensions in the paper's future-work section: (i) curated
+growth of the hand-authored functional reference set (randomized-input
+differential testing over all 180 spec prompts already ships as
+`eval/functional_differential/`), (ii) cross-target generation for
+LLHD/NVVM/SPIR-V.
 
 ### Augmentation/extension by others?
 
