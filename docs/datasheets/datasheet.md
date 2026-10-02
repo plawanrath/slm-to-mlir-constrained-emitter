@@ -54,8 +54,12 @@ wrapper (`mlir-cpu-runner` for arith and linalg+memref;
 
 ### How many instances in total?
 
-435 in the five test benchmarks (150 + 30 + 30 + 200 + 25), plus 30
-in `MLIR-Functional-Reference-30`: 465 released records in total.
+435 benchmark instances in the five test sets (150 + 30 + 30 + 200 + 25).
+`MLIR-Functional-Reference-30` adds 30 records, but each attaches
+execution references (inputs and expected output) to an existing prompt in
+MLIR-Spec-150, Linalg-Spec-30, or StableHLO-Spec-30 (fields
+`source_benchmark`, `source_id`), so it adds no new instances. The six
+repositories hold 465 JSON records in total.
 
 ### Does the dataset contain all possible instances or a sample?
 
@@ -307,8 +311,10 @@ GitHub issues at https://github.com/plawanrath/slm-to-mlir-constrained-emitter/i
 
 ### Erratum / update policy?
 
-Tagged releases. Errata filed against the current tag result in a
-new tag; the old tag remains available.
+Tagged releases on the GitHub repository, starting with
+`v1.0-camera-ready`, whose release asset `paper_results.tar.gz` holds the
+per-prompt generations behind the paper. Errata filed against the current
+tag result in a new tag; the old tag remains available.
 
 Errata for the NeurIPS 2026 camera-ready (no benchmark instance changed):
 

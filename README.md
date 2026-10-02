@@ -7,7 +7,7 @@ Code and benchmarks for "Cross-Dialect Generalization Without Retraining: Benchm
 
 ## Datasets
 
-All six benchmarks are on Hugging Face (Apache-2.0), each with validated MLCommons Croissant 1.1 metadata (core + RAI) in its `croissant.json`. Local copies of the records and Croissant files live under `eval/benchmarks/` and `eval/functional/`.
+All six datasets are on Hugging Face (Apache-2.0), each with validated MLCommons Croissant 1.1 metadata (core + RAI) in its `croissant.json`. The first five hold the 435 benchmark instances: four NL→MLIR benchmarks plus the StableHLO-OutOfGrammar-25 stress set. MLIR-Functional-Reference-30 attaches hand-authored inputs and expected outputs to 30 existing Spec prompts, so it adds no new instances. Local copies of the records and Croissant files live under `eval/benchmarks/` and `eval/functional/`.
 
 | Dataset | Dialect(s) | n |
 |---|---|---|
@@ -16,7 +16,7 @@ All six benchmarks are on Hugging Face (Apache-2.0), each with validated MLCommo
 | [StableHLO-Spec-30](https://huggingface.co/datasets/plawanrath/StableHLO-Spec-30) | StableHLO | 30 |
 | [StableHLO-Held-Out-200](https://huggingface.co/datasets/plawanrath/StableHLO-Held-Out-200) | StableHLO (programmatic sweep) | 200 |
 | [StableHLO-OutOfGrammar-25](https://huggingface.co/datasets/plawanrath/StableHLO-OutOfGrammar-25) | StableHLO (ops outside the grammar) | 25 |
-| [MLIR-Functional-Reference-30](https://huggingface.co/datasets/plawanrath/MLIR-Functional-Reference-30) | all three (execution-based) | 30 |
+| [MLIR-Functional-Reference-30](https://huggingface.co/datasets/plawanrath/MLIR-Functional-Reference-30) | all three (execution references on 30 Spec prompts) | 30 |
 
 Datasheet: [`docs/datasheets/datasheet.md`](docs/datasheets/datasheet.md).
 
@@ -60,7 +60,7 @@ Datasheet: [`docs/datasheets/datasheet.md`](docs/datasheets/datasheet.md).
 
 ### Response-period and camera-ready results
 
-Every number reported during the NeurIPS 2026 E&D author response is recomputable from files in `results/`:
+`results/` is not tracked in git. It ships as `paper_results.tar.gz`, attached to the [`v1.0-camera-ready` release](https://github.com/plawanrath/slm-to-mlir-constrained-emitter/releases/tag/v1.0-camera-ready): every per-prompt generation and aggregate JSON behind a number, table, or figure in the paper. The Hugging Face datasets hold the benchmarks (inputs); this asset holds model outputs on them. Extract it at the repository root (see the README inside, which maps each paper table and figure to its files). Every number reported during the NeurIPS 2026 E&D author response is then recomputable from `results/`:
 
 | Evidence | Script | Results |
 |---|---|---|
@@ -77,7 +77,7 @@ Every number reported during the NeurIPS 2026 E&D author response is recomputabl
 | C3 scope validator vs `mlir-opt` (false rejects per system), Figure 1 | `scripts/day61_c3_false_rejects.py` | `results/day61/c3_false_rejects.json` |
 | Hidden Cost of Structure replication on the frozen pool (SmolLM2, Phi-3.5-mini), Figure 8 | `scripts/day61_hcs_frozen.py` | `results/day61/hcs_*` |
 
-Errata (no benchmark instance changed) are listed in the datasheet (`docs/datasheets/datasheet.md`, "Erratum / update policy") and in the paper's corrections appendix.
+Errata (no benchmark instance changed) are listed in the datasheet (`docs/datasheets/datasheet.md`, "Erratum / update policy"); the camera-ready paper corrects them in place.
 
 ## Target dialects
 

@@ -52,7 +52,7 @@
   },
   "@type": "sc:Dataset",
   "name": "MLIR-Functional-Reference-30",
-  "description": "Hand-authored functional-correctness reference set for arith+func, linalg+memref, and StableHLO (n=30, 10 per dialect). Each record specifies a canonical function name, signature, concrete inputs, and the expected output under a dialect-specific execution wrapper.",
+  "description": "Hand-authored functional-correctness reference set for arith+func, linalg+memref, and StableHLO (n=30, 10 per dialect). Each record specifies a canonical function name, signature, concrete inputs, and the expected output under a dialect-specific execution wrapper. Each record attaches to an existing prompt in MLIR-Spec-150, Linalg-Spec-30, or StableHLO-Spec-30 (fields source_benchmark, source_id), so the set adds no new prompts.",
   "conformsTo": "http://mlcommons.org/croissant/1.1",
   "url": "https://huggingface.co/datasets/plawanrath/MLIR-Functional-Reference-30",
   "sameAs": [

@@ -482,17 +482,16 @@ ls docs/paper/figures
 - **Day 13**: results + ablation sections.
 - **Day 14**: related work + limitations + explicit future-work list.
 - **Day 15**: internal review + one external reader.
-- **Day 16**: revisions + reproducibility package:
-  ```bash
-  tar czf submission_artifact.tar.gz \
-    scripts/env/Dockerfile.llvm scripts/env/docker-compose.yml \
-    scripts/env/requirements.txt \
-    grammar/ decoder/ eval/ data/pipelines/ train/ scripts/ \
-    RUNBOOK.md docs/ \
-    results/frozen/ \
-    checkpoints/phi-3.5-mini-lora/adapters/
-  ```
+- **Day 16**: revisions + reproducibility package.
 - **Day 17**: submit.
+
+**Released artifacts (camera-ready).** Code lives in this repository, frozen
+at tag `v1.0-camera-ready`. That GitHub release attaches
+`paper_results.tar.gz`, the per-prompt generations and aggregate JSONs behind
+every number, table, and figure in the paper. The six benchmarks are on
+Hugging Face (collection
+https://huggingface.co/collections/plawanrath/cross-dialect-mlir-benchmarks-neurips-2026-e-and-d).
+The submission-time `submission_artifact.tar.gz` is retired.
 
 ---
 
